@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body class="mainb">
+<div class="wrapper">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
+            <div class="container-fluid ">
+                <a class="navbar-brand" th:href="@{/home}">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/home}">&hearts;&hearts;&hearts;</a>
+                        </li>
+                        <li class="nav-item" id="weatherLi">
+                            <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
+                                    onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/animaladd}"><span><strong> + Add Animal
+                                        </strong></span></a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="/animaldelete"><span><strong> - Delete Animal
+                                        </strong></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/animalupdate"><span><strong> Update Animal
+                                        </strong></span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Change Themes
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Lightblue</a></li>
+                                <li><a class="dropdown-item" href="#">Lightgreen</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Red</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
+                                Reserved &copy;JD</a>
+                        </li>
+                    </ul>
+                </div>
+                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-secondary">Log Out</button></a>
+            </div>
+            <div><br></div>
+            <div id="weatherWindow" class="container">
+                <div class="d-flex text-white">
+                    <h6 id="currentCity" class="me-5"></h6>
+                    <h2 class="me-5" id="currentTemp"></h2>
+                    <h6 id='currentTime' class="me-5 w-25"></h6>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="row">
+        <div class="d-inline">
+            <form class="col-10 ms-5 mt-5 me-5" action="" method="POST">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div>
+                    <strong>MY PROFILE</strong>
+                </div>
+                <img src="https://thumbs.dreamstime.com/b/people-icon-vector-male-female-person-profile-avatar-people-icon-vector-male-female-sign-user-person-profile-avatar-102655370.jpg"
+                     width="100" height="100" class="rounded-circle mb-2" alt="...">
+                <input type="file" class="form-control" id="customFile" />
+                <br>
+                <br>
+                <br>
+                <div class="col-7">
+                    <label class="form-label"><strong>Username :</strong></label>
+                    <label name="userNameUpdateForm" th:text="${userProfileInfo.getUsername()}">JordanDK</label>
+                </div>
+                <div class="col-7 mt-2">
+                    <label for="fullNameUpdateForm" class="form-label"><strong>Full name :</strong></label>
+                    <label class="profileInfo" th:text="${userProfileInfo.getFullName()}"></label>
+                    <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullNameUpdateForm" name="fullNameUpdateForm">
+                </div>
+                <div class="col-7 mt-2">
+                    <label for="fullNameUpdateForm" class="form-label"><strong>Password :</strong></label>
+                    <label for="passwordUpdateForm" class="profileInfo" th:text="${userProfileInfo.getPassword()}"  style="display: none"><strong>Password :</strong></label>
+                    <input type="password" class="profilInput form-control" value="" placeholder="Password" id="passwordUpdateForm" name="passwordUpdateForm">
+                </div>
+                <div class="col-7 mt-2">
+                    <label for="emailUpdateForm" class="form-label"><strong>Email :</strong></label>
+                    <label class="profileInfo" th:text="${userProfileInfo.getEmail()}"></label>
+                    <input type="email" class="profilInput form-control" value="" placeholder="Email" id="emailUpdateForm" name="emailUpdateForm">
+                </div>
+                <div class="col-7 mt-2">
+                    <label for="phoneUpdateForm" class="form-label"><strong>Phone :</strong></label>
+                    <label class="profileInfo" th:text="${userProfileInfo.getPhoneNumber()}"></label>
+                    <input type="text" class="profilInput form-control" value="" placeholder="Phone" id="phoneUpdateForm" name="phoneUpdateForm">
+                </div>
+                <div class="col-7 mt-2">
+                    <label name="cityUpdateForm" class="form-label" ><strong>City: </strong></label>
+                    <label class="form-label" th:text="${userProfileInfo.getCity()}"><strong>City :</strong></label>
+                </div>
+                <div class="col-7 mt-2">
+                    <label name="cityUpdateForm" class="form-label" ><strong>Country: </strong></label>
+                    <label  class="form-label" th:text="${userProfileInfo.getCountry()}"><strong>Countries :</strong></label>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3 mt-1">
+                        <button onclick="makeChanges()" type="button" class="btn btn-danger">Make Changes</button>
+                    </div>
+                    <div class=" col-md-9 mt-1">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class=" inlineForms d-flex">
+            <div class="col ms-5 mt-5 me-5">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="border-top border-primary pt-3 text-center"><strong
+                        class="fs-3">Favourite
+                    Animals</strong></div>
+                <div class="animalsGroup">
+                    <h1 ><img class="rounded-circle"
+                                       src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
+                                       width="100" height="100" alt="..."> Dogs</h1>
+                    <li>
+                        <tr>
+                            <th scope="row" ><strong>Type: </strong></th>
+                            <td>Golden</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Age: </strong></th>
+                            <td>3</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Games: </strong></th>
+                            <td>ball</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Contact Owner :</strong></th>
+                            <td>+359(0) 87589258</td>
+                        </tr>
+                    </li>
+                    <h1><img class="rounded-circle"
+                                       src="https://timesofindia.indiatimes.com/photo/67586673.cms"
+                                       width="100" height="100" alt="..."> Cats</h1>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Type: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Age: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Games: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Contacts: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+
+                    <h1><img class="rounded-circle"
+                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
+                                         width="100" height="100" alt="..."> Fishes</h1>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Type: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Age: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Games: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                    <li>
+                        <tr>
+                            <th scope="row"><strong>Contacts: </strong></th>
+                            <td>.....</td>
+                        </tr>
+                    </li>
+                </div>
+            </div>
+            <div class="col ms-5 mt-5 me-5">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="border-top border-primary pt-3 text-center"><strong class="fs-3">My
+                    Animals</strong>
+                </div>
+                <div class="animalsGroup">
+                    <h1 id="Dogs"><img class="rounded-circle"
+                                       src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
+                                       width="100" height="100" alt="..."> Rayan &hearts;</h1>
+
+                    <h1 id="Cats"><img class="rounded-circle"
+                                       src="https://timesofindia.indiatimes.com/photo/67586673.cms"
+                                       width="100" height="100" alt="..."> Maca &hearts;</h1>
+
+                    <h1 id="Fishes"><img class="rounded-circle"
+                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
+                                         width="100" height="100" alt="..."> Nemo &hearts;</h1>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>
+        <a href="https://www.facebook.com/" class="me-4 text-reset">
+            <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://twitter.com" class="me-4 text-reset">
+            <i class="bi bi-twitter"></i>
+        </a>
+        <a href="https://www.google.com/" class="me-4 text-reset">
+            <i class="bi bi-google"></i>
+        </a>
+        <a href="https://www.youtube.com/" class="me-4 text-reset">
+            <i class="bi bi-youtube"></i>
+        </a>
+        <a href="https://linkedin.com/" class="me-4 text-reset">
+            <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://github.com/" class="me-4 text-reset">
+            <i class="bi bi-github"></i>
+        </a>
+    </div>
+        </section>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Website Purpose
+                        </h6>
+                        <p>
+                            Help people meet their animal friends!
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
+                                Facebook</a>
+                        </p>
+                        <p>
+                            <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
+                                Youtube</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contact
+                        </h6>
+                        <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+                            JD@gmail.com
+                        </p>
+                        <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
+                        <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="/">JD</a>
+        </div>
+    </footer>
+</div>
+</body>
+<script>
+    window.onload = function () {
+        checkAcceptLocation()
+        getCoordintes();
+        weatheInfo();
+        window.setInterval(function () { weatheInfo() }, 1000);
+
+    }
+
+    // weather button
+
+    function showWeather() {
+        document.getElementById('weatherWindow').style.display = 'block';
+    };
+    function hideWeather() {
+        document.getElementById('weatherWindow').style.display = 'none';
+    };
+    //date
+    function weatheInfo() {
+        var todayt = new Date();
+        var seconds = todayt.getSeconds();
+        var minutes = todayt.getMinutes();
+        var hours = todayt.getHours();
+        if (seconds < 10) {
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':0' + seconds;
+            if(minutes <10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        } else if(minutes<10){
+            document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':' + seconds;
+            if(seconds<10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        }else{
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':' + seconds;
+        }
+    };
+    //city
+    // Step 1: Get user coordinates
+    function getCoordintes() {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+            var lat = crd.latitude.toString();
+            var lng = crd.longitude.toString();
+            var coordinates = [lat, lng];
+            getCity(coordinates);
+            return;
+
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    // Step 2: Get city name
+    function getCity(coordinates) {
+        var xhr = new XMLHttpRequest();
+        var lat = coordinates[0];
+        var lng = coordinates[1];
+        checkAcceptLocation(lat,lng);
+        const api="42f8451fedbcbef6488a995e06463d3b"
+        xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${api}`);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+        xhr.addEventListener("readystatechange", processRequest, false);
+
+        function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                var city = response.name;
+                var country = response.sys.country;
+                var currentTemp = response.main.temp;
+                var currentSit = response.weather[0].main;
+                var currentSpeed = response.wind.speed;
+                var currentHumidity = response.main.humidity;
+                var currentImage = response.weather[0].icon;
+                document.getElementById('currentCity').innerText=city+', '+country;
+                document.getElementById('currentTemp').innerText=Math.round(currentTemp-273.15,2)+'°C';
+                document.getElementById('currentSit').innerText=currentSit;
+                document.getElementById('currentSpeed').innerText=currentSpeed+'m/s';
+                document.getElementById('currentHumidity').innerText=currentHumidity+'%';
+                document.getElementById('currentImage').src=`http://openweathermap.org/img/w/${currentImage}.png`;
+                return;
+            }
+        }
+    }
+
+    function checkAcceptLocation(lat,lng){
+        if(lat!=undefined && lng!=undefined){
+
+            document.getElementById('weatherLi').style.display="block";
+            document.getElementById('weatherWindow').style.display = 'block';
+
+        }else{
+
+            document.getElementById('weatherLi').style.display="none";
+            document.getElementById('weatherWindow').style.display = 'none';
+        }
+    }
+
+
+</script>
+<script>
+    function makeChanges() {
+        var inputsUpdate = document.getElementsByClassName('profilInput');
+        var inputsInfo = document.getElementsByClassName('profileInfo');
+        for (let i = 0; i < inputsUpdate.length; i++) {
+            var currInfo = inputsInfo[i].textContent;
+            if (i == 3) {
+                inputsUpdate[i].setAttribute('value', Number.parseInt(currInfo));
+                inputsUpdate[i].style.display = 'block';
+            }else{
+                inputsUpdate[i].setAttribute('value', currInfo);
+                inputsUpdate[i].style.display = 'block';
+            }
+        }
+        for (let i = 0; i < inputsInfo.length; i++) {
+            inputsInfo[i].style.display = 'none';
+        }
+    }
+</script>
+<style>
+    .mainb{
+        max-width: 1800px;
+        margin: auto;
+    }
+    .wrapper{
+        background-color: rgba(255, 234, 234,0.4);
+    }
+
+    .toast:not(.showing):not(.show){
+        opacity: 1;
+    }
+
+    .animalsGroup h1{
+        margin-top: 3%;
+        padding-top: 4%;
+
+    }
+    .navbar{
+        z-index: 1;
+    }
+
+    .staticnav li{
+        border-left: 5px solid rgba(255, 199, 199,0);
+    }
+    .staticnav a{
+        padding-left: 5px;
+    }
+    .navigator{
+        margin-top: 10%;
+    }
+
+    .navbar{
+        max-width: 1800px;
+        margin: auto;
+    }
+    @media only screen and (max-width: 1300px) {
+        .navigator{
+            display: none;
+        }
+    }
+
+    .text-muted{
+        color: white;
+    }
+    footer{
+        margin-top: 50px;
+    }
+    .animalsGroup{
+        margin-left: 5%;
+        margin-right: 30%;
+        margin-top: 5%;
+    }
+
+
+    .card {
+        width: 100%;
+        height: 75%;
+        border-radius: 20px;
+        box-shadow: 0px 8px 16px 4px #ffe9e9;
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+
+    .time-font {
+        font-size: 50px;
+    }
+
+    .sm-font {
+        font-size: 18px
+    }
+
+    .med-font {
+        font-size: 28px
+    }
+
+    .large-font {
+        font-size: 60px
+    }
+
+    /* Homepage */
+    @media only screen and (max-width: 700px) {
+        .row >.inlineForms{
+            display: inline !important;
+        }
+    }
+
+    .profilInput {
+        display: none;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+
+</html>
