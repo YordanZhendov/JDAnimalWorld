@@ -34,14 +34,6 @@
                             <a class="nav-link active" th:href="@{/profile}"><span><strong> My Profile
                                         </strong></span></a>
                         </li>
-                        <li class="nav-item" >
-                            <a class="nav-link active" href="/animaldelete"><span><strong> - Delete Animal
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="nav-link active" href="/animalupdate"><span><strong> Update Animal
-                                        </strong></span></a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -130,10 +122,10 @@
                     </div>
                     <div class="row">
                         <div>
-                            <button type="submit" class="btn btn-outline-danger mt-3" style="float:right">Clear Form</button>
+                            <button type="submit" class="btn btn-outline-danger mt-3" th:href="@{/animaladd}" style="float:right">Clear Form</button>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-outline-success mt-3"  style="float:right" >Upload Animal</button>
+                            <button type="submit" class="btn btn-outline-success mt-3" th:href="@{/animals/upload}" style="float:right" >Upload Animal</button>
                         </div>
                     </div>
 
