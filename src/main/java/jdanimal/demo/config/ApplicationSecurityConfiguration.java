@@ -25,9 +25,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .loginPage("/users/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/user/home")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/users/login")
+                .deleteCookies("auth_code", "JSESSIONID").invalidateHttpSession(true);
     }
 }

@@ -1,4 +1,4 @@
-package jdanimal.demo.web.models;
+package jdanimal.demo.service.models;
 
 
 import lombok.AllArgsConstructor;

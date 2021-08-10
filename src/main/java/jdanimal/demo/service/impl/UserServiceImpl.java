@@ -1,16 +1,20 @@
 package jdanimal.demo.service.impl;
 
+import jdanimal.demo.data.Animal;
+import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
 import jdanimal.demo.data.DTO.UserRegistrationDTO;
 import jdanimal.demo.data.Role;
 import jdanimal.demo.data.User;
+import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
+import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
 import jdanimal.demo.util.ValidationUtil;
-import jdanimal.demo.web.models.UserProfileModel;
+import jdanimal.demo.service.models.UserProfileModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +31,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final AnimalRepository animalRepository;
     private final UserValidationSerivce userValidationSerivce;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
@@ -77,6 +82,16 @@ public class UserServiceImpl implements UserService {
         User byUsername = this.userRepository.findByUsername(currentUserName);
         UserProfileDTO userProfileDTO = modelMapper.map(byUsername, UserProfileDTO.class);
         return modelMapper.map(userProfileDTO,UserProfileModel.class);
+    }
+
+    @Override
+    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileModel userProfileInfo) {
+        UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadBindingModel, UserAnimalUploadDTO.class);
+        Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
+        User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
+
+        mappedAnimalEntity.setUser(byUsername);
+        this.animalRepository.saveAndFlush(mappedAnimalEntity);
     }
 
 

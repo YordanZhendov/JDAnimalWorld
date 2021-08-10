@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
             <div class="container-fluid ">
-                <a class="navbar-brand" th:href="@{/home}">Home</a>
+                <a class="navbar-brand" th:href="@{/user/home}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/home}">&hearts;&hearts;&hearts;</a>
+                            <a class="nav-link active" th:href="@{/user/home}">&hearts;&hearts;&hearts;</a>
                         </li>
                         <li class="nav-item" id="weatherLi">
                             <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
                                     onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/animaladd}"><span><strong> + Add Animal
+                            <a class="nav-link active" th:href="@{/user/animaladd}"><span><strong> + Add Animal
                                         </strong></span></a>
                         </li>
                         <li class="nav-item dropdown">

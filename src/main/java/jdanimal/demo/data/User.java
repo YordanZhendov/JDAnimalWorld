@@ -44,6 +44,9 @@ public class User extends BaseEntity implements UserDetails {
             ,inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> authorities;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Animal> animals;
+
     @Override
     @Transient
     public boolean isAccountNonExpired() {

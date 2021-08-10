@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
             <div class="container-fluid ">
-                <a class="navbar-brand" th:href="@{/home}" >Home</a>
+                <a class="navbar-brand" th:href="@{/user/home}" >Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/home}">&hearts;&hearts;&hearts;</a>
+                            <a class="nav-link active" th:href="@{/user/home}">&hearts;&hearts;&hearts;</a>
                         </li>
                         <li class="nav-item" id="weatherLi">
                             <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
                                     onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link active" th:href="@{/profile}"><span><strong> My Profile
+                            <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                         </strong></span></a>
                         </li>
                         <li class="nav-item dropdown">
@@ -69,7 +69,7 @@
     <main class="row">
         <div class="d-flex">
             <div class="col-2"></div>
-            <form class="col-6" method="POST">
+            <form class="col-6" method="POST" th:object="${userAnimalUploadModel}" th:action="@{/user/animal/upload}">
                 <br>
                 <br>
                 <br>
@@ -84,11 +84,13 @@
                     <br>
                     <div id="addAnimalForm" class="row">
                         <div class="col-6 text-center">
-                            <div >
+                            <div>
+                                <label>Name:</label>
+                            </div>
+                            <div class="mt-4">
                                 <label>Type:</label>
                             </div>
                             <div class="mt-4">
-
                                 <label>Age:</label>
                             </div>
                             <div class="mt-3">
@@ -107,22 +109,30 @@
                         <br>
                         <div id="inputInfoAnimal" class="col-6">
                             <div>
-                                <input class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
+                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
+                                <small th:if="${#fields.hasErrors('nameOfAnimal')}" th:errors="*{nameOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
-                                <input class="form-control animalInputClear" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
+                                <input th:field="*{typeOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
+                                <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" class="text-danger">error</small>
+                            </div>
+                            <div class="mt-3">
+                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
+                                <small th:if="${#fields.hasErrors('ageOfAnimal')}" th:errors="*{ageOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
                                 <input  class="form-control animalInputClear" placeholder="Games..." type="text" name="gamesOfAnimal" id="gamesOfAnimal">
                             </div>
                             <div class="mt-3">
-                                <input class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
+                                <input th:field="*{foodOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
+                                <small th:if="${#fields.hasErrors('foodOfAnimal')}" th:errors="*{foodOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
-                                <input class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
+                                <input th:field="*{kilogramsOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
+                                <small th:if="${#fields.hasErrors('kilogramsOfAnimal')}" th:errors="*{kilogramsOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
-                                <input class="form-control"  type="date" id="available" name="available">
+                                <input class="form-control"  type="date" id="available" name="availableTill">
                             </div>
                         </div>
                     </div>
@@ -131,10 +141,9 @@
                             <button type="button" class="btn btn-danger mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success mt-3" th:href="@{/animals/upload}" style="float:right" >Upload Animal</button>
+                            <button type="submit" class="btn btn-success mt-3" style="float:right" >Upload Animal</button>
                         </div>
                     </div>
-
                 </ul>
             </form>
             <div class="col-3"></div>
