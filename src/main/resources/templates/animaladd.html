@@ -69,7 +69,7 @@
     <main class="row">
         <div class="d-flex">
             <div class="col-2"></div>
-            <form class="col-6" method="POST" th:object="${userAnimalUploadModel}" th:action="@{/user/animal/upload}">
+            <form class="col-7" method="POST" th:object="${userAnimalUploadModel}" th:action="@{/user/animal/upload}">
                 <br>
                 <br>
                 <br>
@@ -83,55 +83,39 @@
                     <br>
                     <br>
                     <div id="addAnimalForm" class="row">
-                        <div class="col-6 text-center">
+                    
+                        <div id="inputInfoAnimal" class="col-8">
                             <div>
-                                <label>Name:</label>
-                            </div>
-                            <div class="mt-4">
-                                <label>Type:</label>
-                            </div>
-                            <div class="mt-4">
-                                <label>Age:</label>
-                            </div>
-                            <div class="mt-3">
-                                <label>Games:</label>
-                            </div>
-                            <div class="mt-4">
-                                <label>Food:</label>
-                            </div>
-                            <div class="mt-4">
-                                <label>Kilograms:</label>
-                            </div>
-                            <div class="mt-4">
-                                <label>Available till:</label>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="inputInfoAnimal" class="col-6">
-                            <div>
-                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
+                                <strong><i></italic><label>Name:</label></i></strong>
+                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
                                 <small th:if="${#fields.hasErrors('nameOfAnimal')}" th:errors="*{nameOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
+                                <strong><i><label>Type:</label></i></strong>
                                 <input th:field="*{typeOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
                                 <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
-                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
+                                <strong><i><label>Age:</label></i></strong>
+                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear g-3" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
                                 <small th:if="${#fields.hasErrors('ageOfAnimal')}" th:errors="*{ageOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
+                                <strong><i><label>Games:</label></i></strong>
                                 <input  class="form-control animalInputClear" placeholder="Games..." type="text" name="gamesOfAnimal" id="gamesOfAnimal">
                             </div>
                             <div class="mt-3">
+                                <strong><i><label>Food:</label></i></strong>
                                 <input th:field="*{foodOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
                                 <small th:if="${#fields.hasErrors('foodOfAnimal')}" th:errors="*{foodOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
+                                <strong><i><label>Kilograms:</label></i></strong>
                                 <input th:field="*{kilogramsOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
                                 <small th:if="${#fields.hasErrors('kilogramsOfAnimal')}" th:errors="*{kilogramsOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
+                                <strong><i><label>Available till:</label></i></strong>
                                 <input class="form-control"  type="date" id="available" name="availableTill">
                             </div>
                         </div>
@@ -422,6 +406,21 @@
     .profilInput {
         display: none;
     }
+
+    .form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 10px;
+    height: 40px;
+    line-height: 1.42857;
+    padding: 6px 20px;
+    width: 100%;  
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
