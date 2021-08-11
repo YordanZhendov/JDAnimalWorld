@@ -14,7 +14,7 @@
 <div class="wrapper">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
-            <div class="container-fluid ">
+            <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/user/home}" >Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -40,12 +40,13 @@
                                 Change Themes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Lightblue</a></li>
-                                <li><a class="dropdown-item" href="#">Lightgreen</a></li>
+                                <li><a class="dropdown-item" onclick="changeColorToLigthBlue()">Lightblue</a></li>
+                                <li><a class="dropdown-item" onclick="changeColorToLigthGreen()">Lightgreen</a></li>
+                                <li><a class="dropdown-item" onclick="changeColorDefault()">Default</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Red</a></li>
+                                <li><a class="dropdown-item" onclick="changeColorToRed()">Red</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -54,7 +55,7 @@
                         </li>
                     </ul>
                 </div>
-                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-secondary">Log Out</button></a>
+                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-danger">Log Out</button></a>
             </div>
             <div><br></div>
             <div id="weatherWindow" class="container">
@@ -122,10 +123,10 @@
                     </div>
                     <div class="row">
                         <div>
-                            <button type="button" class="btn btn-danger mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
+                            <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success mt-3" style="float:right" >Upload Animal</button>
+                            <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Animal</button>
                         </div>
                     </div>
                 </ul>
@@ -338,8 +339,7 @@
             inputsInfo[i].style.display = 'none';
         }
     }
-    
-    // Clear animal upload form
+    // clear the form for upload
     function clearTheForm(){
         var inputInfoAnimalClear=document.getElementById('inputInfoAnimal');
         var elements=inputInfoAnimalClear.getElementsByTagName('input')
@@ -349,6 +349,102 @@
         }
 
     }
+
+    //changing theme color
+    var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
+    var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
+    var themeT=['bg-success','btn-danger','btn-success','btn-success'];
+    var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
+    var navigationBar=document.getElementsByTagName('nav')[0];
+    var logoutB=navigationBar.getElementsByTagName('button')[1];
+    var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
+    var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
+    var elements=[navigationBar,logoutB,clearB,uploadB];
+
+   
+    function changeColorToLigthBlue(){
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeF[index],themeS[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeT[index],themeS[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeD[index],themeS[index]);
+            }
+        }
+    }
+    
+    function changeColorToLigthGreen(){
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeF[index],themeT[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeS[index],themeT[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeD[index],themeT[index]);
+            }
+        }
+    }
+
+    function changeColorDefault(){
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeT[index],themeF[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeS[index],themeF[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeD[index],themeF[index]);
+            }
+        }
+    }
+    function changeColorToRed(){
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeT[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeS[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+                
+                elements[index].classList.replace(themeF[index],themeD[index]);
+            }
+        }
+    }
+
 </script>
 <style>
     .mainb {
