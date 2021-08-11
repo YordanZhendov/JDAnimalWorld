@@ -1,4 +1,4 @@
-package jdanimal.demo.service.models;
+package jdanimal.demo.data.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegisterModel {
+public class UserRegisterDTO {
 
     private String username;
     private String fullName;

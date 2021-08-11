@@ -1,6 +1,5 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.DTO.UserRegistrationDTO;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.UserValidationSerivce;

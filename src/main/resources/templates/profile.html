@@ -128,124 +128,23 @@
             </form>
         </div>
         <div class=" inlineForms d-flex">
-            <div class="col ms-5 mt-5 me-5">
+            <div class="ms-5 mt-5 me-5 text-center">
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-                <div class="border-top border-primary pt-3 text-center"><strong
-                        class="fs-3">Favourite
-                    Animals</strong></div>
-                <div class="animalsGroup">
-                    <h1 ><img class="rounded-circle"
-                                       src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
-                                       width="100" height="100" alt="..."> Dogs</h1>
-                    <li>
-                        <tr>
-                            <th scope="row" ><strong>Type: </strong></th>
-                            <td>Golden</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Age: </strong></th>
-                            <td>3</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Games: </strong></th>
-                            <td>ball</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Contact Owner :</strong></th>
-                            <td>+359(0) 87589258</td>
-                        </tr>
-                    </li>
-                    <h1><img class="rounded-circle"
-                                       src="https://timesofindia.indiatimes.com/photo/67586673.cms"
-                                       width="100" height="100" alt="..."> Cats</h1>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Type: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Age: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Games: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Contacts: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-
-                    <h1><img class="rounded-circle"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
-                                         width="100" height="100" alt="..."> Fishes</h1>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Type: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Age: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Games: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                    <li>
-                        <tr>
-                            <th scope="row"><strong>Contacts: </strong></th>
-                            <td>.....</td>
-                        </tr>
-                    </li>
-                </div>
-            </div>
-            <div class="col ms-5 mt-5 me-5">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="border-top border-primary pt-3 text-center"><strong class="fs-3">My
+                <div class="border-top border-primary text-center"><strong class="fs-3">My
                     Animals</strong>
                 </div>
-                <div class="animalsGroup">
-                    <h1 id="Dogs"><img class="rounded-circle"
-                                       src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
-                                       width="100" height="100" alt="..."> Rayan &hearts;</h1>
-
-                    <h1 id="Cats"><img class="rounded-circle"
-                                       src="https://timesofindia.indiatimes.com/photo/67586673.cms"
-                                       width="100" height="100" alt="..."> Maca &hearts;</h1>
-
-                    <h1 id="Fishes"><img class="rounded-circle"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
-                                         width="100" height="100" alt="..."> Nemo &hearts;</h1>
-                </div>
+                <form th:action="@{/user/animal/delete}" th:method="post">
+                    <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
+                        <input type="hidden" name="nameOfAnimal" th:value="*{nameOfAnimal}" />
+                        <h1 id="nameOfAnimal" th:text="*{nameOfAnimal}"></h1>
+                        <button type="submit" class="btn btn-outline-danger">delete</button>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

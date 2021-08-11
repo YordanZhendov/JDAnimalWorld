@@ -4,7 +4,7 @@ import jdanimal.demo.data.Animal;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
-import jdanimal.demo.data.DTO.UserRegistrationDTO;
+import jdanimal.demo.service.models.UserRegistrationModel;
 import jdanimal.demo.data.Role;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AnimalRepository;
@@ -13,6 +13,7 @@ import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
 import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
+import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
 import jdanimal.demo.service.models.UserProfileModel;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -40,12 +42,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void register(UserRegistrationDTO userRegistrationDTO) {
-        if(!validationUtil.isValid(userRegistrationDTO)){
+    public void register(UserRegistrationModel userRegistrationModel) {
+        if(!validationUtil.isValid(userRegistrationModel)){
             return;
         }
 
-        User user=modelMapper.map(userRegistrationDTO,User.class);
+        User user=modelMapper.map(userRegistrationModel,User.class);
 
         if(!userValidationSerivce.checkUser(user)){
             return;
@@ -92,6 +94,14 @@ public class UserServiceImpl implements UserService {
 
         mappedAnimalEntity.setUser(byUsername);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
+    }
+
+    @Override
+    public List<AnimalViewModel> getAllAnimalsByUser(String id) {
+        return animalRepository.getAnimalByUser(id)
+                .stream()
+                .map(animal -> modelMapper.map(animal,AnimalViewModel.class))
+                .collect(Collectors.toList());
     }
 
 

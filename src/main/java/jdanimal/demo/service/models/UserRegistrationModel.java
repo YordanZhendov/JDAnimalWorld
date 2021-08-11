@@ -1,4 +1,4 @@
-package jdanimal.demo.data.DTO;
+package jdanimal.demo.service.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.validation.constraints.Email;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegistrationDTO {
+public class UserRegistrationModel {
 
     @Length(min = 3)
     private String username;
