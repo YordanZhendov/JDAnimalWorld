@@ -28,10 +28,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .defaultSuccessUrl("/user/home")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/users/login")
-                .and()
-                .sessionManagement()
-                .expiredUrl("/users/login")
-                .invalidSessionUrl("/users/login");
+                .logoutSuccessUrl("/users/login");
     }
 }
