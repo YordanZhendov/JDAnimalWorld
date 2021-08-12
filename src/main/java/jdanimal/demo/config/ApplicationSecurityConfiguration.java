@@ -29,6 +29,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .and()
                 .logout()
                 .logoutSuccessUrl("/users/login")
-                .maximumSessions(5);
+                .and()
+                .sessionManagement()
+                .maximumSessions(2);
     }
 }
