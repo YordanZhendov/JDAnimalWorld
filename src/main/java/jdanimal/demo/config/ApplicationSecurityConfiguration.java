@@ -30,7 +30,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .logout()
                 .logoutSuccessUrl("/users/login")
                 .and()
-                .sessionManagement()
-                .maximumSessions(2);
+                .rememberMe()
+                .rememberMeParameter('remember')
+                .key('remember Me Encryption Key')
+                .rememberMeCookieName('rememberMeCookieName')
+                .tokenValiditySeconds(10000);
     }
 }
