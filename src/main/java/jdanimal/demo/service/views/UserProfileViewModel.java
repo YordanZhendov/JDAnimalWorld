@@ -1,4 +1,4 @@
-package jdanimal.demo.service.models;
+package jdanimal.demo.service.views;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserProfileModel {
+public class UserProfileViewModel {
 
     private String username;
     private String fullName;

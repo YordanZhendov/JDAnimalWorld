@@ -43,72 +43,6 @@
 
     <main>
         <div class="row">
-            <div class="register col-9">
-                <form class="row g-3 border-top border-primary border-1" th:action="@{/users/register}" method="post">
-                    <div class="col-md-12 h4 text-center"><img class="ms-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4egqR9lKCqkPdZahfJ3RVyaGtw6qkkUIzikDD2vulqATGhrkOzH0qARjIaLV_BaAtu5M&usqp=CAU" alt="" srcset=""><strong>REGISTER</strong></div>
-                    <div class="col-md-12">
-                        <label class="form-label">Username</label>
-                        <input type="username" class="form-control" placeholder="Username" name="username" id="username">
-                    </div>
-                    <div class="col-md-12">
-                        <label class="form-label">Full name</label>
-                        <input type="name" class="form-control" placeholder="Full name" name="fullName" id="fullname">
-                    </div>
-                    <div class="col-md-6">
-                        <label  class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="password" id="password">
-                    </div><div class="col-md-6">
-                        <label  class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword">
-                    </div>
-                    <div class="col-md-12">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" placeholder="Email" name="email" id="email">
-                    </div>
-                    <div class="col-md-12">
-                        <label  class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phonenumber">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Countries</label>
-                        <select id="inputState" name="country" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>Bulgaria</option>
-                            <option>Germany</option>
-                            <option>Russia</option>
-                            <option>France</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">City</label>
-                        <select id="df" name="city" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>Dobrich</option>
-                            <option>Silistra</option>
-                            <option>Varna</option>
-                            <option>Sofia</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="inputZip" class="form-label">Postcode</label>
-                        <input type="text" class="form-control" placeholder="Postcode" name="postcode" id="inputZip">
-                    </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="policyAgree" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Agreed with the policy of the website !
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <button type="button" class="btn btn-danger" onclick="signingIN()">Login</button>
-                    </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-success">Register</button>
-                    </div>
-                </form>
-            </div>
             <div class="sign in col-9">
                 <form th:action="@{/users/login}" method="post" class="row g-3 border-top border-primary border-1">
                     <div th:if="${param.error}">
@@ -126,7 +60,7 @@
                         <input type="password" class="form-control" placeholder="Password" name="password" id="passwordsign">
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-danger" onclick="registerIn()">New Register</button>
+                        <a th:href="@{/users/register}"><button type="button" class="btn btn-danger">New Register</button></a>
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-success">Log in</button>
@@ -311,21 +245,6 @@
     }
     function focusIndexPageSign() {
         document.getElementById('usernamesign').focus({ preventScroll: false });
-    }
-    //LOGIN REGISTER FORM
-    var register = document.getElementsByClassName('register')[0];
-    var sign = document.getElementsByClassName('sign')[0];
-
-    function signingIN() {
-        register.style.display = 'none';
-        sign.style.display = 'block';
-        focusIndexPageSign()
-
-    }
-    function registerIn() {
-        sign.style.display = 'none';
-        register.style.display = 'block';
-        focusIndexPageReg()
     }
 
     // weather button

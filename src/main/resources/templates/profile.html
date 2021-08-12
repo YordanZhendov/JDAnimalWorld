@@ -154,7 +154,7 @@
                     <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
                         <input type="hidden" name="nameOfAnimal" th:value="*{nameOfAnimal}" />
                         <h1 id="nameOfAnimal" th:text="*{nameOfAnimal}"></h1>
-                        <button type="submit" class="btn btn-outline-danger">delete</button>
+                        <button type="submit" class="btn btn-primary">liked</button>
                     </div>
                 </form>
             </div>

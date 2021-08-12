@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body class="mainb">
+<div class="wrapper">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed">
+            <div class="container-fluid ">
+                <a class="navbar-brand" th:href="@{/users/login}">Animal's World</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/users/login}">&hearts;&hearts;&hearts;</a>
+                        </li>
+                        <li class="nav-item" id="weatherLi">
+                            <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
+                                    onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
+                                Reserved &copy;JD</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="register col-9">
+                <form class="row g-3 border-top border-primary border-1" th:object="${userRegistrationModel}" th:action="@{/users/register}" method="post">
+                    <div class="col-md-12 h4 text-center"><img class="ms-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4egqR9lKCqkPdZahfJ3RVyaGtw6qkkUIzikDD2vulqATGhrkOzH0qARjIaLV_BaAtu5M&usqp=CAU" alt="" srcset=""><strong>REGISTER</strong></div>
+                    <div class="col-md-12">
+                        <label class="form-label">Username</label>
+                        <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" placeholder="Username" name="username" id="username">
+                        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">error</small>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Full name</label>
+                        <input type="name" class="form-control" placeholder="Full name" name="fullName" id="fullname">
+                    </div>
+                    <div class="col-md-6">
+                        <label  class="form-label">Password</label>
+                        <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control" placeholder="Password" name="password" id="password">
+                        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">error</small>
+                    </div><div class="col-md-6">
+                        <label  class="form-label">Confirm Password</label>
+                        <input th:field="*{confirmPassword}" th:errorclass="bg-danger" type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword">
+                        <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="text-danger">error</small>
+                </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Email</label>
+                        <input th:field="*{email}" th:errorclass="bg-danger" type="email" class="form-control" placeholder="Email" name="email" id="email">
+                        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">error</small>
+                    </div>
+                    <div class="col-md-12">
+                        <label  class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phonenumber">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Countries</label>
+                        <select id="inputState" name="country" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>Bulgaria</option>
+                            <option>Germany</option>
+                            <option>Russia</option>
+                            <option>France</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">City</label>
+                        <select id="df" name="city" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>Dobrich</option>
+                            <option>Silistra</option>
+                            <option>Varna</option>
+                            <option>Sofia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Postcode</label>
+                        <input th:field="*{postcode}" th:errorclass="bg-danger" type="text" class="form-control" placeholder="Postcode" name="postcode" id="inputZip">
+                        <small th:if="${#fields.hasErrors('postcode')}" th:errors="*{postcode}" class="text-danger">error</small>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="policyAgree" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Agreed with the policy of the website !
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <a th:href="@{/users/login}" ><button type="button" class="btn btn-danger" >Login</button></a>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-1"></div>
+            <div class="navigator col-1">
+                <div class="staticnav h4 mt-5 position-fixed">
+                </div>
+            </div>
+        </div>
+
+        <div id="weatherWindow" class="container-fluid position-relative">
+            <div class="row justify-content-right mt-5">
+                <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+                    <div class="card p-4">
+                        <div class="d-flex">
+                            <h6 id="currentCity" class="flex-grow-1"></h6>
+                            <h6 id='currentTime'></h6>
+                        </div>
+                        <div class="d-flex flex-column temp mt-5 mb-3">
+                            <h2 class="mb-0 font-weight-bold" id="currentTemp"></h2> <span id="currentSit"
+                                                                                           class="small grey"></span>
+                        </div>
+                        <div class="d-flex">
+                            <div class="temp-details flex-grow-1">
+                                <p class="my-1"> <img src="https://i.imgur.com/B9kqOzp.png" height="17px"> <span
+                                        id="currentSpeed"></span> </p>
+                                <p class="my-1"> <i class="fa fa-tint mr-2" aria-hidden="true"></i> <span
+                                        id="currentHumidity"></span> </p>
+                            </div>
+                            <div> <img src="" width="100%" id="currentImage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="animalsGroup">
+            <h1 id="Dogs"><img class="rounded-circle"
+                               src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
+                               width="100" height="100" alt="..."> Dogs</h1>
+            <label  class="form-label">The Golden Retriever is a medium-large gun dog that was
+                bred to retrieve shot waterfowl, such as ducks and upland game birds, during hunting and shooting
+                parties.[3] The name "retriever" refers to the breed's ability to retrieve shot game undamaged due
+                to their soft mouth. Golden retrievers have an instinctive love of water, and are easy to train to
+                basic or advanced obedience standards. They are a long-coated breed, with a dense inner coat that
+                provides them with adequate warmth in the outdoors, and an outer coat that lies flat against their
+                bodies and repels water. Golden retrievers are well suited to residency in suburban or country
+                environments.[4] They shed copiously, particularly at the change of seasons, and require fairly
+                regular grooming. The Golden Retriever was originally bred in Scotland in the mid-19th
+                century.</label>
+
+            <h1 id="Cats"><img class="rounded-circle" src="https://timesofindia.indiatimes.com/photo/67586673.cms"
+                               width="100" height="100" alt="..."> Cats</h1>
+            <label  class="form-label">he cat (Felis catus) is a domestic species of small
+                carnivorous mammal.[1][2] It is the only domesticated species in the family Felidae and is often
+                referred to as the domestic cat to distinguish it from the wild members of the family.[4] A cat can
+                either be a house cat, a farm cat or a feral cat; the latter ranges freely and avoids human
+                contact.[5] Domestic cats are valued by humans for companionship and their ability to hunt rodents.
+                About 60 cat breeds are recognized by various cat registries.</label>
+
+            <h1 id="Fishes"><img class="rounded-circle"
+                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
+                                 width="100" height="100" alt="..."> Fishes</h1>
+            <label class="form-label">Fish are aquatic, craniate, gill-bearing animals that
+                lack limbs with digits. They form a sister group to the tunicates, together forming the olfactores.
+                Included in this definition are the living hagfish, lampreys, and cartilaginous and bony fish as
+                well as various extinct related groups. Around 99% of living fish species are ray-finned fish,
+                belonging to the class Actinopterygii, with over 95% belonging to the teleost subgrouping</label>
+        </div>
+    </main>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+        <div>
+            <a href="https://www.facebook.com/" class="me-4 text-reset">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://twitter.com" class="me-4 text-reset">
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a href="https://www.google.com/" class="me-4 text-reset">
+                <i class="bi bi-google"></i>
+            </a>
+            <a href="https://www.youtube.com/" class="me-4 text-reset">
+                <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://linkedin.com/" class="me-4 text-reset">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://github.com/" class="me-4 text-reset">
+                <i class="bi bi-github"></i>
+            </a>
+        </div>
+        </section>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Website Purpose
+                        </h6>
+                        <p>
+                            Help people meet their animal friends!
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Friends</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Food</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Accessories</a>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
+                                Facebook</a>
+                        </p>
+                        <p>
+                            <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
+                                Youtube</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Animal Hope</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contact
+                        </h6>
+                        <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+                            JD@gmail.com
+                        </p>
+                        <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
+                        <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="#">JD</a>
+        </div>
+    </footer>
+
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+<script>
+    window.onload = function () {
+        getCoordintes();
+        weatheInfo();
+        window.setInterval(function () { weatheInfo() }, 1000);
+        checkAcceptLocation()
+        focusIndexPageReg();
+        createMenu();
+        window.onscroll = function () { myFunction() };
+        clicked();
+
+    }
+
+    function focusIndexPageReg() {
+        document.getElementById('username').focus({ preventScroll: false });
+    }
+    // weather button
+
+    function showWeather() {
+        document.getElementById('weatherWindow').style.display = 'block';
+    }
+    function hideWeather() {
+        document.getElementById('weatherWindow').style.display = 'none';
+    }
+    //date
+    function weatheInfo() {
+        var todayt = new Date();
+        var seconds = todayt.getSeconds();
+        var minutes = todayt.getMinutes();
+        var hours = todayt.getHours();
+        if (seconds < 10) {
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':0' + seconds;
+            if(minutes <10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        } else if(minutes<10){
+            document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':' + seconds;
+            if(seconds<10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        }else{
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':' + seconds;
+        }
+    };
+    //city
+    // Step 1: Get user coordinates
+    function getCoordintes() {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+            var lat = crd.latitude.toString();
+            var lng = crd.longitude.toString();
+            var coordinates = [lat, lng];
+            getCity(coordinates);
+            return;
+
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    // Step 2: Get city name
+    function getCity(coordinates) {
+        var xhr = new XMLHttpRequest();
+        var lat = coordinates[0];
+        var lng = coordinates[1];
+        checkAcceptLocation(lat,lng);
+        const api="42f8451fedbcbef6488a995e06463d3b"
+        xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${api}`);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+        xhr.addEventListener("readystatechange", processRequest, false);
+
+        function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                var city = response.name;
+                var country = response.sys.country;
+                var currentTemp = response.main.temp;
+                var currentSit = response.weather[0].main;
+                var currentSpeed = response.wind.speed;
+                var currentHumidity = response.main.humidity;
+                var currentImage = response.weather[0].icon;
+                document.getElementById('currentCity').innerText=city+', '+country;
+                document.getElementById('currentTemp').innerText=Math.round(currentTemp-273.15,2)+'°C';
+                document.getElementById('currentSit').innerText=currentSit;
+                document.getElementById('currentSpeed').innerText=currentSpeed+'m/s';
+                document.getElementById('currentHumidity').innerText=currentHumidity+'%';
+                document.getElementById('currentImage').src=`http://openweathermap.org/img/w/${currentImage}.png`;
+                return;
+            }
+        }
+    }
+
+    function checkAcceptLocation(lat,lng){
+        if(lat!=undefined && lng!=undefined){
+            document.getElementById('weatherLi').style.display="block";
+            showWeather()
+        }else{
+            document.getElementById('weatherLi').style.display="none";
+            hideWeather()
+        }
+    }
+
+
+    // navigation menu
+
+    function createMenu() {
+
+
+        var h1tags = document.getElementsByTagName('h1');
+        var navmenu = document.getElementsByClassName('staticnav')[0];
+
+        for (i = 0; i < h1tags.length; i++) {
+            var liTag = document.createElement('ul')
+            var anchorTag = document.createElement('a')
+
+            if (h1tags[i].id.length > 0) {
+                anchorTag.setAttribute('href', "#" + h1tags[i].id)
+
+            } else {
+                anchorTag.setAttribute('href', "#" + h1tags[i].innerText)
+            }
+
+            anchorTag.innerHTML = h1tags[i].textContent
+            liTag.appendChild(anchorTag)
+            navmenu.appendChild(liTag)
+        }
+    }
+
+    function clicked() {
+        var menuto = document.getElementsByClassName('staticnav')[0];
+        var anchorTagtwo = menuto.getElementsByTagName('a')
+        for (let i = 0; i < anchorTagtwo.length; i++) {
+            anchorTagtwo[i].addEventListener('click', () => resolveDOMPrecedence(i));
+        }
+
+    };
+
+    function resolveDOMPrecedence(index) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                myFunction(index);
+            }, 25);
+        });
+    }
+
+    function myFunction(parami) {
+
+        var h1Tags = document.getElementsByTagName('h1');
+        var statictag = document.getElementsByClassName('staticnav')[0]
+        var ulTags = statictag.getElementsByTagName('ul');
+        var index = 0;
+
+        var scrolpx = window.pageYOffset;
+        var bodyOff = window.innerHeight;
+        var tocompare = scrolpx + (bodyOff * 0.4);
+
+        for (i = 0; i < h1Tags.length; i++) {
+            if (tocompare > h1Tags[i].offsetTop) {
+                index = i;
+            }
+        };
+
+        for (i = 0; i < h1Tags.length; i++) {
+            ulTags[i].style.borderLeft = '5px solid rgba(255, 199, 199,0)';
+            ulTags[i].style.fontWeight = '100';
+        };
+
+
+        if (parami == undefined) {
+            ulTags[index].style.borderLeft = '5px solid lightblue';
+            ulTags[index].style.fontWeight = '700';
+
+        } else {
+            ulTags[parami].style.borderLeft = '5px solid lightblue';
+            ulTags[parami].style.fontWeight = '700';
+
+        }
+
+    }
+
+    function makeChanges() {
+        var inputsUpdate = document.getElementsByClassName('profilInput');
+        var inputsInfo = document.getElementsByClassName('profileInfo');
+        for (let i = 0; i < inputsUpdate.length; i++) {
+            var currInfo = inputsInfo[i].textContent;
+            if (i == 3) {
+                inputsUpdate[i].setAttribute('value', Number.parseInt(currInfo));
+                inputsUpdate[i].style.display = 'block';
+            }else{
+                inputsUpdate[i].setAttribute('value', currInfo);
+                inputsUpdate[i].style.display = 'block';
+            }
+        }
+        for (let i = 0; i < inputsInfo.length; i++) {
+            inputsInfo[i].style.display = 'none';
+        }
+    }
+</script>
+<style>
+    body{
+        max-width: 1800px;
+        margin: auto;
+    }
+
+    .toast:not(.showing):not(.show){
+        opacity: 1;
+    }
+    .sign{
+        margin-top: 130px;
+        margin-left: 30px;
+
+    }
+
+    .animalsGroup h1{
+        margin-top: 3%;
+        padding-top: 4%;
+
+    }
+    .staticnav li{
+        border-left: 5px solid rgba(255, 199, 199,0);
+    }
+    .staticnav a{
+        padding-left: 5px;
+    }
+    .navigator{
+        margin-top: 10%;
+    }
+
+    .navbar{
+        max-width: 1800px;
+        margin: auto;
+        z-index: 4
+    }
+    @media only screen and (max-width: 1300px) {
+        .navigator{
+            display: none;
+        }
+    }
+
+    .text-muted{
+        color: white;
+    }
+    footer{
+        margin-top: 50px;
+    }
+    .animalsGroup{
+        margin-left: 5%;
+        margin-right: 30%;
+        margin-top: 5%;
+    }
+
+    /* //weather */
+
+    #weatherWindow{
+        display: none;
+        z-index: -1;
+    }
+    .card {
+        width: 100%;
+        height: 75%;
+        border-radius: 20px;
+        box-shadow: 0px 8px 16px 4px #ffe9e9;
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+
+    .time-font {
+        font-size: 50px;
+    }
+
+    .sm-font {
+        font-size: 18px
+    }
+
+    .med-font {
+        font-size: 28px
+    }
+
+    .large-font {
+        font-size: 60px
+    }
+    .register{
+        margin-top: 130px;
+        margin-left: 30px;
+    }
+
+
+    /* Homepage */
+    @media only screen and (max-width: 700px) {
+        .row >.inlineForms{
+            display: inline !important;
+        }
+    }
+
+    .profilInput {
+        display: none;
+    }
+
+</style>
+
+</html>

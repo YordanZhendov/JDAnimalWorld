@@ -1,10 +1,10 @@
 package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.Animal;
+import jdanimal.demo.data.DTO.UserRegisterDTO;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
-import jdanimal.demo.service.models.UserRegistrationModel;
 import jdanimal.demo.data.Role;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AnimalRepository;
@@ -15,7 +15,7 @@ import jdanimal.demo.service.UserValidationSerivce;
 import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
-import jdanimal.demo.service.models.UserProfileModel;
+import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,12 +42,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void register(UserRegistrationModel userRegistrationModel) {
-        if(!validationUtil.isValid(userRegistrationModel)){
+    public void register(UserRegisterDTO userRegisterDTO) {
+        if(!validationUtil.isValid(userRegisterDTO)){
             return;
         }
 
-        User user=modelMapper.map(userRegistrationModel,User.class);
+        User user=modelMapper.map(userRegisterDTO,User.class);
 
         if(!userValidationSerivce.checkUser(user)){
             return;
@@ -80,21 +80,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileModel findByUsername(String currentUserName) {
+    public UserProfileViewModel findByUsername(String currentUserName) {
         User byUsername = this.userRepository.findByUsername(currentUserName);
         UserProfileDTO userProfileDTO = modelMapper.map(byUsername, UserProfileDTO.class);
-        return modelMapper.map(userProfileDTO,UserProfileModel.class);
+        return modelMapper.map(userProfileDTO, UserProfileViewModel.class);
     }
 
-    @Override
-    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileModel userProfileInfo) {
-        UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadBindingModel, UserAnimalUploadDTO.class);
-        Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
-        User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
 
-        mappedAnimalEntity.setUser(byUsername);
-        this.animalRepository.saveAndFlush(mappedAnimalEntity);
-    }
 
     @Override
     public List<AnimalViewModel> getAllAnimalsByUser(String id) {
