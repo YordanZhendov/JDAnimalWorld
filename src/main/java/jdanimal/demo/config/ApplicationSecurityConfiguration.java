@@ -31,7 +31,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .logoutSuccessUrl("/users/login")
                 .and()
                 .sessionManagement()
-                .maximumSessions(1)
                 .expiredUrl("/users/login")
                 .invalidSessionUrl("/users/login");
     }
