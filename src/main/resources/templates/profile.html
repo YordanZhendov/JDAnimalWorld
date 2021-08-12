@@ -122,8 +122,8 @@
                 </div>
             </form>
         </div>
-        <div class=" inlineForms d-flex">
-            <div class="ms-5 mt-5 me-5 text-center">
+        <div class="inlineForms d-flex">
+            <div class="col-5 ms-5 mt-3 me-5 text-center">
                 <br>
                 <br>
                 <br>
@@ -132,6 +132,23 @@
                 <br>
                 <div class="border-top border-primary text-center"><strong class="fs-3">My
                     Animals</strong>
+                </div>
+                <form th:action="@{/user/animal/delete}" th:method="post">
+                    <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
+                        <input type="hidden" name="nameOfAnimal" th:value="*{nameOfAnimal}" />
+                        <h1 id="nameOfAnimal" th:text="*{nameOfAnimal}"></h1>
+                        <button type="submit" class="btn btn-outline-danger">delete</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-5 ms-5 mt-2 me-5 text-center">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="border-top border-primary text-center"><strong class="fs-3">Liked Animals</strong>
                 </div>
                 <form th:action="@{/user/animal/delete}" th:method="post">
                     <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
