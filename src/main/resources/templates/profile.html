@@ -94,11 +94,6 @@
                     <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullNameUpdateForm" name="fullNameUpdateForm">
                 </div>
                 <div class="col-7 mt-2">
-                    <label for="fullNameUpdateForm" class="form-label"><strong>Password :</strong></label>
-                    <label for="passwordUpdateForm" class="profileInfo" th:text="${userProfileInfo.getPassword()}"  style="display: none"><strong>Password :</strong></label>
-                    <input type="password" class="profilInput form-control" value="" placeholder="Password" id="passwordUpdateForm" name="passwordUpdateForm">
-                </div>
-                <div class="col-7 mt-2">
                     <label for="emailUpdateForm" class="form-label"><strong>Email :</strong></label>
                     <label class="profileInfo" th:text="${userProfileInfo.getEmail()}"></label>
                     <input type="email" class="profilInput form-control" value="" placeholder="Email" id="emailUpdateForm" name="emailUpdateForm">
