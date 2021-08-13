@@ -27,7 +27,6 @@ public class UserRegistrationModel {
     @NotBlank()
     @Email()
     private String email;
-    @NotBlank()
     @Length(min = 9,max = 9,message = "Enter your 9 digits!")
     private String phoneNumber;
     private String country;
