@@ -71,7 +71,8 @@
                     </div>
                     <div class="col-md-12">
                         <label  class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phonenumber">
+                        <input th:field="*{phonenumber}" th:errorclass="bg-danger" type="text" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phonenumber">
+                        <small th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}" class="text-danger">error</small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Countries</label>
