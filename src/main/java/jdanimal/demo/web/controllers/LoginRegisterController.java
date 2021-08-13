@@ -51,7 +51,7 @@ public class LoginRegisterController {
 
         UserRegisterDTO mappedUser = modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
         this.userService.register(mappedUser);
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 }
 
