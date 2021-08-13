@@ -43,7 +43,7 @@ public class LoginRegisterController {
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
 
-        if(!bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationModel",userRegistrationModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationModel",bindingResult);
             return "redirect:/users/register";
