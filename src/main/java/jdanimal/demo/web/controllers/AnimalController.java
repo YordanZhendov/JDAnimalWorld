@@ -54,7 +54,7 @@ public class AnimalController {
             String currentUserName = authentication.getName();
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
             this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo,picture);
-            return "redirect:/user/profile";
+            return "redirect:/user/home";
         }
         return null;
     }

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>home</title>
 </head>
 
 <body class="mainb">
@@ -81,7 +82,9 @@
             <form class="row" method="GET" action="#">
                 <div class="searchInput">
                     <div class="ms-1 mb-1">
-                        <input type="text" class="form-control-input" placeholder="Search.." name="search">
+                        <label>
+                            <input type="text" class="form-control-input" placeholder="Search.." name="search"/>
+                        </label>
                     </div>
                     <div class="ms-1">
                         <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
@@ -94,7 +97,7 @@
                     th:each="animal : ${animals}" th:object="${animal}">
                     <div class="animalallList justify-content-between align-items-start">
                         <div class="ms-3 me-1 mt-5">
-                            <img class="rounded-circle" th:src="*{'data:image/png;base64,'+animalPicture}" width="100px" height="100px" alt="" srcset="">
+                            <img class="rounded-circle" th:src="*{'data:image/png;base64,'+getAnimalPicture()}" width="100px" height="100px" alt="" srcset="">
                             <div th:text="| ${animal.getNameOfAnimal()}|"></div>
                         </div>
                         <div class="mt-5 ms-1" th:text="|Profile: ${animal.getUser().getFullName()}|"></div>
@@ -186,7 +189,7 @@
                             JD@gmail.com
                         </p>
                         <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
-                        <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
+                        <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 094112400</p>
                     </div>
                 </div>
             </div>
@@ -212,16 +215,16 @@
 
     function showWeather() {
         document.getElementById('weatherWindow').style.display = 'block';
-    };
+    }
     function hideWeather() {
         document.getElementById('weatherWindow').style.display = 'none';
-    };
+    }
     //date
     function weatheInfo() {
-        var todayt = new Date();
-        var seconds = todayt.getSeconds();
-        var minutes = todayt.getMinutes();
-        var hours = todayt.getHours();
+        const todayt = new Date();
+        const seconds = todayt.getSeconds();
+        const minutes = todayt.getMinutes();
+        const hours = todayt.getHours();
         if (seconds < 10) {
             document.getElementById('currentTime').innerText = hours + ':' + minutes + ':0' + seconds;
             if (minutes < 10) {
@@ -241,23 +244,23 @@
         } else {
             document.getElementById('currentTime').innerText = hours + ':' + minutes + ':' + seconds;
         }
-    };
+    }
     //city
     // Step 1: Get user coordinates
     function getCoordintes() {
-        var options = {
+        const options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
         };
 
         function success(pos) {
-            var crd = pos.coords;
-            var lat = crd.latitude.toString();
-            var lng = crd.longitude.toString();
-            var coordinates = [lat, lng];
+            const crd = pos.coords;
+            const lat = crd.latitude.toString();
+            const lng = crd.longitude.toString();
+            const coordinates = [lat, lng];
             getCity(coordinates);
-            return;
+
 
         }
 
@@ -270,9 +273,9 @@
 
     // Step 2: Get city name
     function getCity(coordinates) {
-        var xhr = new XMLHttpRequest();
-        var lat = coordinates[0];
-        var lng = coordinates[1];
+        const xhr = new XMLHttpRequest();
+        const lat = coordinates[0];
+        const lng = coordinates[1];
         checkAcceptLocation(lat, lng);
         const api = "42f8451fedbcbef6488a995e06463d3b"
         xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${api}`);
@@ -281,28 +284,28 @@
         xhr.addEventListener("readystatechange", processRequest, false);
 
         function processRequest(e) {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                var city = response.name;
-                var country = response.sys.country;
-                var currentTemp = response.main.temp;
-                var currentSit = response.weather[0].main;
-                var currentSpeed = response.wind.speed;
-                var currentHumidity = response.main.humidity;
-                var currentImage = response.weather[0].icon;
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                const city = response.name;
+                const country = response.sys.country;
+                const currentTemp = response.main.temp;
+                const currentSit = response.weather[0].main;
+                const currentSpeed = response.wind.speed;
+                const currentHumidity = response.main.humidity;
+                const currentImage = response.weather[0].icon;
                 document.getElementById('currentCity').innerText = city + ', ' + country;
                 document.getElementById('currentTemp').innerText = Math.round(currentTemp - 273.15, 2) + '°C';
                 document.getElementById('currentSit').innerText = currentSit;
                 document.getElementById('currentSpeed').innerText = currentSpeed + 'm/s';
                 document.getElementById('currentHumidity').innerText = currentHumidity + '%';
                 document.getElementById('currentImage').src = `http://openweathermap.org/img/w/${currentImage}.png`;
-                return;
+
             }
         }
     }
 
     function checkAcceptLocation(lat, lng) {
-        if (lat != undefined && lng != undefined) {
+        if (lat !== undefined && lng !== undefined) {
 
             document.getElementById('weatherLi').style.display = "block";
             document.getElementById('weatherWindow').style.display = 'block';
@@ -318,15 +321,12 @@
 </script>
 <script>
     function makeChanges() {
-        var inputsUpdate = document.getElementsByClassName('profilInput');
-        var inputsInfo = document.getElementsByClassName('profileInfo');
+        const inputsUpdate = document.getElementsByClassName('profilInput');
+        const inputsInfo = document.getElementsByClassName('profileInfo');
         for (let i = 0; i < inputsUpdate.length; i++) {
-            var currInfo = inputsInfo[i].textContent;
-            if (i == 3) {
-                inputsUpdate[i].setAttribute('value', Number.parseInt(currInfo));
+            if (i === 3) {
                 inputsUpdate[i].style.display = 'block';
             } else {
-                inputsUpdate[i].setAttribute('value', currInfo);
                 inputsUpdate[i].style.display = 'block';
             }
         }
@@ -335,15 +335,15 @@
         }
     }
 
-    var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
-    var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
-    var themeT=['bg-success','btn-danger','btn-success','btn-success'];
-    var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
-    var navigationBar=document.getElementsByTagName('nav')[0];
-    var logoutB=navigationBar.getElementsByTagName('button')[1];
-    var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
-    var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
-    var elements=[navigationBar,logoutB,clearB,uploadB];
+    const themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
+    const themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
+    const themeT=['bg-success','btn-danger','btn-success','btn-success'];
+    const themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
+    const navigationBar=document.getElementsByTagName('nav')[0];
+    const logoutB=navigationBar.getElementsByTagName('button')[1];
+    const clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
+    const uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
+    const elements=[navigationBar,logoutB,clearB,uploadB];
 
    
     function changeColorToLigthBlue(){
