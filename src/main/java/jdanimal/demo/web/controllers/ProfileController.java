@@ -21,8 +21,6 @@ import java.util.List;
 public class ProfileController {
 
     private final UserService userService;
-    private final AnimalService animalService;
-
 
     @GetMapping("/profile")
     public String getUserProfile(Model model){
@@ -36,7 +34,7 @@ public class ProfileController {
             model.addAttribute("userAnimal",allAnimalsByUser);
             return "profile";
         }
-        return null;
+        return "profile";
     }
 
 
