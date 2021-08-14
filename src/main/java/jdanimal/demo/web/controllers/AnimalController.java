@@ -42,6 +42,10 @@ public class AnimalController {
                                @Valid UserAnimalUploadModel userAnimalUploadModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) throws IOException {
+
+        System.out.println();
+        System.out.println("was here");
+        System.out.println();
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
                     "userAnimalUploadModel",userAnimalUploadModel);
