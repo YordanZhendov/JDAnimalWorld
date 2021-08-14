@@ -47,14 +47,14 @@ public class AnimalController {
                     "userAnimalUploadModel",userAnimalUploadModel);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.userAnimalUploadModel",bindingResult);
-            return "redirect:/user/animaladd";
+            return "animaladd";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
             this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo,picture);
-            return "redirect:/user/home";
+            return "home";
         }
         return null;
     }

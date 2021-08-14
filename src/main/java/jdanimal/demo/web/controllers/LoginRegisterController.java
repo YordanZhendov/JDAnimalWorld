@@ -47,12 +47,12 @@ public class LoginRegisterController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationModel",userRegistrationModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationModel",bindingResult);
-            return "redirect:/users/register";
+            return "register";
         }
 
         UserRegisterDTO mappedUser = modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
         this.userService.register(mappedUser);
-        return "redirect:/users/login";
+        return "index";
     }
 }
 
