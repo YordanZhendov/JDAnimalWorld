@@ -13,6 +13,11 @@ public class HomeController {
 
     private final AnimalService animalService;
 
+    @GetMapping("/users/login")
+    public String logIn(){
+        return "index";
+    }
+
 
     @GetMapping("/logout")
     public String logOut() {
