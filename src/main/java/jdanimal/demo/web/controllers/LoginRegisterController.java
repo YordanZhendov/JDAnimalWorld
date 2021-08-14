@@ -32,7 +32,7 @@ public class LoginRegisterController {
 
     }
 
-    @PostMapping("/users/registeruser")
+    @PostMapping("/users/register")
     public String registerUser(@Valid UserRegistrationModel userRegistrationModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
