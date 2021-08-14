@@ -19,7 +19,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/user/home")
+    @GetMapping("/users/home")
     public String getHome(Model model){
         List<AnimalViewModel> allAnimals = animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);
