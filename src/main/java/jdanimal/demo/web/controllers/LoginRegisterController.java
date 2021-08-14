@@ -29,11 +29,7 @@ public class LoginRegisterController {
         return "index";
 
     }
-    @PostMapping("/login")
-    public String getHome(){
-        return "home";
 
-    }
     @GetMapping("/register")
         public String register(Model model){
             if(!model.containsAttribute("userRegistrationModel")){
