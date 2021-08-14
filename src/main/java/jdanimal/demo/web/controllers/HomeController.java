@@ -23,6 +23,6 @@ public class HomeController {
     public String getHome(Model model){
         List<AnimalViewModel> allAnimals = animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);
-        return "home";
+        return "redirect:/home";
     }
 }
