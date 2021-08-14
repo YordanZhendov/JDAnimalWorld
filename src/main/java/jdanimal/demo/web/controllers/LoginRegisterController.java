@@ -18,19 +18,12 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/users")
 public class LoginRegisterController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/login")
-    public String getLogin(){
-        return "index";
-
-    }
-
-    @GetMapping("/register")
+    @GetMapping("/users/register")
         public String register(Model model){
             if(!model.containsAttribute("userRegistrationModel")){
                 model.addAttribute("userRegistrationModel",new UserRegistrationModel());
@@ -39,20 +32,20 @@ public class LoginRegisterController {
 
     }
 
-    @PostMapping("/register")
+    @PostMapping("/users/registeruser")
     public String registerUser(@Valid UserRegistrationModel userRegistrationModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
-
+        System.out.println();
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationModel",userRegistrationModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationModel",bindingResult);
-            return "register";
+            return "redirect:/users/register";
         }
 
         UserRegisterDTO mappedUser = modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
         this.userService.register(mappedUser);
-        return "index";
+        return "redirect:/users/login";
     }
 }
 

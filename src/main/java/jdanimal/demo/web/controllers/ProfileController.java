@@ -34,7 +34,7 @@ public class ProfileController {
             model.addAttribute("userAnimal",allAnimalsByUser);
             return "profile";
         }
-        return "profile";
+        return null;
     }
 
 

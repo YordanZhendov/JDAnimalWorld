@@ -29,12 +29,12 @@ public class AnimalController {
     private final UserService userService;
     private final AnimalService animalService;
 
-    @GetMapping("/animaladd")
+    @GetMapping("/animal")
     public String addAnimal(Model model){
         if(!model.containsAttribute("userAnimalUploadModel")){
             model.addAttribute("userAnimalUploadModel",new UserAnimalUploadModel());
         }
-        return "animaladd";
+        return "animal";
     }
 
     @PostMapping("/animal/upload")
@@ -47,25 +47,16 @@ public class AnimalController {
                     "userAnimalUploadModel",userAnimalUploadModel);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.userAnimalUploadModel",bindingResult);
-            return "animaladd";
+            return "redirect:/user/animal";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
             this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo,picture);
-            return "home";
+            return "redirect:/user/home";
         }
         return null;
     }
 
-
-    //Todo
-//    @PostMapping("/animal/delete")
-//    public String deleteAnimal(AnimalsViewDeleteModel animalsViewDeleteModel){
-//
-//        animalService.deleteByNameOfAnimal(animalsViewDeleteModel.getNameOfAnimal());
-//
-//        return "redirect:/user/profile";
-//    }
 }

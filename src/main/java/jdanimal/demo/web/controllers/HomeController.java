@@ -13,13 +13,18 @@ public class HomeController {
 
     private final AnimalService animalService;
 
+    @GetMapping("/users/login")
+    public String logIn(){
+        return "index";
+    }
+
     @GetMapping("/logout")
     public String logOut() {
         return "index";
 
     }
 
-    @GetMapping("/home")
+    @GetMapping("/user/home")
     public String getHome(Model model){
         List<AnimalViewModel> allAnimals = animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);

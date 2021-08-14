@@ -35,7 +35,7 @@
                                         </strong></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/animaladd}"><span><strong> + Add Animal
+                            <a class="nav-link active" th:href="@{/user/animal}"><span><strong> + Add Animal
                                         </strong></span></a>
                         </li>
                         <li class="nav-item dropdown">
@@ -94,10 +94,10 @@
                     th:each="animal : ${animals}" th:object="${animal}">
                     <div class="animalallList justify-content-between align-items-start">
                         <div class="ms-3 me-1 mt-5">
-<!--                            <img class="rounded-circle" th:src="*{'data:image/jpeg;base64,'+animalPicture}" width="100px" height="100px" alt="" srcset="">-->
+                            <img class="rounded-circle" th:src="*{'data:image/jpeg;base64,'+animalPicture}"  width="70px" height="70px" alt="" srcset="">
                             <div th:text="| ${animal.getNameOfAnimal()}|"></div>
                         </div>
-                        <div class="mt-5 ms-1" th:text="|Profile: ${animal.getUser().getFullName()}|">d</div>
+                        <div class="mt-5 ms-1" th:text="|Profile: ${animal.getUser().getFullName()}|"></div>
                         <div class="ms-2 me-1">
                             <p>
                                 <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -109,7 +109,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">Like
                             </label>
-                        </div>                   
+                        </div>
                     </div>
                     <div class="collapse col-12 mt-2" id="collapseExample">
                         <div class="card card-body bg-light" th:text="|Animal Type: *{typeOfAnimal}|">
@@ -126,9 +126,9 @@
                         </div>
                     </div>
                 </li>
-          </ul>
+            </ul>
         </div>
-        
+
     </main>
     <footer class="text-center text-lg-start bg-light text-muted">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>
@@ -345,44 +345,44 @@
     var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
     var elements=[navigationBar,logoutB,clearB,uploadB];
 
-   
+
     function changeColorToLigthBlue(){
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeS[index]);
             }
         }
     }
-    
+
     function changeColorToLigthGreen(){
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeT[index]);
             }
         }
@@ -391,19 +391,19 @@
     function changeColorDefault(){
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeF[index]);
             }
         }
@@ -411,19 +411,19 @@
     function changeColorToRed(){
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeD[index]);
             }
         }

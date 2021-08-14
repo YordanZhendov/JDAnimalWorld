@@ -49,11 +49,4 @@ public class AnimalServiceImpl implements AnimalService {
         mappedAnimalEntity.setAnimalPicture(pictureString);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
     }
-
-
-    //Todo
-//    @Override
-//    public void deleteByNameOfAnimal(String name) {
-//        animalRepository.deleteByNameOfAnimal(name);
-//    }
 }
