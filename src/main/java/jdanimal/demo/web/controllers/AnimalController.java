@@ -3,7 +3,6 @@ package jdanimal.demo.web.controllers;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
-import jdanimal.demo.service.views.AnimalsViewDeleteModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
