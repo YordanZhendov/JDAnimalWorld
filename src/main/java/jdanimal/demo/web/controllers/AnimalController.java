@@ -38,10 +38,9 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/upload")
-    public String uploadAnimal(@RequestParam(name = "animalPicture") MultipartFile picture,
-                               @Valid UserAnimalUploadModel userAnimalUploadModel,
+    public String uploadAnimal(@Valid UserAnimalUploadModel userAnimalUploadModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) throws IOException {
+                               RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
@@ -54,7 +53,7 @@ public class AnimalController {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
-            this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo,picture);
+            this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo);
             return "redirect:/user/home";
         }
         return null;

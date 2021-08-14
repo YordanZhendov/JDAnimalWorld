@@ -31,8 +31,8 @@ public class Animal extends BaseEntity{
     private String availableTill;
     @ManyToOne
     private User user;
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "picture")
-    private String animalPicture;
+//    @Lob
+//    @Basic(fetch = FetchType.LAZY)
+//    @Column(name = "picture")
+//    private String animalPicture;
 }

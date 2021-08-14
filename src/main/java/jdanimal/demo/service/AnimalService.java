@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AnimalService {
     List<AnimalViewModel> getAllAnimals();
-    void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo, MultipartFile picture) throws IOException;
+    void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo);
 
 
 }

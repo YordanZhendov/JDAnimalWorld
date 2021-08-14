@@ -37,16 +37,16 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo, MultipartFile picture) throws IOException {
+    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo){
 
-        byte[] pictureBytes = picture.getBytes();
-        String pictureString = Base64.getEncoder().encodeToString(pictureBytes);
+//        byte[] pictureBytes = picture.getBytes();
+//        String pictureString = Base64.getEncoder().encodeToString(pictureBytes);
 
         UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadModel, UserAnimalUploadDTO.class);
         Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
         mappedAnimalEntity.setUser(byUsername);
-        mappedAnimalEntity.setAnimalPicture(pictureString);
+//        mappedAnimalEntity.setAnimalPicture(pictureString);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
     }
 }
