@@ -15,7 +15,7 @@ public class HomeController {
 
     @GetMapping("/logout")
     public String logOut() {
-        return "redirect:index";
+        return "index";
 
     }
 
@@ -23,6 +23,6 @@ public class HomeController {
     public String getHome(Model model){
         List<AnimalViewModel> allAnimals = animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);
-        return "redirect:/home";
+        return "home";
     }
 }
