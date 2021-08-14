@@ -1,5 +1,6 @@
 package jdanimal.demo.web.controllers;
 
+import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.service.models.UserRegistrationModel;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
@@ -26,6 +27,11 @@ public class LoginRegisterController {
     @GetMapping("/login")
     public String getLogin(){
         return "index";
+
+    }
+    @PostMapping("/login")
+    public String getHome(){
+        return "home";
 
     }
     @GetMapping("/register")
