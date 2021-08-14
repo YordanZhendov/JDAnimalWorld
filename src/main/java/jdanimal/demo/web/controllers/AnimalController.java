@@ -15,9 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @AllArgsConstructor
@@ -36,9 +39,10 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/upload")
-    public String uploadAnimal(@Valid UserAnimalUploadModel userAnimalUploadModel,
+    public String uploadAnimal(@RequestParam(name = "animalPicture") MultipartFile picture,
+                               @Valid UserAnimalUploadModel userAnimalUploadModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes){
+                               RedirectAttributes redirectAttributes) throws IOException {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
                     "userAnimalUploadModel",userAnimalUploadModel);
@@ -49,12 +53,13 @@ public class AnimalController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-            UserProfileViewModel userProfileInfo = userService.findByUsername(currentUserName);
-            this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo);
+            UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
+            this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo,picture);
             return "redirect:/user/profile";
         }
         return null;
     }
+
 
     //Todo
 //    @PostMapping("/animal/delete")

@@ -13,6 +13,7 @@ import lombok.Setter;
 public class AnimalViewModel {
 
     private String id;
+    private String animalPicture;
     private String nameOfAnimal;
     private String typeOfAnimal;
     private String ageOfAnimal;

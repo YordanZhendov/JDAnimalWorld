@@ -5,12 +5,14 @@ import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AnimalService {
     List<AnimalViewModel> getAllAnimals();
-    void deleteByNameOfAnimal(String name);
-    void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo);
+    //todo
+//    void deleteByNameOfAnimal(String name);
+    void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo, MultipartFile picture) throws IOException;
 
 
 }

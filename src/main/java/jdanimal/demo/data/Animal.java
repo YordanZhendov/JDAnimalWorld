@@ -29,10 +29,10 @@ public class Animal extends BaseEntity{
     private String kilogramsOfAnimal;
     @Column(name = "available_till")
     private String availableTill;
-//    @Lob
-//    @Basic(fetch = FetchType.LAZY)
-//    @Column(name = "picture")
-//    private byte[] animalPicture;
     @ManyToOne
     private User user;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "picture")
+    private String animalPicture;
 }

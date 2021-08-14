@@ -14,9 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,17 +37,23 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo) {
+    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo, MultipartFile picture) throws IOException {
+
+        byte[] pictureBytes = picture.getBytes();
+        String pictureString = Base64.getEncoder().encodeToString(pictureBytes);
+
         UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadModel, UserAnimalUploadDTO.class);
         Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
-
         mappedAnimalEntity.setUser(byUsername);
+        mappedAnimalEntity.setAnimalPicture(pictureString);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
     }
 
-    @Override
-    public void deleteByNameOfAnimal(String name) {
-        animalRepository.deleteByNameOfAnimal(name);
-    }
+
+    //Todo
+//    @Override
+//    public void deleteByNameOfAnimal(String name) {
+//        animalRepository.deleteByNameOfAnimal(name);
+//    }
 }
