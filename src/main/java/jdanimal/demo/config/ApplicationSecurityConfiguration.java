@@ -28,8 +28,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .defaultSuccessUrl("/user/home")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/users/login")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/users/login");
     }
 }
