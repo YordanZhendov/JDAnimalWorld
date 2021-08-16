@@ -20,7 +20,7 @@ public class HomeController {
         if(authentication == null || authentication instanceof Anonymousauthenticationtoken){
             return "index";
         }
-        return "home";
+        return "redirect:/user/home";
     }
 
 
