@@ -21,6 +21,7 @@ public class HomeController {
 
     @GetMapping("/logout")
     public String logOut() {
+        Cookie cookie = new Cookie("JSESSION","");
         return "index";
 
     }
