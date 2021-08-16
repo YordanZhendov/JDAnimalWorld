@@ -46,9 +46,9 @@
             <div class="sign in col-9">
                 <form th:action="@{/users/login}" method="post" class="row g-3 border-top border-primary border-1">
                     <div th:if="${param.error}">
-                        <p class="bg-danger">Invalid username or password</p>
+                        <p class="col-12 p-2 bg-danger text-white text-center mt-2 rounded-circle">Invalid username or password</p>
                     </div><div th:if="${param.logout}">
-                        <p class="bg-danger">You have been logged out</p>
+                        <p class="col-12 p-2 bg-danger text-white text-center mt-2 rounded-circle">You have been logged out</p>
                     </div>
                     <div class="col-md-12 h4 text-center"><img class="ms-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4egqR9lKCqkPdZahfJ3RVyaGtw6qkkUIzikDD2vulqATGhrkOzH0qARjIaLV_BaAtu5M&usqp=CAU" alt="" srcset=""><strong>SIGN IN</strong></div>
                     <div class="col-md-6">
