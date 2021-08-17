@@ -3,6 +3,7 @@ package jdanimal.demo.web.controllers;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.views.AnimalViewModel;
 import lombok.AllArgsConstructor;
+import javax.servlet.http.Cookie
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
