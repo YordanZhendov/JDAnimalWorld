@@ -31,7 +31,7 @@ public class HomeController {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if(cookie.getName().equals("JSESSIONID")){     
-             return "redirect:/user/home";
+             return "home";
             }
         } 
         return "index";
