@@ -3,6 +3,8 @@ package jdanimal.demo.web.controllers;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.views.AnimalViewModel;
 import lombok.AllArgsConstructor;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +20,8 @@ public class HomeController {
     private final AnimalService animalService;
 
     @GetMapping("/users/login")
-    public String logIn(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+    public String logIn(HttpServletRequest req){
+        if ((req.getCookies().getValue() != null)) {
            
             return "redirect:/user/home";
         }
