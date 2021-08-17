@@ -38,7 +38,7 @@ public class HomeController {
              return "index";
           }
         }
-        return "home";
+        return "redirect:/user/home";
     }
 
 
