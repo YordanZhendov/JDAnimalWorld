@@ -40,6 +40,8 @@ public class HomeController {
             oldCookie=cookies[0];
             return "home";
         }
+        
+        return "redirect:/users/login;
     }
 
 
