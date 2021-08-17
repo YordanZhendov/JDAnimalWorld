@@ -29,7 +29,7 @@ public class HomeController {
      @GetMapping("/")
     public String index(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
-        if (cookies[0].equals("JSESSIONID")) {
+        if (cookies[0].getName().equals("JSESSIONID")) {
             return "redirect:/user/home";
         } 
         return "index";
