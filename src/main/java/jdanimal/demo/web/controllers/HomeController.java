@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.util.WebUtils;
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -21,7 +21,7 @@ public class HomeController {
     public String logIn(HttpServletRequest request){
         Cookie name = WebUtils.getCookie(request, "JSESSIONID");
         if (name != null) {
-            return "redirect:/user/home"
+            return "redirect:/user/home";
         } 
         return "index";
     }
