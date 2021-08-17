@@ -29,12 +29,11 @@ public class HomeController {
      @GetMapping("/")
     public String index(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
-        if(cookies.size() > 0){
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("JSESSIONID")){     
-                    return "home";
-                }
-            } 
+        
+         if(cookies[0].getName().equals("JSESSIONID")){     
+             return "home";
+          }
+            
         }
         return "index";
     }
