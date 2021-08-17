@@ -28,16 +28,7 @@ public class HomeController {
     
      @GetMapping("/")
     public String index(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        
-        Cookie oldCookie=null;
-      
-       
-        if(oldCookie.getValue().equals(cookies[0].getValue())){
-            oldCookie=cookies[0];
-            return "home";
-        }
-        
+        Cookie[] cookies = request.getCookies();      
         return "index";
     }
 
