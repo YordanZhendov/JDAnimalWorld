@@ -31,12 +31,8 @@ public class HomeController {
         Cookie[] cookies = request.getCookies();
         
         Cookie oldCookie=null;
-        
-        if(cookies[0].getValue().equals("")){
-            return "index";
-         
-        }
-        
+      
+       
         if(oldCookie.getValue() == cookies[0].getValue()){
             oldCookie=cookies[0];
             return "home";
