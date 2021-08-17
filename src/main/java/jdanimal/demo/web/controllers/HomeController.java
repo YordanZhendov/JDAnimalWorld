@@ -33,7 +33,6 @@ public class HomeController {
         Cookie oldCookie=null;
         
         if(cookies[0].getValue().equals("")){
-            oldCookie=cookies[0];
             return "index";
          
         }
@@ -43,7 +42,7 @@ public class HomeController {
             return "home";
         }
         
-        return null;
+        return "index";
     }
 
 
