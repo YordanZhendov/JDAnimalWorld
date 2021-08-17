@@ -33,7 +33,7 @@ public class HomeController {
         Cookie oldCookie=null;
       
        
-        if(oldCookie.getValue() == cookies[0].getValue()){
+        if(oldCookie.getValue().equals(cookies[0].getValue())){
             oldCookie=cookies[0];
             return "home";
         }
