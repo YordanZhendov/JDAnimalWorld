@@ -30,7 +30,7 @@ public class HomeController {
     public String index(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            if(cookie.getName()=='JSESSIONID'){     
+            if(cookie.getName().equals("JSESSIONID")){     
              return "redirect:/user/home";
             }
         } 
