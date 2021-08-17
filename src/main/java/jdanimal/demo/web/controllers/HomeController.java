@@ -33,6 +33,7 @@ public class HomeController {
         Cookie oldCookie=null;
         
         if(oldCookie == null){
+            oldCookie=cookies[0];
             return "index";
          
         }
