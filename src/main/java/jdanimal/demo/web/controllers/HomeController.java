@@ -33,8 +33,6 @@ public class HomeController {
          if(cookies[0].getName().equals("JSESSIONID")){     
              return "home";
           }
-            
-        }
         return "index";
     }
 
