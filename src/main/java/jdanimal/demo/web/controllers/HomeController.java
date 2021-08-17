@@ -30,9 +30,14 @@ public class HomeController {
     public String index(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
         
-         if(cookies[0].getName().equals("JSESSIONID")){     
+        Cooke oldCookie=null;
+        
+        if(oldCookie == null){
+         if(cookies[0].getName().equals("JSESSIONID")){   
+             oldCookie=cookies[0];
              return "index";
           }
+        }
         return "home";
     }
 
