@@ -32,7 +32,7 @@ public class HomeController {
         if (cookies[0].getName().equals("JSESSIONID")) {
             return "redirect:/user/home";
         } 
-        return "index";
+        return null;
     }
 
 
