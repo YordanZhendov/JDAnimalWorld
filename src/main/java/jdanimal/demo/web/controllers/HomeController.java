@@ -32,17 +32,18 @@ public class HomeController {
         
         Cookie oldCookie=null;
         
-        if(oldCookie == null){
+        if(cookies[0].getValue().equals("")){
             oldCookie=cookies[0];
             return "index";
          
         }
+        
         if(oldCookie.getValue() == cookies[0].getValue()){
             oldCookie=cookies[0];
             return "home";
         }
         
-        return "home";
+        return null;
     }
 
 
