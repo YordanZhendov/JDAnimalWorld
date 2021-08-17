@@ -22,15 +22,16 @@ public class HomeController {
     private final AnimalService animalService;
 
     @GetMapping("/users/login")
-    public String logIn(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        if (cookies[0].equals("JSESSIONID")) {
-            return "redirect:/logout";
-        } 
+    public String logIn(){
         return "index";
     }
+    
      @GetMapping("/")
-    public String logIn(){
+    public String index(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if (cookies[0].equals("JSESSIONID")) {
+            return "redirect:/users/login";
+        } 
         return "index";
     }
 
