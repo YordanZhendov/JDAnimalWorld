@@ -33,12 +33,13 @@ public class HomeController {
         Cookie oldCookie=null;
         
         if(oldCookie == null){
-         if(cookies[0].getName().equals("JSESSIONID")){   
-             oldCookie=cookies[0];
-             return "index";
-          }
+            return "index";
+         
         }
-        return "redirect:/user/home";
+        if(oldCookie.getValue() == cookies[0].getValue()){
+            oldCookie=cookies[0];
+            return "home";
+        }
     }
 
 
