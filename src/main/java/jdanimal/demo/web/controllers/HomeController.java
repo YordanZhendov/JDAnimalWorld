@@ -31,9 +31,9 @@ public class HomeController {
         Cookie[] cookies = request.getCookies();
         
          if(cookies[0].getName().equals("JSESSIONID")){     
-             return "home";
+             return "index";
           }
-        return "index";
+        return "home";
     }
 
 
