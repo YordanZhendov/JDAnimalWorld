@@ -20,7 +20,7 @@ public class HomeController {
 
     @GetMapping("/users/login")
     public String logIn(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies()
+        Cookie[] cookies = request.getCookies();
         if (cookies[0].equals("JSESSIONID")) {
             return "redirect:/user/home";
         } 
