@@ -29,20 +29,14 @@ public class HomeController {
         return "index";
     }
     
-    private boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || AnonymousAuthenticationToken.class.
-          isAssignableFrom(authentication.getClass())) {
-            return false;
-        }
-        return authentication.isAuthenticated();
-    }
-    
      @GetMapping("/")
     public String index(){
-        if (isAuthenticated()) {
-        return "home";
-        }   
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+            /* The user is logged in :) */
+            return "redirect:/home";
+         }
         return "index";
     }
 
