@@ -26,9 +26,6 @@ public class HomeController {
 
     @GetMapping("/users/login")
     public String logIn(){
-        if (isAuthenticated()) {
-        return "redirect:/user/home";
-        }
         return "index";
     }
     
@@ -42,8 +39,10 @@ public class HomeController {
     }
     
      @GetMapping("/")
-    public String index(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();      
+    public String index(){
+        if (isAuthenticated()) {
+        return "redirect:/user/home";
+        }   
         return "index";
     }
 
