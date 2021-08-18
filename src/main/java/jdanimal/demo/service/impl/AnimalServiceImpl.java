@@ -29,9 +29,9 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<AnimalViewModel> getAllAnimals() {
-        return animalRepository.findAllAnimals()
+        return this.animalRepository.findAllAnimals()
                 .stream()
-                .map(animal -> modelMapper.map(animal, AnimalViewModel.class))
+                .map(animal -> this.modelMapper.map(animal, AnimalViewModel.class))
                 .collect(Collectors.toList());
 
     }
@@ -39,14 +39,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo){
 
-//        byte[] pictureBytes = picture.getBytes();
-//        String pictureString = Base64.getEncoder().encodeToString(pictureBytes);
 
         UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadModel, UserAnimalUploadDTO.class);
         Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
         mappedAnimalEntity.setUser(byUsername);
-//        mappedAnimalEntity.setAnimalPicture(pictureString);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
     }
 }

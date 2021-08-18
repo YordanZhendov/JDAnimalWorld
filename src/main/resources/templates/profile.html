@@ -74,7 +74,7 @@
     </header>
     <main class="row">
         <div class="d-inline">
-            <form class="col-10 ms-5 mt-5 me-5" action="" method="POST">
+            <form class="col-10 ms-5 mt-5 me-5" action="/user/update-profile" method="POST">
                 <br>
                 <br>
                 <br>
@@ -91,22 +91,23 @@
                 <br>
                 <div class="col-7">
                     <label class="form-label"><strong>Username :</strong></label>
-                    <label name="userNameUpdateForm" th:text="${userProfileInfo.getUsername()}">JordanDK</label>
+                    <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username">
+
                 </div>
                 <div class="col-7 mt-2">
-                    <label for="fullNameUpdateForm" class="form-label"><strong>Full name :</strong></label>
+                    <label class="form-label"><strong>Full name :</strong></label>
                     <label class="profileInfo" th:text="${userProfileInfo.getFullName()}"></label>
-                    <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullNameUpdateForm" name="fullNameUpdateForm">
+                    <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullName" name="fullName">
                 </div>
                 <div class="col-7 mt-2">
-                    <label for="emailUpdateForm" class="form-label"><strong>Email :</strong></label>
+                    <label class="form-label"><strong>Email :</strong></label>
                     <label class="profileInfo" th:text="${userProfileInfo.getEmail()}"></label>
-                    <input type="email" class="profilInput form-control" value="" placeholder="Email" id="emailUpdateForm" name="emailUpdateForm">
+                    <input type="email" class="profilInput form-control" value="" placeholder="Email" id="email" name="email">
                 </div>
                 <div class="col-7 mt-2">
-                    <label for="phoneUpdateForm" class="form-label"><strong>Phone :</strong></label>
+                    <label class="form-label"><strong>Phone :</strong></label>
                     <label class="profileInfo" th:text="${userProfileInfo.getPhoneNumber()}"></label>
-                    <input type="text" class="profilInput form-control" value="" placeholder="Phone" id="phoneUpdateForm" name="phoneUpdateForm">
+                    <input type="text" class="profilInput form-control" value="" placeholder="Phone" id="phoneNumber" name="phoneNumber">
                 </div>
                 <div class="col-7 mt-2">
                     <label name="cityUpdateForm" class="form-label" ><strong>City: </strong></label>

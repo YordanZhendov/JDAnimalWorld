@@ -36,14 +36,13 @@ public class LoginRegisterController {
     public String registerUser(@Valid UserRegistrationModel userRegistrationModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
-        System.out.println();
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationModel",userRegistrationModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationModel",bindingResult);
             return "redirect:/users/register";
         }
 
-        UserRegisterDTO mappedUser = modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
+        UserRegisterDTO mappedUser = this.modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
         this.userService.register(mappedUser);
         return "redirect:/users/login";
     }

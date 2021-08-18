@@ -39,13 +39,16 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "agree_policy")
     private boolean policyAgree;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE},fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id")
             ,inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> authorities;
 
     @OneToMany(mappedBy = "user")
     private Set<Animal> animals;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Accessory> accessories;
 
     @Override
     @Transient

@@ -35,15 +35,15 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<RoleServiceDTO> findAllRoles() {
-        return  roleRepository.findAll()
+        return  this.roleRepository.findAll()
                 .stream()
-                .map(r->modelMapper.map(r,RoleServiceDTO.class))
+                .map(r->this.modelMapper.map(r,RoleServiceDTO.class))
                 .collect(Collectors.toSet());
 
     }
 
     @Override
     public RoleServiceDTO findByAuthority(String role) {
-        return modelMapper.map(roleRepository.findByAuthority(role),RoleServiceDTO.class);
+        return this.modelMapper.map(this.roleRepository.findByAuthority(role),RoleServiceDTO.class);
     }
 }

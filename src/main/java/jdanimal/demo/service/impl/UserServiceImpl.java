@@ -13,6 +13,7 @@ import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
 import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
+import jdanimal.demo.service.models.UserUpdateProfileModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
 import jdanimal.demo.service.views.UserProfileViewModel;
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
             return;
         }
 
-        User user=modelMapper.map(userRegisterDTO,User.class);
+        User user=this.modelMapper.map(userRegisterDTO,User.class);
 
         if(!userValidationSerivce.checkUser(user)){
             return;
@@ -59,13 +60,13 @@ public class UserServiceImpl implements UserService {
         if(userRepository.count() == 0){
             roleService.seedRoles();
             user.setAuthorities(this.roleService.findAllRoles()
-                    .stream().map(r->modelMapper
+                    .stream().map(r->this.modelMapper
                             .map(r,Role.class))
                     .collect(Collectors.toSet()));
         }else {
 
             user.setAuthorities(new LinkedHashSet<>());
-            user.getAuthorities().add(modelMapper.map(roleService.findByAuthority("GUEST"),Role.class));
+            user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
         }
 
         this.userRepository.save(user);
@@ -75,25 +76,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public User validUser(UserLoginDTO userLoginDTO) {
         userLoginDTO.setPassword(this.bCryptPasswordEncoder.encode(userLoginDTO.getPassword()));
-        User userLogin = modelMapper.map(userLoginDTO, User.class);
+        User userLogin = this.modelMapper.map(userLoginDTO, User.class);
         return this.userRepository.findByUsernameAndPassword(userLogin.getUsername(), userLogin.getPassword()).orElse(null);
     }
 
     @Override
     public UserProfileViewModel findByUsername(String currentUserName) {
         User byUsername = this.userRepository.findByUsername(currentUserName);
-        UserProfileDTO userProfileDTO = modelMapper.map(byUsername, UserProfileDTO.class);
-        return modelMapper.map(userProfileDTO, UserProfileViewModel.class);
+        UserProfileDTO userProfileDTO = this.modelMapper.map(byUsername, UserProfileDTO.class);
+        return this.modelMapper.map(userProfileDTO, UserProfileViewModel.class);
     }
 
 
 
     @Override
     public List<AnimalViewModel> getAllAnimalsByUser(String id) {
-        return animalRepository.getAnimalByUser(id)
+        return this.animalRepository.getAnimalByUser(id)
                 .stream()
-                .map(animal -> modelMapper.map(animal,AnimalViewModel.class))
+                .map(animal -> this.modelMapper.map(animal,AnimalViewModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateProfile(UserUpdateProfileModel userUpdateProfileModel) {
+        User user = this.userRepository.findByUsername(userUpdateProfileModel.getUsername());
+        user.setEmail(userUpdateProfileModel.getEmail());
+        user.setPhoneNumber(userUpdateProfileModel.getPhoneNumber());
+        user.setFullName(userUpdateProfileModel.getFullName());
+        this.userRepository.save(user);
     }
 
 

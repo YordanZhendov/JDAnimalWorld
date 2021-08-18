@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -94,11 +93,11 @@
                 </div>
             </form>
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownf" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Filter by
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownf">
                     <li><a class="dropdown-item" >Name</a></li>
                     <li><a class="dropdown-item" >Type</a></li>
                     <li><a class="dropdown-item" >Available Date</a></li>
@@ -114,7 +113,7 @@
                     <div class="mt-1 ms-1" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
 
                     <div class="animalallList justify-content-between align-items-start">
-                        <div class="col-8 ms-3 me-1 mt-5">
+                        <div class="col-6 ms-3 me-1 mt-5">
                             <img class="rounded-roll mb-5" src="https://i2.wp.com/animalhope.com.mx/wp-content/uploads/2021/04/Logo-Animal-Hope-Variations0.gif?fit=459%2C309&ssl=1" width="100px" height="100px" alt="" srcset="">
                             <strong><i><div class="ms-5" th:text="| ${animal.getNameOfAnimal()}|">Rayan</div></i></strong>
                         </div>
@@ -134,7 +133,7 @@
                     <div class="collapse col-12 mt-5" id="collapseExample">
                         <div class="card card-body bg-light" th:text="|Animal Type: *{typeOfAnimal}|">
                         </div>
-                        <div class="card card-body " th:text="|Available untill: *{availableTill}|">
+                        <div class="card card-body " th:text="|Available until: *{availableTill}|">
                         </div>
                         <div class="card card-body bg-light" th:text="|Age: *{ageOfAnimal}|">
                         </div>
@@ -147,6 +146,43 @@
                     </div>
                 </li>
           </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
+                    th:each="accessory : ${accessories}" th:object="${accessory}">
+                    <div class="mt-1 ms-1" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                    <div class="mt-1 ms-1" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                    <div class="mt-1 ms-1" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
+
+                    <div class="animalallList justify-content-between align-items-start">
+                        <div class="col-6 ms-3 me-1 mt-5">
+                            <img class="rounded-roll mb-5" src="https://media.karousell.com/media/photos/products/2017/03/13/not_available_at_the_moment_1489420632_1787c15d.jpg" width="100px" height="100px" alt="" srcset="">
+                            <strong><i><div class="ms-5" th:text="| ${accessory.getAccessoryName()}|">Rayan</div></i></strong>
+                        </div>
+                        <div class="ms-2 me-1">
+                            <p>
+                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleAccessory" aria-expanded="false" aria-controls="collapseExample">
+                                    Accessory Details:
+                                </button>
+                            </p>
+                        </div>
+                        <div class="form-check mt-5 me-5">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultAccessory">
+                            <label class="form-check-label" for="flexCheckDefaultAccessory">Like
+                            </label>
+                        </div>
+                    </div>
+                    <div class="collapse col-12 mt-5" id="collapseExampleAccessory">
+                        <div class="card card-body bg-light" th:text="|Accessory Name: *{getAccessoryName()}|">
+                        </div>
+                        <div class="card card-body " th:text="|Available until: *{getAvailableTill()}|">
+                        </div>
+                        <div class="card card-body bg-light" th:text="|Days used: *{getDaysUsed()}|">
+                        </div>
+                        <div class="card card-body" th:text="|Price: *{getAccessoryPrice()}|">
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
     </main>
