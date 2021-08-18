@@ -35,7 +35,7 @@ public class HomeController {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
 
             /* The user is logged in :) */
-            return "redirect:/home";
+            return "redirect:/user/home";
          }
         return "index";
     }
