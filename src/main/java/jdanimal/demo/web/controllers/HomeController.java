@@ -28,6 +28,15 @@ public class HomeController {
     public String logIn(){
         return "index";
     }
+    
+    @GetMapping("/")
+    public String index(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
+            return "index";
+        }
+        return "redirect:/user/home";
+    }
 
     @GetMapping("/logout")
     public String logOut() {
