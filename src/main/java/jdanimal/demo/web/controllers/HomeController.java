@@ -40,7 +40,7 @@ public class HomeController {
     
      @GetMapping("/")
     public String index(){
-        if (isAuthenticated()) {
+        if (!isAuthenticated()) {
         return "home";
         }   
         return "index";
