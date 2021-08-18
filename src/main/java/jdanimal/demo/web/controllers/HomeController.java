@@ -31,12 +31,6 @@ public class HomeController {
     
      @GetMapping("/")
     public String index(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-
-            /* The user is logged in :) */
-            return "redirect:/user/home";
-         }
         return "index";
     }
 
