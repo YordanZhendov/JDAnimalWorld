@@ -28,12 +28,6 @@ public class HomeController {
     public String logIn(){
         return "index";
     }
-    
-     @GetMapping("/")
-    public String index(){
-        return "redirect:/users/login";
-    }
-
 
     @GetMapping("/logout")
     public String logOut() {
