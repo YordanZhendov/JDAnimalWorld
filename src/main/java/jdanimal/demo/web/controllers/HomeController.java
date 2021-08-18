@@ -40,8 +40,8 @@ public class HomeController {
     
      @GetMapping("/")
     public String index(){
-        if (!isAuthenticated()) {
-        return "home";
+        if (isAuthenticated()) {
+        return "redirect:/user/home";
         }   
         return "index";
     }
