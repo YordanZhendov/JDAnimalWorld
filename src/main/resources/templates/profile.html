@@ -80,12 +80,15 @@
                 <br>
                 <br>
                 <br>
-                <div>
-                    <strong>MY PROFILE</strong>
+                <div class="shadow p-3 mb-5 bg-body rounded">
+                    <div>
+                        <strong>My Profile Picture</strong>
+                    </div>
+                    <img src="https://thumbs.dreamstime.com/b/people-icon-vector-male-female-person-profile-avatar-people-icon-vector-male-female-sign-user-person-profile-avatar-102655370.jpg"
+                    width="100" height="100" class="rounded-circle mb-2" alt="...">
+                    <input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp" class="col-2 form-control" id="customFile" />
+                    <button type="submit" class="btn btn-secondary mt-2">Upload</button>
                 </div>
-                <img src="https://thumbs.dreamstime.com/b/people-icon-vector-male-female-person-profile-avatar-people-icon-vector-male-female-sign-user-person-profile-avatar-102655370.jpg"
-                     width="100" height="100" class="rounded-circle mb-2" alt="...">
-                <input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp" class="form-control" id="customFile" />
                 <br>
                 <br>
                 <br>
@@ -127,7 +130,6 @@
                     </div>
                 </div>
             </form>
-        </div>
         <div class="inlineForms d-flex">
             <div class="col-5 ms-5 mt-3 me-5 text-center">
                 <br>
@@ -550,6 +552,9 @@
     /* Homepage */
     @media only screen and (max-width: 700px) {
         .row >.inlineForms{
+            display: inline !important;
+        }
+        .inlineForms{
             display: inline !important;
         }
     }
