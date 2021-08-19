@@ -97,7 +97,7 @@
                                  <small th:if="${#fields.hasErrors('accessoryName')}" th:errors="*{accessoryName}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
-                                <strong><i><label>Available till:</label></i></strong>
+                                <strong><i><label>Available until:</label></i></strong>
                                 <input  th:field="*{availableTill}" th:errorclass="bg-danger" class="form-control" placeholder="Date..."  type="date" id="availableTill" name="availableTill">
                                  <small th:if="${#fields.hasErrors('availableTill')}" th:errors="*{availableTill}" class="text-danger">error</small>
                             </div>
