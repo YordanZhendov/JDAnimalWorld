@@ -108,10 +108,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="animal : ${animals}" th:object="${animal}">
-                    <div class="mt-1 ms-1" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                    <div class="mt-1 ms-1" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                    <div class="mt-1 ms-1" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-
+                    <div class="ms-2 me-1">
+                        <p>
+                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetails" aria-expanded="false" aria-controls="ownerDetails">
+                                Owner Details:
+                            </button>
+                        </p>
+                    </div>
+                    <div class="collapse col-12 mt-5" id="ownerDetails">
+                        <div class="mt-1 ms-1" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                        <div class="mt-1 ms-1" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                        <div class="mt-1 ms-1" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
+                    </div>
                     <div class="animalallList justify-content-between align-items-start">
                         <div class="col-6 ms-3 me-1 mt-5">
                             <img class="rounded-roll mb-5" src="https://i2.wp.com/animalhope.com.mx/wp-content/uploads/2021/04/Logo-Animal-Hope-Variations0.gif?fit=459%2C309&ssl=1" width="100px" height="100px" alt="" srcset="">
@@ -149,10 +157,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="accessory : ${accessories}" th:object="${accessory}">
-                    <div class="mt-1 ms-1" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                    <div class="mt-1 ms-1" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                    <div class="mt-1 ms-1" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-
+                    <div class="ms-2 me-1">
+                        <p>
+                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetailsAccessory" aria-expanded="false" aria-controls="ownerDetailsAccessory">
+                                Owner Details:
+                            </button>
+                        </p>
+                    </div>
+                    <div class="collapse col-12 mt-5" id="ownerDetailsAccessory">
+                        <div class="mt-1 ms-1" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                        <div class="mt-1 ms-1" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                        <div class="mt-1 ms-1" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
+                    </div>
                     <div class="animalallList justify-content-between align-items-start">
                         <div class="col-6 ms-3 me-1 mt-5">
                             <img class="rounded-roll mb-5" src="https://media.karousell.com/media/photos/products/2017/03/13/not_available_at_the_moment_1489420632_1787c15d.jpg" width="100px" height="100px" alt="" srcset="">
