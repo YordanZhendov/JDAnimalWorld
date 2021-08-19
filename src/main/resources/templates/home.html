@@ -110,9 +110,15 @@
                 </ul>
             </div>
             <br>
+            
             <ul class="list-group ms-3 list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="animal : ${animals}" th:object="${animal}">
+                    <div class="form-check mt-5 me-5">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Like
+                        </label>
+                    </div>
                     <div class="ms-2 me-1">
                         <p>
                             <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetails" aria-expanded="false" aria-controls="ownerDetails">
@@ -126,7 +132,7 @@
                         <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                     </div>
                     <div class="animalallList justify-content-between align-items-start">
-                        <div class="col-6 ms-3 me-1 mt-5">
+                        <div class="col-5 ms-3 me-1 mt-5">
                             <div class="pictureAnimalSlide">
                                 <strong><i><div class="h-1 ms-5" th:text="| ${animal.getNameOfAnimal()}|">Rayan</div></i></strong>
                                 <br>
@@ -171,12 +177,7 @@
                                     Animal Details:
                                 </button>
                             </p>
-                        </div>
-                        <div class="form-check mt-5 me-5">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">Like
-                            </label>
-                        </div>
+                        </div>                       
                     </div>
                     <div class="collapse col-12 mt-5" id="collapseExample">
                         <div class="card card-body bg-light" th:text="|Animal Type: *{typeOfAnimal}|">
@@ -197,6 +198,11 @@
             <ul class="list-group ms-3 list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="accessory : ${accessories}" th:object="${accessory}">
+                    <div class="form-check mt-5 me-5">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultAccessory">
+                        <label class="form-check-label" for="flexCheckDefaultAccessory">Like
+                        </label>
+                    </div>
                     <div class="ms-2 me-1">
                         <p>
                             <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetailsAccessory" aria-expanded="false" aria-controls="ownerDetailsAccessory">
@@ -255,12 +261,7 @@
                                     Accessory Details:
                                 </button>
                             </p>
-                        </div>
-                        <div class="form-check mt-5 me-5">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultAccessory">
-                            <label class="form-check-label" for="flexCheckDefaultAccessory">Like
-                            </label>
-                        </div>
+                        </div>                       
                     </div>
                     <div class="collapse col-12 mt-5" id="collapseExampleAccessory">
                         <div class="card card-body bg-light" th:text="|Accessory Name: *{getAccessoryName()}|">
