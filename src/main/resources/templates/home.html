@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="htt://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -38,7 +39,7 @@
                                         </strong></span></a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control
+                            <a class="nav-link active" sec:authorize="hasRole('ADMIN')" th:href="@{/user/users-control}"><span><strong> Users Control
                                         </strong></span></a>
                         </li>
                         <li class="nav-item">
