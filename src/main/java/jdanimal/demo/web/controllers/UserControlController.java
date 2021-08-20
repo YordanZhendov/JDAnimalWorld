@@ -20,7 +20,7 @@ public class UserControlController {
 
     @GetMapping("/user/users-control")
     public String userControlPage(){
-        return "user-control";
+        return "users-control";
     }
 
 }
