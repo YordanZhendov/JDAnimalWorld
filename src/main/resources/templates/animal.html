@@ -96,17 +96,17 @@
                         <div id="inputInfoAnimal" class="col-8">
                             <div>
                                 <strong><i></italic><label>Name:</label></i></strong>
-                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
+                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
                                 <small th:if="${#fields.hasErrors('nameOfAnimal')}" th:errors="*{nameOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
                                 <strong><i><label>Type:</label></i></strong>
-                                <input th:field="*{typeOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
+                                <input th:field="*{typeOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
                                 <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
                                 <strong><i><label>Age:</label></i></strong>
-                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear g-3" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
+                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear g-3" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
                                 <small th:if="${#fields.hasErrors('ageOfAnimal')}" th:errors="*{ageOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
@@ -115,12 +115,12 @@
                             </div>
                             <div class="mt-3">
                                 <strong><i><label>Food:</label></i></strong>
-                                <input th:field="*{foodOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
+                                <input th:field="*{foodOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
                                 <small th:if="${#fields.hasErrors('foodOfAnimal')}" th:errors="*{foodOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
                                 <strong><i><label>Kilograms:</label></i></strong>
-                                <input th:field="*{kilogramsOfAnimal}" th:errorclass="bg-danger" class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
+                                <input th:field="*{kilogramsOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
                                 <small th:if="${#fields.hasErrors('kilogramsOfAnimal')}" th:errors="*{kilogramsOfAnimal}" class="text-danger">error</small>
                             </div>
                             <div class="mt-3">
