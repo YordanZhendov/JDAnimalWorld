@@ -24,6 +24,10 @@ public class HomeController {
     public String logIn(){
         return "index";
     }
+    @GetMapping("/access-denied")
+    public String accessDeniedPage(){
+        return "access-denied";
+    }
 
     @GetMapping("/")
     public String index(){
