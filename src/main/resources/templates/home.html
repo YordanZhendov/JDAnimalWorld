@@ -36,7 +36,7 @@
                             <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
                                     onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
                         </li>
-                        <sec:authorize access="hasRole('ADMIN')"></sec:authorize>
+                        <sec:authorize access="hasRole('ADMIN')">
                             <li class="nav-item" >
                                 <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                             </strong></span></a>
