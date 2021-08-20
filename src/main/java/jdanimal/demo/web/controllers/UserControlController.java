@@ -19,12 +19,8 @@ public class UserControlController {
 
 
     @GetMapping("/user/users-control")
-    public String userControlPage(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
-             return "users-control";
-        }
-        return "redirect:/user/home";
+    public String userControlPage(){       
+        return "users-control";
     }
 
 }
