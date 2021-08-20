@@ -36,16 +36,15 @@
                             <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
                                     onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
                         </li>
-                        <sec:authorize access="hasRole('ADMIN')">
-                            <li class="nav-item" >
-                                <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
-                                            </strong></span></a>
-                            </li>
-                        </sec:authorize>  
-                        <li class="nav-item"  sec:authorize="hasRole('ADMIN')">
-                            <a class="nav-link active"><span><strong> Users Control
+                        <li class="nav-item" >
+                            <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                         </strong></span></a>
-                        </li>                             
+                        </li>
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <li class="nav-item" th:href="@{/user/users-control}">
+                                <a class="nav-link active"><span><strong> Users Control</strong></span></a>
+                            </li>   
+                        </sec:authorize>  
                         <li class="nav-item">
                             <a class="nav-link active" th:href="@{/user/animal}"><span><strong> + Add Animal
                                         </strong></span></a>
