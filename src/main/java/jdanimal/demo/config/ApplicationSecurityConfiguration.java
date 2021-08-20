@@ -17,7 +17,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/admin/*").hasRole("ADMIN")
+                .antMatchers("/user/users-control").hasRole("ADMIN")
                 .antMatchers("/js/**","/", "/css/**").permitAll()
                 .antMatchers("/users/register", "/users/login").anonymous()
                 .anyRequest().authenticated()
