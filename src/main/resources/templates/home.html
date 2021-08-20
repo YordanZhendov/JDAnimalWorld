@@ -39,7 +39,7 @@
                             <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                         </strong></span></a>
                         </li>
-                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">werwr
+                        <li class="nav-item" sec:authorize-url="/user/users-control">
                                 <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
                         </li>   
                         <li class="nav-item">
@@ -91,12 +91,6 @@
         <br>
         <br>
         <br>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-            Content for administrators
-        </div>
-        <div sec:authorize="hasRole('ROLE_USER')">
-            Content for users
-        </div>
         <div class="animalsList ms-3 mt-5 me-auto">
             <form class="row" method="GET" action="#">
                 <div class="searchInput">
