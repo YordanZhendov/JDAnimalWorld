@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-        xmlns="http://www.sprinfgramework.org/schema/security">
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         
 
 <head>
@@ -40,7 +39,7 @@
                             <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                         </strong></span></a>
                         </li>
-                        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
                         </li>   
                         <li class="nav-item">
