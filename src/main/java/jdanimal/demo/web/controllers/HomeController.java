@@ -42,11 +42,7 @@ public class HomeController {
     }
 
     @GetMapping("/user/home")
-    public String getHome(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
-             model.addAttribute("ADMIN","ADMIN");
-        }
+    public String getHome(Model model){      
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
         model.addAttribute("accessories",allAccessories);
