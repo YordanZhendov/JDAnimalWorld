@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a th:href="@{/logout}"><button type="button" class="btn text-light btn-danger"><i class="bi bi-x-octagon-fill"></i>    Log Out</button></a>
+                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-danger" data-toggle="tooltip"  title="Please Don't Do it :("><i class="bi bi-x-octagon-fill"></i>        Log Out</button></a>
                 </div>
                 <div><br></div>
                 <div id="weatherWindow" class="container">
@@ -451,6 +451,11 @@
             }
         }
     }
+    
+    //tooltip
+     $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+    });
 </script>
 <style>
     .mainb {
