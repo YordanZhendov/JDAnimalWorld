@@ -92,48 +92,51 @@
                     width="100" height="100" class="rounded-circle mb-2" alt="...">
                     <input type="file" accept=".jpg,.png,.jpeg,.gif,.bmp" class="col-2 form-control" id="customFile" />
                     <button type="submit" class="btn btn-secondary mt-2">Upload</button>
+                    <br>
+                    <br>
+                    <br>
+                        <br>            
+                        <div class="col-7">
+                            <label class="form-label"><strong>Username :</strong></label>
+                            <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username">
+        
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label class="form-label"><strong>Full name :</strong></label>
+                            <label class="profileInfo" th:text="${userProfileInfo.getFullName()}"></label>
+                            <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullName" name="fullName">
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label class="form-label"><strong>Email :</strong></label>
+                            <label class="profileInfo" th:text="${userProfileInfo.getEmail()}"></label>
+                            <input type="email" class="profilInput form-control" value="" placeholder="Email" id="email" name="email">
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label class="form-label"><strong>Phone :</strong></label>
+                            <label class="profileInfo" th:text="${userProfileInfo.getPhoneNumber()}"></label>
+                            <input type="text" class="profilInput form-control" value="" placeholder="Phone" id="phoneNumber" name="phoneNumber">
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label name="cityUpdateForm" class="form-label" ><strong>City: </strong></label>
+                            <label class="form-label" th:text="${userProfileInfo.getCity()}"><strong>City :</strong></label>
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label name="cityUpdateForm" class="form-label" ><strong>Country: </strong></label>
+                            <label  class="form-label" th:text="${userProfileInfo.getCountry()}"><strong>Countries :</strong></label>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 mt-1">
+                                <button onclick="makeChanges()" type="button" class="btn btn-secondary">Make Changes</button>
+                            </div>
+                            <div class=" col-md-9 mt-1">
+                                <button type="submit" class="btn btn-secondary">Save Changes</button>
+                            </div>
+                        </div>
                 </div>
+                
             </form>
-            <form class="col-10 ms-5 mt-5 me-5" action="/user/update-profile" method="POST">
-                <br>            
-                <div class="col-7">
-                    <label class="form-label"><strong>Username :</strong></label>
-                    <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username">
-
-                </div>
-                <div class="col-7 mt-2">
-                    <label class="form-label"><strong>Full name :</strong></label>
-                    <label class="profileInfo" th:text="${userProfileInfo.getFullName()}"></label>
-                    <input type="text" class="profilInput form-control " value="" placeholder="Full name" id="fullName" name="fullName">
-                </div>
-                <div class="col-7 mt-2">
-                    <label class="form-label"><strong>Email :</strong></label>
-                    <label class="profileInfo" th:text="${userProfileInfo.getEmail()}"></label>
-                    <input type="email" class="profilInput form-control" value="" placeholder="Email" id="email" name="email">
-                </div>
-                <div class="col-7 mt-2">
-                    <label class="form-label"><strong>Phone :</strong></label>
-                    <label class="profileInfo" th:text="${userProfileInfo.getPhoneNumber()}"></label>
-                    <input type="text" class="profilInput form-control" value="" placeholder="Phone" id="phoneNumber" name="phoneNumber">
-                </div>
-                <div class="col-7 mt-2">
-                    <label name="cityUpdateForm" class="form-label" ><strong>City: </strong></label>
-                    <label class="form-label" th:text="${userProfileInfo.getCity()}"><strong>City :</strong></label>
-                </div>
-                <div class="col-7 mt-2">
-                    <label name="cityUpdateForm" class="form-label" ><strong>Country: </strong></label>
-                    <label  class="form-label" th:text="${userProfileInfo.getCountry()}"><strong>Countries :</strong></label>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3 mt-1">
-                        <button onclick="makeChanges()" type="button" class="btn btn-secondary">Make Changes</button>
-                    </div>
-                    <div class=" col-md-9 mt-1">
-                        <button type="submit" class="btn btn-secondary">Save Changes</button>
-                    </div>
-                </div>
-            </form>
+           
         <div class="inlineForms d-flex">
             <div class="col-5 ms-5 mt-3 me-5 text-center">
                 <br>
@@ -171,6 +174,7 @@
                 </form>
             </div>
         </div>
+        
     </main>
     <footer class="text-center text-lg-start bg-light text-muted">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>
