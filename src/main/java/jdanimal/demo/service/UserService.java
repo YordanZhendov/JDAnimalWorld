@@ -18,4 +18,5 @@ public interface UserService extends UserDetailsService {
     UserProfileViewModel findByUsername(String currentUserName);
     List<AnimalViewModel> getAllAnimalsByUser(String id);
     void updateProfile(UserUpdateProfileModel userUpdateProfileModel);
+    List<User> getAllUsersInDB();
 }

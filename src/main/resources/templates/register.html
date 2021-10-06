@@ -107,6 +107,7 @@
                             <label class="form-check-label" for="gridCheck">
                                 Agreed with the policy of the website !
                             </label>
+                            <small th:if="${#fields.hasErrors('policyAgree')}" th:errors="*{policyAgree}" class="text-danger">error</small>
                         </div>
                     </div>
                     <div class="col-4">

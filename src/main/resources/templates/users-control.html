@@ -103,7 +103,7 @@
                             </div>
                             <div class="row">
                                 <div class="card card-body bg-light  text-right"
-                                    th:text="|Owner: ${user.getUserName()}|"><strong><i>Username: Jordan</i></strong>
+                                    th:text="|Owner: ${user.getUsername()}|"><strong><i>Username: Jordan</i></strong>
                                 </div>
                                 <div class="col collapse mt-5" id="ownerDetails">
                                     <div class="card card-body bg-light" th:text="|Owner: ${user.getFullName()}|">Owner:
@@ -139,13 +139,15 @@
                             </div>
                             <div class="mt-5 border-bottom border-4 rounded-pill text-center h3 border-warning"><i>List
                                     of Animals and Accessories</i></div>
-                            <div class="row d-inline">
+                            <div class="row d-inline" th:each="animal : ${user.getAnimals()}" th:object="${animal}">
                                 <div class="col">
-                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded">Ball
+                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded" th:text="${animal.getNameOfAnimal()}">Animal
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row d-inline" th:each="accessory : ${user.getAccessories()}" th:object="${accessory}">
                                 <div class="col">
-                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded">Rayan
+                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded" th:text="${accessory.getAccessoryName()}">Accessory
                                     </div>
                                 </div>
                             </div>

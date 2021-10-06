@@ -2,15 +2,19 @@ package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
+import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import java.util.List;
 
 @Controller
@@ -19,11 +23,13 @@ public class HomeController {
 
     private final AnimalService animalService;
     private final AccessoryService accessoryService;
+    private final UserService userService;
 
     @GetMapping("/users/login")
     public String logIn(){
         return "index";
     }
+
     @GetMapping("/access-denied")
     public String accessDeniedPage(){
         return "access-denied";
