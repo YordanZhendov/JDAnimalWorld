@@ -9,6 +9,6 @@ import java.util.List;
 public interface AnimalService {
     List<AnimalViewModel> getAllAnimals();
     void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo);
-
-
+    void removeAnimal(String id);
+    void saveUrlAnimal(String id, String replaceFileName);
 }

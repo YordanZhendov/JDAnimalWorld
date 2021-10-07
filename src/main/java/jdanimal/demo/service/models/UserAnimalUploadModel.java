@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 
 @Getter
@@ -28,6 +29,7 @@ public class UserAnimalUploadModel {
     @NotBlank(message = "Field must be filled!")
     private String kilogramsOfAnimal;
     private String availableTill;
+    private String urlAnimalPhoto;
 
 
 

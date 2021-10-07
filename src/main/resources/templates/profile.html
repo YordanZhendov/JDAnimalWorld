@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -83,23 +82,26 @@
             <br>
             <br>
             <br>
+            <br>
+            <form class="col-10 ms-5 mt-5 me-5" action="/user/foto/upload" method="POST" enctype="multipart/form-data">
+                <div>
+                    <strong>Profile Picture</strong>
+                </div>
+                <img th:src="@{${userProfileInfo.getUrlProfilePicture()}}"
+                     width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
+                <input type="file" accept=".jpg, .png, .jpeg"  class="col-2 form-control" id="file"  name="file"/>
+                <button type="submit" class="btn btn-secondary mt-2">Upload</button>
+            </form>
             <form class="col-10 ms-5 mt-5 me-5" action="/user/update-profile" method="POST">
                 <div class="shadow p-3 mb-5 bg-body rounded">
-                    <div>
-                        <strong>My Profile Picture</strong>
-                    </div>
-                    <img src="https://thumbs.dreamstime.com/b/people-icon-vector-male-female-person-profile-avatar-people-icon-vector-male-female-sign-user-person-profile-avatar-102655370.jpg"
-                    width="100" height="100" class="rounded-circle mb-2" alt="...">
-                    <input type="file" accept=".jpg,.png,.jpeg,.gif,.bmp" class="col-2 form-control" id="customFile" />
-                    <button type="submit" class="btn btn-secondary mt-2">Upload</button>
                     <br>
                     <br>
                     <br>
                         <br>            
                         <div class="col-7">
                             <label class="form-label"><strong>Username :</strong></label>
-                            <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username">
-        
+                            <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username"></label>
+
                         </div>
                         <div class="col-7 mt-2">
                             <label class="form-label"><strong>Full name :</strong></label>
@@ -145,16 +147,25 @@
                 <br>
                 <br>
                 <br>
-                <div class="border-top border-primary text-center"><strong class="fs-3">My
+                <div class="border-top border-primary text-center"><strong class="fs-3 mb-2">My
                     Animals</strong>
                 </div>
-                <form th:action="@{/user/animal/delete}" th:method="post">
-                    <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
-                        <input type="hidden" name="nameOfAnimal" th:value="*{nameOfAnimal}" />
-                        <h1 id="delete" th:text="*{nameOfAnimal}"></h1>
-                        <button type="submit" class="btn btn-outline-danger">delete</button>
+                <div>
+                    <div>
+                        <div th:each="animal : ${userAnimal}" th:object="${animal}">
+                            <img th:src="@{${animal.getUrlAnimalPhoto()}}"
+                                 width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
+                            <div th:text="${animal.getNameOfAnimal()}"></div>
+                            <form th:action="@{/user/animal/uploadPhoto/{id}(id=${animal.getId()})}" method="POST" enctype="multipart/form-data">
+                                <input type="file" accept=".jpg, .png, .jpeg" id="fileAnimal"  name="fileAnimal" class="ms-2"/>
+                                <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload</button>
+                            </form>
+                            <a th:href="@{/user/animal/delete/{id}(id=${animal.getId()})}" class="btn ms-2 btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a>
+                            <br>
+                        </div>
                     </div>
-                </form>
+                </div>
+
             </div>
             <div class="col-5 ms-5 mt-2 me-5 text-center">
                 <br>
@@ -165,16 +176,9 @@
                 <br>
                 <div class="border-top border-primary text-center"><strong class="fs-3">Liked Animals</strong>
                 </div>
-                <form th:action="@{/user/animal/delete}" th:method="post">
-                    <div class="animalsGroup" th:each="animal : ${userAnimal}" th:object="${animal}">
-                        <input type="hidden" name="nameOfAnimal" th:value="*{nameOfAnimal}" />
-                        <h1 id="like" th:text="*{nameOfAnimal}"></h1>
-                        <button type="submit" class="btn btn-primary">liked</button>
-                    </div>
-                </form>
             </div>
         </div>
-        
+        </div>
     </main>
     <footer class="text-center text-lg-start bg-light text-muted">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>

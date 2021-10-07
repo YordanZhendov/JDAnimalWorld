@@ -29,10 +29,8 @@ public class Animal extends BaseEntity{
     private String kilogramsOfAnimal;
     @Column(name = "available_till")
     private String availableTill;
+    @Column(name= "picture_animal")
+    private String urlAnimalPhoto;
     @ManyToOne
     private User user;
-//    @Lob
-//    @Basic(fetch = FetchType.LAZY)
-//    @Column(name = "picture")
-//    private String animalPicture;
 }

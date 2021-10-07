@@ -19,4 +19,6 @@ public class UserProfileDTO {
     private String phoneNumber;
     private String country;
     private String city;
+    private String urlProfilePicture;
+
 }

@@ -92,6 +92,12 @@
                     <ul class="list-group ms-3 list-group-flush">
                         <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                             th:each="user : ${users}" th:object="${user}">
+                            <img th:src="@{${user.getUrlProfilePicture()}}"
+                                 width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
+                            <div class="card card-body bg-light  text-right"
+                                 th:text="|Owner: ${user.getUsername()}|"><strong><i>Username: Jordan</i>
+                            </strong>
+                            </div>
                             <div class="ms-2 me-1">
                                 <p>
                                     <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse"
@@ -102,9 +108,6 @@
                                 </p>
                             </div>
                             <div class="row">
-                                <div class="card card-body bg-light  text-right"
-                                    th:text="|Owner: ${user.getUsername()}|"><strong><i>Username: Jordan</i></strong>
-                                </div>
                                 <div class="col collapse mt-5" id="ownerDetails">
                                     <div class="card card-body bg-light" th:text="|Owner: ${user.getFullName()}|">Owner:
                                         Yordan Nikolov Zhendov</div>
@@ -141,7 +144,10 @@
                                     of Animals and Accessories</i></div>
                             <div class="row d-inline" th:each="animal : ${user.getAnimals()}" th:object="${animal}">
                                 <div class="col">
-                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded" th:text="${animal.getNameOfAnimal()}">Animal
+                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded">
+                                        <strong><div  th:text="${animal.getNameOfAnimal()}">Animal</div></strong>
+                                        <img th:src="@{${animal.getUrlAnimalPhoto()}}"
+                                             width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
                                     </div>
                                 </div>
                             </div>
@@ -155,6 +161,7 @@
 
                     </ul>
                 </div>
+            </div>
         </main>
         <footer class="text-center text-lg-start bg-light text-muted">
             <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>

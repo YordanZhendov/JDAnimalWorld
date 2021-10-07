@@ -1,0 +1,17 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIATKIWJ64SZUG3KO54
+      secret-key: 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
+    region:
+      static: eu-central-1
+#    stack:
+#      auto: false
+
+application:
+  bucket:
+    name: jdanimalsworld
+
+
+server:
+  port: 8080

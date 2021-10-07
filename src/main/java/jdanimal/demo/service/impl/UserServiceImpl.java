@@ -1,9 +1,6 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.Animal;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
-import jdanimal.demo.data.enums.UserStatus;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
 import jdanimal.demo.data.Role;
@@ -13,7 +10,6 @@ import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
-import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
 import jdanimal.demo.service.models.UserUpdateProfileModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
@@ -25,7 +21,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +65,6 @@ public class UserServiceImpl implements UserService {
             user.setAuthorities(new LinkedHashSet<>());
             user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
         }
-        user.setStatus(UserStatus.ACTIVE);
         this.userRepository.save(user);
 
     }
@@ -112,6 +106,14 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsersInDB() {
         return this.userRepository.getAllUsers();
     }
+
+    @Override
+    public void saveUrl(String username,String fileName) {
+        User byUsername = this.userRepository.findByUsername(username);
+        byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);
+        this.userRepository.saveAndFlush(byUsername);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

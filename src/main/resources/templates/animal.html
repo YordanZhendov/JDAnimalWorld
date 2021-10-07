@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,13 +88,14 @@
                 <br>
                 <div class="text-center h2 border-bottom border-danger"><strong>Animal Form</strong></div>
                 <ul>
-                    
                     <br>
                     <br>
                     <br>
                     <div id="addAnimalForm" class="row">
                     
                         <div id="inputInfoAnimal" class="col-8">
+                            <br>
+                            <br>
                             <div>
                                 <strong><i></italic><label>Name:</label></i></strong>
                                 <input th:field="*{nameOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">

@@ -17,4 +17,5 @@ public class UserProfileViewModel {
     private String phoneNumber;
     private String country;
     private String city;
+    private String urlProfilePicture;
 }

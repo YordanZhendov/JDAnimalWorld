@@ -1,6 +1,5 @@
 package jdanimal.demo.data;
 
-import jdanimal.demo.data.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,10 +38,8 @@ public class User extends BaseEntity implements UserDetails {
     private String postcode;
     @Column(name = "agree_policy")
     private boolean policyAgree;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name="status")
-    private UserStatus status;
+    @Column(name = "profile_picture")
+    private String urlProfilePicture;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id")
