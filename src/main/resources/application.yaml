@@ -15,9 +15,9 @@ application:
 spring:
   servlet:
     multipart:
-      max-request-size: 10MB
+      max-request-size: 1MB
 
 server:
   port: 8080
   tomcat:
-    max-swallow-size: 10MB
+    max-swallow-size: 1MB
