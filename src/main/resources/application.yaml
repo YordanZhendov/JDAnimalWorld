@@ -12,6 +12,12 @@ application:
   bucket:
     name: jdanimalsworld
 
+spring:
+  servlet:
+    multipart:
+      max-request-size: 10MB
 
 server:
   port: 8080
+  tomcat:
+    max-swallow-size: 10MB

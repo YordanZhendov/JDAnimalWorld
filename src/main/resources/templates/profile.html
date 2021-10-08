@@ -90,14 +90,10 @@
                 <img th:src="@{${userProfileInfo.getUrlProfilePicture()}}"
                      width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
                 <input type="file" accept=".jpg, .png, .jpeg"  class="col-2 form-control" id="file"  name="file"/>
-                <button type="submit" class="btn btn-secondary mt-2">Upload</button>
+                <button id="uploadProfilePicture" type="submit" class="btn btn-secondary mt-2">Upload</button>
             </form>
             <form class="col-10 ms-5 mt-5 me-5" action="/user/update-profile" method="POST">
                 <div class="shadow p-3 mb-5 bg-body rounded">
-                    <br>
-                    <br>
-                    <br>
-                        <br>            
                         <div class="col-7">
                             <label class="form-label"><strong>Username :</strong></label>
                             <label type="text" th:text="${userProfileInfo.getUsername()}" id="username" name="username"></label>
@@ -153,14 +149,14 @@
                 <div>
                     <div>
                         <div th:each="animal : ${userAnimal}" th:object="${animal}">
+                            <strong><p th:text="${animal.getNameOfAnimal()}"></p></strong>
                             <img th:src="@{${animal.getUrlAnimalPhoto()}}"
-                                 width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
-                            <div th:text="${animal.getNameOfAnimal()}"></div>
+                                 width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)" th:label="${animal.getNameOfAnimal()}">
                             <form th:action="@{/user/animal/uploadPhoto/{id}(id=${animal.getId()})}" method="POST" enctype="multipart/form-data">
-                                <input type="file" accept=".jpg, .png, .jpeg" id="fileAnimal"  name="fileAnimal" class="ms-2"/>
+                                <input type="file" accept=".jpg, .png, .jpeg" name="fileAnimal" class="fileAnimal ms-2"/>
                                 <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload</button>
+                                <a th:href="@{/user/animal/delete/{id}(id=${animal.getId()})}" class="btn ms-2 btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a>
                             </form>
-                            <a th:href="@{/user/animal/delete/{id}(id=${animal.getId()})}" class="btn ms-2 btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a>
                             <br>
                         </div>
                     </div>
@@ -483,6 +479,20 @@
       //tooltip
        $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
+    });
+
+    //FileSizeChecker
+    $('#file').bind('change', function() {
+        if (this.files[0].size/1024/1024 > 10){
+            alert('The File should not exceed 10MB');
+            $('#file').val('');
+        }
+    });
+    $('.fileAnimal').bind('change', function() {
+        if (this.files[0].size/1024/1024 > 10){
+            alert('The File should not exceed 10MB');
+            $('.fileAnimal').val('');
+        }
     });
 
 </script>
