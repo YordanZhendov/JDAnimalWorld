@@ -1,5 +1,6 @@
 package jdanimal.demo.web.controllers;
 
+import jdanimal.demo.data.Animal;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @AllArgsConstructor
@@ -34,8 +36,10 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
+
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
             List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(userProfileInfo.getUsername());
+            Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();
 
             if(!model.containsAttribute("userUpdateProfileModel")){
                 model.addAttribute("userUpdateProfileModel",new UserUpdateProfileModel());
@@ -43,6 +47,8 @@ public class ProfileController {
 
             model.addAttribute("userProfileInfo",userProfileInfo);
             model.addAttribute("userAnimal",allAnimalsByUser);
+            model.addAttribute("likedAnimals",likedAnimals);
+
             return "profile";
         }
 
@@ -69,6 +75,24 @@ public class ProfileController {
     @GetMapping("/animal/delete/{id}")
     public String deleteAnimal(@PathVariable(value = "id") String id){
         animalService.removeAnimal(id);
+        return "redirect:/user/profile";
+    }
+
+    @GetMapping("/animal/like/{id}")
+    public String animalLike(@PathVariable(value = "id") String id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        animalService.addLikedAnimalTotheCurrentUser(id,currentUserName);
+
+        return "redirect:/user/home";
+    };
+
+    @GetMapping("/animal/dislike/{id}")
+    public String animalDislike(@PathVariable(value = "id") String  id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        animalService.disLikedAnimalTotheCurrentUser(id,currentUserName);
+
         return "redirect:/user/profile";
     }
 

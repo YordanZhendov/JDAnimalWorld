@@ -6,6 +6,7 @@ import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.AnimalService;
+import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.models.UserAnimalDeleteModel;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.service.views.AnimalViewModel;
@@ -28,6 +29,7 @@ public class AnimalServiceImpl implements AnimalService {
     private final AnimalRepository animalRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     @Override
     public List<AnimalViewModel> getAllAnimals() {
@@ -49,7 +51,10 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public void removeAnimal(String id) {
+        Animal animalById = animalRepository.findAnimalById(id);
+        this.userService.removeAnimalFromUsers(animalById);
         this.animalRepository.deleteById(id);
+
     }
 
     @Override
@@ -57,5 +62,21 @@ public class AnimalServiceImpl implements AnimalService {
         Animal animalById = animalRepository.findAnimalById(id);
         animalById.setUrlAnimalPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
         animalRepository.saveAndFlush(animalById);
+    }
+
+    @Override
+    public void addLikedAnimalTotheCurrentUser(String id, String currentUserName) {
+        User byUsername = userRepository.findByUsername(currentUserName);
+        Animal animalById = animalRepository.findAnimalById(id);
+        byUsername.getLikedAnimals().add(animalById);
+        userRepository.saveAndFlush(byUsername);
+    }
+
+    @Override
+    public void disLikedAnimalTotheCurrentUser(String id, String currentUserName) {
+        User byUsername = userRepository.findByUsername(currentUserName);
+        Animal animalById = animalRepository.findAnimalById(id);
+        byUsername.getLikedAnimals().remove(animalById);
+        userRepository.saveAndFlush(byUsername);
     }
 }

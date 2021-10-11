@@ -1,5 +1,6 @@
 package jdanimal.demo.service.impl;
 
+import jdanimal.demo.data.Animal;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
@@ -112,6 +113,14 @@ public class UserServiceImpl implements UserService {
         User byUsername = this.userRepository.findByUsername(username);
         byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);
         this.userRepository.saveAndFlush(byUsername);
+    }
+
+    @Override
+    public void removeAnimalFromUsers(Animal animalById) {
+        List<User> allUsers = userRepository.getAllUsers();
+        for (User allUser : allUsers) {
+            allUser.getLikedAnimals().remove(animalById);
+        }
     }
 
 

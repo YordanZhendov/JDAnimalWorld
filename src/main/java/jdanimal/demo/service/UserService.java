@@ -1,6 +1,7 @@
 package jdanimal.demo.service;
 
 
+import jdanimal.demo.data.Animal;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.DTO.UserLoginDTO;
@@ -20,4 +21,6 @@ public interface UserService extends UserDetailsService {
     void updateProfile(UserUpdateProfileModel userUpdateProfileModel);
     List<User> getAllUsersInDB();
     void saveUrl(String username,String fileName);
+    void removeAnimalFromUsers(Animal animalById);
+
 }

@@ -11,4 +11,6 @@ public interface AnimalService {
     void uploadAnimal(UserAnimalUploadModel userAnimalUploadBindingModel, UserProfileViewModel userProfileInfo);
     void removeAnimal(String id);
     void saveUrlAnimal(String id, String replaceFileName);
+    void addLikedAnimalTotheCurrentUser(String id, String currentUserName);
+    void disLikedAnimalTotheCurrentUser(String id, String currentUserName);
 }
