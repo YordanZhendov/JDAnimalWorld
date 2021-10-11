@@ -134,17 +134,12 @@
                 
             </form>
         <div class="inlineForms row">
-            <div class="col-4 ms-5 mt-3 me-5 text-center">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="border-top border-primary text-center"><strong class="fs-3 mb-2">My
-                    Animals</strong>
-                </div>
-                <div>
+            <div class="col-4 ms-5 mt-2 me-5 text-center">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myAnimalsList" aria-expanded="false" aria-controls="myAnimalsList">
+                    <strong class="fs-3 mb-2">My
+                        Animals</strong>
+                </button>
+                <div id="myAnimalsList">
                     <div>
                         <div th:each="animal : ${userAnimal}" th:object="${animal}">
                             <strong><p th:text="${animal.getNameOfAnimal()}"></p></strong>
@@ -160,17 +155,12 @@
                 </div>
 
             </div>
-            <div class="col-4 ms-5 mt-3 me-5 text-center">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="border-top border-primary text-center"><strong class="fs-3 mb-2">My
-                    Accessories</strong>
-                </div>
-                <div>
+            <div class="col-4 ms-5 mt-2 me-5 text-center">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myAccessoriesList" aria-expanded="false" aria-controls="myAccessoriesList">
+                    <strong class="fs-3 mb-2">My
+                        Accessories</strong>
+                </button>
+                <div id="myAccessoriesList">
                     <div>
                         <div th:each="accessory : ${allAccessoriesByUser}" th:object="${accessory}">
                             <strong><p th:text="${accessory.getAccessoryName()}"></p></strong>
@@ -187,13 +177,10 @@
 
             </div>
             <div class="col-4 ms-5 mt-2 me-5 text-center">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="border-top border-primary text-center"><strong class="fs-3">Liked Animals</strong>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myLikedAnimals" aria-expanded="false" aria-controls="myLikedAnimals">
+                    <strong class="fs-3 mb-2">Liked Animals</strong>
+                </button>
+                <div id="myLikedAnimals">
                     <div th:each="likedAnimal : ${likedAnimals}">
                         <strong><p th:text="${likedAnimal.getNameOfAnimal()}"></p></strong>
                         <img width="100" height="100" class="rounded-circle mb-2" th:src="${(likedAnimal.getUrlAnimalPhoto() != null && !#strings.isEmpty(likedAnimal.getUrlAnimalPhoto())) ? likedAnimal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${likedAnimal.getUser().getUsername()}"/>
@@ -202,13 +189,10 @@
                 </div>
             </div>
             <div class="col-4 ms-5 mt-2 me-5 text-center">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="border-top border-primary text-center"><strong class="fs-3">Liked Accessories</strong>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myLikedAccessories" aria-expanded="false" aria-controls="myLikedAccessories">
+                    <strong class="fs-3 mb-2">Liked Accessories</strong>
+                </button>
+                <div id="myLikedAccessories">
                     <div th:each="accessory : ${likedAccessories}">
                         <strong><p th:text="${accessory.getAccessoryName()}"></p></strong>
                         <img th:src="@{${accessory.getUrlAccessoryPhoto()}}"

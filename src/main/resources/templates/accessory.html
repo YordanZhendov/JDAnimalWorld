@@ -96,7 +96,7 @@
                     
                         <div id="inputInfoAnimal" class="col-8">
                             <div>
-                                <strong><i></italic><label>Name:</label></i></strong>
+                                <strong><i></italic><label>Type:</label></i></strong>
                                 <input  th:field="*{accessoryName}" th:errorclass="bg-warning" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="accessoryName" id="accessoryName">
                                  <small th:if="${#fields.hasErrors('accessoryName')}" th:errors="*{accessoryName}" class="text-danger">error</small>
                             </div>
