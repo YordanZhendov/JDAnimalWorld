@@ -15,8 +15,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class UserAccessoryUploadDTO {
 
+    private String id;
     private String accessoryName;
     private String availableTill;
     private int daysUsed;
     private BigDecimal accessoryPrice;
+    private String urlAccessoryPhoto;
 }

@@ -1,6 +1,7 @@
 package jdanimal.demo.data.DTO;
 
 
+import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,6 @@ public class UserProfileDTO {
     private String city;
     private String urlProfilePicture;
     private Set<Animal> likedAnimals;
-
+    private Set<Accessory> likedAccessories;
 
 }

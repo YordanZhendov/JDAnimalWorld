@@ -2,9 +2,9 @@ package jdanimal.demo.service.impl;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,12 @@ public class StorageServiceImpl {
 
     private final UserService userService;
     private final AnimalService animalService;
+    private final AccessoryService accessoryService;
 
-    public StorageServiceImpl(UserService userService, AnimalService animalService) {
+    public StorageServiceImpl(UserService userService, AnimalService animalService, AccessoryService accessoryService) {
         this.userService = userService;
         this.animalService = animalService;
+        this.accessoryService = accessoryService;
     }
 
     public String upload(MultipartFile file, UserProfileViewModel userProfileViewModel){
@@ -57,6 +59,16 @@ public class StorageServiceImpl {
         fileRecieved.delete();
          return "File"+fileName+"successfully uploaded";
 
+    }
+
+    public String uploadAccessoryPicture(MultipartFile fileAccessory, UserProfileViewModel userProfileInfo, String id) {
+        File fileRecieved=convertMultiPartFileToFile(fileAccessory);
+        String fileName=userProfileInfo.getUsername()+"_"+fileAccessory.getOriginalFilename();
+        s3Client.putObject(new PutObjectRequest(bucketName,fileName,fileRecieved));
+        String replaceFileName = fileName.replace(" ", "+");
+        accessoryService.saveUrlAccessory(id,replaceFileName);
+        fileRecieved.delete();
+        return "File"+fileName+"successfully uploaded";
     }
 
 

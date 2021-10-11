@@ -14,8 +14,7 @@ public interface AnimalRepository extends JpaRepository<Animal,String> {
     List<Animal> findAllAnimals();
 
     @Query("select a from Animal as a WHERE a.user.username=?1")
-    List<Animal> getAnimalByUser(String id);
-
+    List<Animal> getAnimalByUser(String username);
     Animal findAnimalById(String id);
 
 }

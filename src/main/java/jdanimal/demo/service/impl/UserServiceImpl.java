@@ -1,17 +1,20 @@
 package jdanimal.demo.service.impl;
 
+import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
 import jdanimal.demo.data.Role;
 import jdanimal.demo.data.User;
+import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
 import jdanimal.demo.service.models.UserUpdateProfileModel;
+import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
 import jdanimal.demo.service.views.UserProfileViewModel;
@@ -33,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final AnimalRepository animalRepository;
+    private final AccessoryRepository accessoryRepository;
     private final UserValidationSerivce userValidationSerivce;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
@@ -87,12 +91,37 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<AnimalViewModel> getAllAnimalsByUser(String id) {
-        return this.animalRepository.getAnimalByUser(id)
+    public List<AnimalViewModel> getAllAnimalsByUser(String username) {
+        return this.animalRepository.getAnimalByUser(username)
                 .stream()
                 .map(animal -> this.modelMapper.map(animal,AnimalViewModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<AccessoryViewModel> getAllAccessoriesByUser(String username) {
+        return this.accessoryRepository.getAccessoriesByUser(username)
+                .stream()
+                .map(accessory -> this.modelMapper.map(accessory,AccessoryViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void removeAnimalFromUsers(Animal animalById) {
+        List<User> allUsers = userRepository.getAllUsers();
+        for (User allUser : allUsers) {
+            allUser.getLikedAnimals().remove(animalById);
+        }
+    }
+
+    @Override
+    public void removeAccessoryFromUsers(Accessory accessoryById) {
+        List<User> allUsers = userRepository.getAllUsers();
+        for (User allUser : allUsers) {
+            allUser.getLikedAccessories().remove(accessoryById);
+        }
+    }
+
 
     @Override
     public void updateProfile(UserUpdateProfileModel userUpdateProfileModel) {
@@ -114,15 +143,6 @@ public class UserServiceImpl implements UserService {
         byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);
         this.userRepository.saveAndFlush(byUsername);
     }
-
-    @Override
-    public void removeAnimalFromUsers(Animal animalById) {
-        List<User> allUsers = userRepository.getAllUsers();
-        for (User allUser : allUsers) {
-            allUser.getLikedAnimals().remove(animalById);
-        }
-    }
-
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

@@ -55,6 +55,9 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Animal> likedAnimals;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Accessory> likedAccessories;
+
     @Override
     @Transient
     public boolean isAccountNonExpired() {

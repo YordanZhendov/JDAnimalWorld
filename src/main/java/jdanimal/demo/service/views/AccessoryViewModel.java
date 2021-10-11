@@ -14,9 +14,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class AccessoryViewModel {
 
+    private String id;
     private String accessoryName;
     private String availableTill;
     private int daysUsed;
     private BigDecimal accessoryPrice;
+    private String urlAccessoryPhoto;
     private User user;
 }

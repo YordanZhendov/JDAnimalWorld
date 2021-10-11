@@ -27,6 +27,8 @@ public class Accessory extends BaseEntity{
     private int daysUsed;
     @Column(name = "accessory_price")
     private BigDecimal accessoryPrice;
+    @Column(name= "picture_accessory")
+    private String urlAccessoryPhoto;
     @ManyToOne
     private User user;
 

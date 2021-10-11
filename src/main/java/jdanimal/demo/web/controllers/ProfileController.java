@@ -1,10 +1,13 @@
 package jdanimal.demo.web.controllers;
 
+import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
+import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
 import jdanimal.demo.service.models.UserUpdateProfileModel;
+import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import lombok.AllArgsConstructor;
@@ -30,16 +33,20 @@ public class ProfileController {
     private final UserService userService;
     private final StorageServiceImpl storageService;
     private final AnimalService animalService;
+    private final AccessoryService accessoryService;
 
     @GetMapping("/profile")
     public String getUserProfile(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
-            List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(userProfileInfo.getUsername());
+            String username = userProfileInfo.getUsername();
+
+            List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(username);
+            List<AccessoryViewModel> allAccessoriesByUser = this.userService.getAllAccessoriesByUser(username);
             Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();
+            Set<Accessory> likedAccessories = userProfileInfo.getLikedAccessories();
 
             if(!model.containsAttribute("userUpdateProfileModel")){
                 model.addAttribute("userUpdateProfileModel",new UserUpdateProfileModel());
@@ -47,7 +54,9 @@ public class ProfileController {
 
             model.addAttribute("userProfileInfo",userProfileInfo);
             model.addAttribute("userAnimal",allAnimalsByUser);
+            model.addAttribute("allAccessoriesByUser",allAccessoriesByUser);
             model.addAttribute("likedAnimals",likedAnimals);
+            model.addAttribute("likedAccessories",likedAccessories);
 
             return "profile";
         }
@@ -79,7 +88,7 @@ public class ProfileController {
     }
 
     @GetMapping("/animal/like/{id}")
-    public String animalLike(@PathVariable(value = "id") String id){
+    public String likeAnimal(@PathVariable(value = "id") String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         animalService.addLikedAnimalTotheCurrentUser(id,currentUserName);
@@ -88,10 +97,50 @@ public class ProfileController {
     };
 
     @GetMapping("/animal/dislike/{id}")
-    public String animalDislike(@PathVariable(value = "id") String  id){
+    public String dislikeAnimal(@PathVariable(value = "id") String  id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         animalService.disLikedAnimalTotheCurrentUser(id,currentUserName);
+
+        return "redirect:/user/profile";
+    }
+
+    @PostMapping("/accessory/uploadPhoto/{id}")
+    public String uploadAccessoryPicture(@PathVariable(value = "id") String id,@RequestParam(value = "fileAccessory") MultipartFile fileAccessory){
+        boolean correctPicture = storageService.checkFile(fileAccessory.getOriginalFilename(),fileAccessory.getSize());
+        if(!correctPicture){
+            return "redirect:/user/profile";
+        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
+
+        storageService.uploadAccessoryPicture(fileAccessory,userProfileInfo,id);
+
+
+        return "redirect:/user/profile";
+    }
+
+    @GetMapping("/accessory/delete/{id}")
+    public String deleteAccessory(@PathVariable(value = "id") String id){
+        accessoryService.removeAccessory(id);
+        return "redirect:/user/profile";
+    }
+
+    @GetMapping("/accessory/like/{id}")
+    public String likeAccessory(@PathVariable(value = "id") String id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        accessoryService.addLikedAccessoryTotheCurrentUser(id,currentUserName);
+
+        return "redirect:/user/home";
+    };
+
+    @GetMapping("/accessory/dislike/{id}")
+    public String dislikeAccessory(@PathVariable(value = "id") String  id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        accessoryService.disLikedAccessoryTotheCurrentUser(id,currentUserName);
 
         return "redirect:/user/profile";
     }
