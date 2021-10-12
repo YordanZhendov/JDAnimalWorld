@@ -1,83 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</head>
+
+<head th:replace="fragments/commons::head"></head>
 
 <body class="mainb">
 <div class="wrapper">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
-            <div class="container-fluid">
-                <img title="Animals-World"  th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
-                <a class="navbar-brand ms-1" th:href="@{/user/home}" >Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/home}">&hearts;&hearts;&hearts;</a>
-                        </li>
-                        <li class="nav-item" id="weatherLi">
-                            <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
-                                    onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item" sec:authorize-url="/user/users-control">
-                                <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
-                        </li>   
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/accessory}"><span><strong> + Add Accessory
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Change Themes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" onclick="changeColorToLigthBlue()">Lightblue</a></li>
-                                <li><a class="dropdown-item" onclick="changeColorToLigthGreen()">Lightgreen</a></li>
-                                <li><a class="dropdown-item" onclick="changeColorDefault()">Default</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" onclick="changeColorToRed()">Red</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
-                                Reserved &copy;JD</a>
-                        </li>
-                    </ul>
-                </div>
-                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-danger" data-toggle="tooltip"  title="Please Don't Do it :("><i class="bi bi-x-octagon-fill"></i>        Log Out</button></a>
-            </div>
-            <div><br></div>
-            <div id="weatherWindow" class="container">
-                <div class="d-flex text-white">
-                    <h6 id="currentCity" class="me-5"></h6>
-                    <h2 class="me-5" id="currentTemp"></h2>
-                    <h6 id='currentTime' class="me-5 w-25"></h6>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="fragments/commons::header"></header>
     <main class="row">
         <div class="d-flex">
-            <img src="https://i.pinimg.com/600x315/c9/51/75/c95175086ab76c01112598838fdea7bd.jpg" class="backImage"/>
+            <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
             <div class="col-2"></div>
             <form class="col-7" action="/user/animal/upload" method="POST" enctype="multipart/form-data" th:object="${userAnimalUploadModel}">
                 <br>
@@ -89,9 +21,6 @@
                 <br>
                 <div class="text-center h2 border-bottom border-danger"><strong>Animal Form</strong></div>
                 <ul>
-                    <br>
-                    <br>
-                    <br>
                     <div id="addAnimalForm" class="row">
                     
                         <div id="inputInfoAnimal" class="col-8">
@@ -146,79 +75,10 @@
         </div>
 
     </main>
-    <footer class="text-center text-lg-start bg-light mt-5 text-muted">
-        <div class="footerDiv">
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-            <div>
-                <a href="https://www.facebook.com/" class="me-4 text-reset">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a href="https://twitter.com" class="me-4 text-reset">
-                    <i class="bi bi-twitter"></i>
-                </a>
-                <a href="https://www.google.com/" class="me-4 text-reset">
-                    <i class="bi bi-google"></i>
-                </a>
-                <a href="https://www.youtube.com/" class="me-4 text-reset">
-                    <i class="bi bi-youtube"></i>
-                </a>
-                <a href="https://linkedin.com/" class="me-4 text-reset">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href="https://github.com/" class="me-4 text-reset">
-                    <i class="bi bi-github"></i>
-                </a>
-            </div>
-            </section>
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3"></i>Website Purpose
-                            </h6>
-                            <p>
-                                Help people meet their animal friends!
-                            </p>
-                        </div>
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Useful links
-                            </h6>
-                            <p>
-                                <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
-                                    Facebook</a>
-                            </p>
-                            <p>
-                                <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
-                                    Youtube</a>
-                            </p>
-                        </div>
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Contact
-                            </h6>
-                            <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
-                            <p>
-                                <i class="bi bi-envelope-fill"></i>
-                                JD@gmail.com
-                            </p>
-                            <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
-                            <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:
-                <a class="text-reset fw-bold" href="/">JD</a>
-            </div>
-        </div>
-
-    </footer>
+    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
+
 <script>
     window.onload = function () {
         checkAcceptLocation()
@@ -518,10 +378,6 @@
         color: white;
     }
 
-    footer {
-        margin-top: 50px;
-    }
-
 
     .profilInput {
         display: none;
@@ -549,3 +405,5 @@
 
 
 </html>
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed">
+        <div class="container-fluid ">
+            <img title="Animals-World" th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
+            <a class="navbar-brand ms-1" th:href="@{/users/login}">Animals World</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/users/login}">&hearts;&hearts;&hearts;</a>
+                    </li>
+                    <li class="nav-item" id="weatherLi">
+                        <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
+                                onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
+                            Reserved &copy;JD</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>

@@ -1,91 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-        
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
+
+<head th:replace="fragments/commons::head"></head>
+
 
 <body class="mainb">
 <div class="wrapper">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
-            <div class="container-fluid ">
-                <img title="Animals-World" th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
-                <a class="navbar-brand ms-1" th:href="@{/user/home}" >Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/home}">&hearts;&hearts;&hearts;</a>
-                        </li>
-                        <li class="nav-item" id="weatherLi">
-                            <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
-                                    onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item" sec:authorize-url="/user/users-control">
-                                <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
-                        </li>   
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/animal}"><span><strong> + Add Animal
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/user/accessory}"><span><strong> + Add Accessory
-                                        </strong></span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Change Themes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" onclick="changeColorToLigthBlue()">Lightblue</a></li>
-                                <li><a class="dropdown-item" onclick="changeColorToLigthGreen()">Lightgreen</a></li>
-                                <li><a class="dropdown-item" onclick="changeColorDefault()">Default</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" onclick="changeColorToRed()">Red</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
-                                Reserved &copy;JD</a>
-                        </li>
-                    </ul>
-                </div>
-                <a th:href="@{/logout}"><button type="button" class="btn text-light btn-danger" data-toggle="tooltip"  title="Please Don't Do it :("><i class="bi bi-x-octagon-fill"></i>        Log Out</button></a>
-            </div>
-            <div><br></div>
-            <div id="weatherWindow" class="container">
-                <div class="d-flex text-white">
-                    <h6 id="currentCity" class="me-5"></h6>
-                    <h2 class="me-5" id="currentTemp"></h2>
-                    <h6 id='currentTime' class="me-5 w-25"></h6>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main class="row col-12">
-        <img src="https://i.pinimg.com/600x315/c9/51/75/c95175086ab76c01112598838fdea7bd.jpg" class="backImage"/>
+    <header th:replace="fragments/commons::header"></header>
+    <main>
+        <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
         <br>
         <br>
         <br>
@@ -95,7 +20,7 @@
         <br>
         <br>
         <br>
-        <div class="animalsList ms-3 mt-5 me-auto">
+        <div class="animalsList">
             <form class="row" method="GET" action="#">
                 <div class="searchInput">
                     <div class="ms-4 mb-1">
@@ -112,15 +37,14 @@
                     Filter by
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownf">
-                    <li><a class="dropdown-item" >Name</a></li>
-                    <li><a class="dropdown-item" >Type</a></li>
-                    <li><a class="dropdown-item" >Available Date</a></li>
-                    <li><a class="dropdown-item" >Owner Name</a></li>
+                    <li><a class="dropdown-item" >Animal</a></li>
+                    <li><a class="dropdown-item" >Stores</a></li>
+                    <li><a class="dropdown-item" >Accessories</a></li>
                 </ul>
             </div>
             <br>
 <!--            Animal list-->
-            <ul class="list-group ms-3 list-group-flush">
+            <ul class="list-group ms-3 me-3 list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="animal : ${animals}" th:object="${animal}">
                     <div class="form-check mt-5 me-5">
@@ -154,7 +78,7 @@
                                     Animal Details:
                                 </button>
                             </p>
-                        </div>                       
+                        </div>
                     </div>
                     <div class="collapse col-12 mt-5" id="collapseExample">
                         <div class="card card-body bg-light" th:text="|Animal Type: *{typeOfAnimal}|">
@@ -171,7 +95,7 @@
                 </li>
           </ul>
 <!--            Accessory List-->
-            <ul class="list-group ms-3 list-group-flush">
+            <ul class="list-group ms-3 me-3 list-group-flush">
                 <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
                     th:each="accessory : ${accessories}" th:object="${accessory}">
                     <div class="form-check mt-5 me-5">
@@ -191,7 +115,7 @@
                         <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                     </div>
                     <div class="animalallList justify-content-between align-items-start">
-                        <div class="col-6 ms-3 me-1 mt-5">                          
+                        <div class="col-6 ms-3 me-1 mt-5">
                             <div class="pictureAccessorySlide">
                                 <strong><i><div class="h-1 ms-5" th:text="| ${accessory.getAccessoryName()}|">Rayan</div></i></strong>
                                 <br>
@@ -204,7 +128,7 @@
                                     Accessory Details:
                                 </button>
                             </p>
-                        </div>                       
+                        </div>
                     </div>
                     <div class="collapse col-12 mt-5" id="collapseExampleAccessory">
                         <div class="card card-body bg-light" th:text="|Accessory Name: *{getAccessoryName()}|">
@@ -219,79 +143,10 @@
         </div>
 
     </main>
-    <footer class="text-center text-lg-start bg-light mt-5 text-muted">
-        <div class="footerDiv">
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-            <div>
-                <a href="https://www.facebook.com/" class="me-4 text-reset">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a href="https://twitter.com" class="me-4 text-reset">
-                    <i class="bi bi-twitter"></i>
-                </a>
-                <a href="https://www.google.com/" class="me-4 text-reset">
-                    <i class="bi bi-google"></i>
-                </a>
-                <a href="https://www.youtube.com/" class="me-4 text-reset">
-                    <i class="bi bi-youtube"></i>
-                </a>
-                <a href="https://linkedin.com/" class="me-4 text-reset">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href="https://github.com/" class="me-4 text-reset">
-                    <i class="bi bi-github"></i>
-                </a>
-            </div>
-            </section>
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3"></i>Website Purpose
-                            </h6>
-                            <p>
-                                Help people meet their animal friends!
-                            </p>
-                        </div>
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Useful links
-                            </h6>
-                            <p>
-                                <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
-                                    Facebook</a>
-                            </p>
-                            <p>
-                                <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
-                                    Youtube</a>
-                            </p>
-                        </div>
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Contact
-                            </h6>
-                            <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
-                            <p>
-                                <i class="bi bi-envelope-fill"></i>
-                                JD@gmail.com
-                            </p>
-                            <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
-                            <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:
-                <a class="text-reset fw-bold" href="/">JD</a>
-            </div>
-        </div>
-
-    </footer>
+    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
+
 <script>
     window.onload = function () {
         checkAcceptLocation()
@@ -427,7 +282,18 @@
             inputsInfo[i].style.display = 'none';
         }
     }
+    // clear the form for upload
+    function clearTheForm(){
+        var inputInfoAnimalClear=document.getElementById('inputInfoAnimal');
+        var elements=inputInfoAnimalClear.getElementsByTagName('input')
+        for(let i=0;i < elements.length; i++){
+            elements[i].value='';
 
+        }
+
+    }
+
+    //changing theme color
     var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
     var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
     var themeT=['bg-success','btn-danger','btn-success','btn-success'];
@@ -521,17 +387,18 @@
             }
         }
     }
-        //tooltip
+
+    //tooltip
     $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+        $('[data-toggle="tooltip"]').tooltip();
     });
+
 </script>
 <style>
     .mainb {
         max-width: 1800px;
         margin: auto;
     }
-
 
     .backImage{
         max-width: 1800px;
@@ -542,7 +409,6 @@
         position: fixed;
     }
 
-
     .animalsGroup h1 {
         margin-top: 3%;
         padding-top: 4%;
@@ -550,7 +416,7 @@
     }
 
     .navbar {
-        z-index: 2;
+        z-index: 1;
     }
 
     .staticnav li {
@@ -567,21 +433,12 @@
         margin: auto;
     }
 
-    @media only screen and (min-width: 300px) {
-        .searchInput{
-            display: flex;
-        }
-        .animalallList{
-            display: flex;
-        }
-    }
-
     @media only screen and (max-width: 400px) {
-        .searchInput{
+        #addAnimalForm{
             display: inline;
         }
-        .animalallList{
-            display: inline;
+        #inputInfoAnimal{
+            width: 100%;
         }
 
     }
@@ -598,26 +455,27 @@
     .profilInput {
         display: none;
     }
-    .animalsList {
-        position: relative;
-        margin-top: 10%;
-    }
-    .carousel-indicators{
-        z-index: 1;
-    }
-    .btn-danger{
-        background-color: #d43f3a;
-    }
-    
-    .carousel {
-    border-radius: 10px 55px 10px 55px;
-    overflow: hidden;
+
+    .form-control {
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.075) inset;
+        color: #555;
+        display: block;
+        font-size: 10px;
+        height: 40px;
+        line-height: 1.42857;
+        padding: 6px 20px;
+        width: 100%;
     }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
+
 
 
 </html>

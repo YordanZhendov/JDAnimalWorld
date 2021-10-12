@@ -1,46 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments/commons::head"></head>
+
 
 <body class="mainb">
 <div class="wrapper">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed">
-            <div class="container-fluid ">
-               <img title="Animals-World" th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
-                <a class="navbar-brand ms-1" th:href="@{/users/login}">Animals World</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/users/login}">&hearts;&hearts;&hearts;</a>
-                        </li>
-                        <li class="nav-item" id="weatherLi">
-                            <a class="nav-link active" href="#"><span onclick="hideWeather()">Hide</span>/<span
-                                    onclick="showWeather()">Show</span><span><strong> Weather</strong></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
-                                Reserved &copy;JD</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="fragments/commonsLogReg::header"></header>
 
     <main>
         <div class="row">
@@ -128,95 +95,7 @@ The dog has been selectively bred over millennia for various behaviors, sensory 
                 belonging to the class Actinopterygii, with over 95% belonging to the teleost subgrouping.</label>
         </div>
     </main>
-    <footer class="text-center text-lg-start bg-light text-muted">
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-        <div>
-            <a href="https://www.facebook.com/" class="me-4 text-reset">
-                <i class="bi bi-facebook"></i>
-            </a>
-            <a href="https://twitter.com" class="me-4 text-reset">
-                <i class="bi bi-twitter"></i>
-            </a>
-            <a href="https://www.google.com/" class="me-4 text-reset">
-                <i class="bi bi-google"></i>
-            </a>
-            <a href="https://www.youtube.com/" class="me-4 text-reset">
-                <i class="bi bi-youtube"></i>
-            </a>
-            <a href="https://linkedin.com/" class="me-4 text-reset">
-                <i class="bi bi-linkedin"></i>
-            </a>
-            <a href="https://github.com/" class="me-4 text-reset">
-                <i class="bi bi-github"></i>
-            </a>
-        </div>
-        </section>
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Website Purpose
-                        </h6>
-                        <p>
-                            Help people meet their animal friends!
-                        </p>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Products
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Friends</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Food</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Accessories</a>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
-                                Facebook</a>
-                        </p>
-                        <p>
-                            <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
-                                Youtube</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Animal Hope</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Contact
-                        </h6>
-                        <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
-                        <p>
-                            <i class="bi bi-envelope-fill"></i>
-                            JD@gmail.com
-                        </p>
-                        <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
-                        <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="#">JD</a>
-        </div>
-    </footer>
-
+    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
 
