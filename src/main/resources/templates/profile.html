@@ -33,7 +33,7 @@
                         </li>
                         <li class="nav-item" sec:authorize-url="/user/users-control">
                                 <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
-                        </li>   
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" th:href="@{/user/animal}"><span><strong> + Add Animal
                                         </strong></span></a>
@@ -75,8 +75,9 @@
             </div>
         </nav>
     </header>
-    <main class="row">
+    <main class="row" id="main">
         <div class="d-inline">
+            <img src="https://i.pinimg.com/600x315/c9/51/75/c95175086ab76c01112598838fdea7bd.jpg" class="backImage"/>
             <br>
             <br>
             <br>
@@ -131,7 +132,7 @@
                             </div>
                         </div>
                 </div>
-                
+
             </form>
         <div class="inlineForms row">
             <div class="col-4 ms-5 mt-2 me-5 text-center">
@@ -204,73 +205,78 @@
         </div>
         </div>
     </main>
-    <footer class="text-center text-lg-start bg-light text-muted">
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" <div>
-        <a href="https://www.facebook.com/" class="me-4 text-reset">
-            <i class="bi bi-facebook"></i>
-        </a>
-        <a href="https://twitter.com" class="me-4 text-reset">
-            <i class="bi bi-twitter"></i>
-        </a>
-        <a href="https://www.google.com/" class="me-4 text-reset">
-            <i class="bi bi-google"></i>
-        </a>
-        <a href="https://www.youtube.com/" class="me-4 text-reset">
-            <i class="bi bi-youtube"></i>
-        </a>
-        <a href="https://linkedin.com/" class="me-4 text-reset">
-            <i class="bi bi-linkedin"></i>
-        </a>
-        <a href="https://github.com/" class="me-4 text-reset">
-            <i class="bi bi-github"></i>
-        </a>
-    </div>
-        </section>
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Website Purpose
-                        </h6>
-                        <p>
-                            Help people meet their animal friends!
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
-                                Facebook</a>
-                        </p>
-                        <p>
-                            <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
-                                Youtube</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Contact
-                        </h6>
-                        <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
-                        <p>
-                            <i class="bi bi-envelope-fill"></i>
-                            JD@gmail.com
-                        </p>
-                        <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
-                        <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
+    <footer class="text-center text-lg-start bg-light mt-5 text-muted">
+        <div class="footerDiv">
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+            <div>
+            <a href="https://www.facebook.com/" class="me-4 text-reset">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://twitter.com" class="me-4 text-reset">
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a href="https://www.google.com/" class="me-4 text-reset">
+                <i class="bi bi-google"></i>
+            </a>
+            <a href="https://www.youtube.com/" class="me-4 text-reset">
+                <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://linkedin.com/" class="me-4 text-reset">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://github.com/" class="me-4 text-reset">
+                <i class="bi bi-github"></i>
+            </a>
+            </div>
+            </section>
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <div class="row mt-3">
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                <i class="fas fa-gem me-3"></i>Website Purpose
+                            </h6>
+                            <p>
+                                Help people meet their animal friends!
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Useful links
+                            </h6>
+                            <p>
+                                <a href="https://www.facebook.com/" class="text-reset"><i class="bi bi-facebook"></i>
+                                    Facebook</a>
+                            </p>
+                            <p>
+                                <a href="https://www.youtube.com/" class="text-reset"><i class="bi bi-youtube"></i>
+                                    Youtube</a>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Contact
+                            </h6>
+                            <p><i class="bi bi-house-fill"></i> Varna, Bulgaria</p>
+                            <p>
+                                <i class="bi bi-envelope-fill"></i>
+                                JD@gmail.com
+                            </p>
+                            <p><i class="bi bi-telephone-forward-fill"></i> + 359(0) 085589985</p>
+                            <p><i class="bi bi-telephone-forward-fill"></i></i> + 359(0) 094112400</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="/">JD</a>
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2021 Copyright:
+                <a class="text-reset fw-bold" href="/">JD</a>
+            </div>
         </div>
+
     </footer>
+
 </div>
 </body>
 <script>
@@ -531,17 +537,21 @@
 
 </script>
 <style>
+
     .mainb{
         max-width: 1800px;
         margin: auto;
     }
-    .wrapper{
-        background-color: rgba(255, 234, 234,0.4);
+
+    .backImage{
+        max-width: 1800px;
+        width: 100%;
+        height: 100%;
+        opacity: 0.2;
+        z-index: -2;
+        position: fixed;
     }
 
-    .toast:not(.showing):not(.show){
-        opacity: 1;
-    }
 
     .animalsGroup h1{
         margin-top: 3%;
@@ -566,6 +576,7 @@
         max-width: 1800px;
         margin: auto;
     }
+
     @media only screen and (max-width: 1300px) {
         .navigator{
             display: none;
@@ -575,9 +586,7 @@
     .text-muted{
         color: white;
     }
-    footer{
-        margin-top: 50px;
-    }
+
     .animalsGroup{
         margin-left: 5%;
         margin-right: 30%;
