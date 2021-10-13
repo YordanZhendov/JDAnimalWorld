@@ -39,11 +39,10 @@ public class AccessoryServiceImpl implements AccessoryService {
 
     @Override
     public List<AccessoryViewModel> getAllAccessories() {
-        List<AccessoryViewModel> accessoryViewModelList = this.accessoryRepository.getAccessories()
+        return this.accessoryRepository.getAccessories()
                 .stream()
                 .map(accessory -> this.modelMapper.map(accessory, AccessoryViewModel.class))
                 .collect(Collectors.toList());
-        return accessoryViewModelList;
     }
 
     @Override

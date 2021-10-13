@@ -52,6 +52,9 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Accessory> accessories;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Store> stores;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Animal> likedAnimals;
 

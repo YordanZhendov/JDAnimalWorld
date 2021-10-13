@@ -35,17 +35,28 @@
                     <li class="nav-item" sec:authorize-url="/user/users-control">
                         <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user/animal}"><span><strong> + Add Animal
-                                        </strong></span></a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navBarAdd" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false"><strong>+ Click to Add</strong>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navBarAdd">
+                            <li class="nav-item">
+                                <a class="dropdown-item" th:href="@{/user/animal}">+ Animal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" th:href="@{/user/accessory}">+ Accessory</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" th:href="@{/user/addanimaltore}">+ Animal Store</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user/accessory}"><span><strong> + Add Accessory
-                                        </strong></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user/animalstores}"><span><strong> $ Animal Stores
-                                        </strong></span></a>
+                        <a class="nav-link active" th:href="@{/user/animalstores}"><strong> $ Animal Stores
+                                        </strong></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
