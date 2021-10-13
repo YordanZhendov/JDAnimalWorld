@@ -4,10 +4,12 @@ import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
+import jdanimal.demo.service.StoreService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
 import jdanimal.demo.service.models.UserUpdateProfileModel;
 import jdanimal.demo.service.views.AccessoryViewModel;
+import jdanimal.demo.service.views.StoreViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import lombok.AllArgsConstructor;
@@ -34,6 +36,7 @@ public class ProfileController {
     private final StorageServiceImpl storageService;
     private final AnimalService animalService;
     private final AccessoryService accessoryService;
+    private final StoreService storeService;
 
     @GetMapping("/profile")
     public String getUserProfile(Model model){
@@ -45,6 +48,7 @@ public class ProfileController {
 
             List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(username);
             List<AccessoryViewModel> allAccessoriesByUser = this.userService.getAllAccessoriesByUser(username);
+            List<StoreViewModel> allStoresByUser = this.storeService.getAllStoresByUser(username);
             Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();
             Set<Accessory> likedAccessories = userProfileInfo.getLikedAccessories();
 
@@ -54,6 +58,7 @@ public class ProfileController {
 
             model.addAttribute("userProfileInfo",userProfileInfo);
             model.addAttribute("userAnimal",allAnimalsByUser);
+            model.addAttribute("allStoresByUser",allStoresByUser);
             model.addAttribute("allAccessoriesByUser",allAccessoriesByUser);
             model.addAttribute("likedAnimals",likedAnimals);
             model.addAttribute("likedAccessories",likedAccessories);

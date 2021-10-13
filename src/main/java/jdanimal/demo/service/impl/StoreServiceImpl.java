@@ -50,4 +50,10 @@ public class StoreServiceImpl implements StoreService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<StoreViewModel> getAllStoresByUser(String username) {
+        List<StoreViewModel> allStores = getAllStores();
+        return allStores.stream().filter(storeViewModel -> storeViewModel.getUser().getUsername().equals(username)).collect(Collectors.toList());
+    }
+
 }

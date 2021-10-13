@@ -8,4 +8,5 @@ import java.util.List;
 public interface StoreService {
     void uploadStore(UserStoreUploadModel userStoreUploadModel, String username);
     List<StoreViewModel> getAllStores();
+    List<StoreViewModel> getAllStoresByUser(String username);
 }

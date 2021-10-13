@@ -64,6 +64,17 @@
             </form>
         <div class="inlineForms row">
             <div class="col ms-5 mt-2 me-5 text-center">
+                <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#myStores" aria-expanded="false" aria-controls="myStores">
+                    <strong class="fs-3 mb-2">My Stores</strong>
+                </button>
+                <div id="myStores">
+                    <div th:each="store : ${allStoresByUser}">
+                        <strong><p th:text="${store.getName()}"></p></strong>
+                        <a th:href="@{/user/store/delete/{id}(id=${store.getId()})}" class="btn btn-danger ms-2">Delete<i class="fas fa-user-times ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col ms-5 mt-2 me-5 text-center">
                 <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#myAnimalsList" aria-expanded="false" aria-controls="myAnimalsList">
                     <strong class="fs-3 mb-2">My
                         Animals</strong>
