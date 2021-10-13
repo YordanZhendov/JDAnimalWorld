@@ -49,4 +49,5 @@ public class StoreServiceImpl implements StoreService {
                 .map(store -> this.modelMapper.map(store, StoreViewModel.class))
                 .collect(Collectors.toList());
     }
+
 }
