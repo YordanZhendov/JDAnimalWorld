@@ -22,5 +22,6 @@ public class AnimalViewModel {
     private String kilogramsOfAnimal;
     private String availableTill;
     private String urlAnimalPhoto;
+    private String description;
     private User user;
 }

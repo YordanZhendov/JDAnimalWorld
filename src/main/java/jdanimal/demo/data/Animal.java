@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Animal extends BaseEntity{
 
     @Column(name = "name_of_animal")
     private String nameOfAnimal;
+
     @Column(name = "type_of_animal")
     private String typeOfAnimal;
     @Column(name = "age_of_animal")
@@ -33,6 +35,9 @@ public class Animal extends BaseEntity{
     private String availableTill;
     @Column(name= "picture_animal")
     private String urlAnimalPhoto;
+    @Column(name = "description")
+    @Type(type="text")
+    private String description;
     @ManyToOne
     private User user;
 

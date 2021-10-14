@@ -21,4 +21,5 @@ public class UserAccessoryUploadDTO {
     private int daysUsed;
     private BigDecimal accessoryPrice;
     private String urlAccessoryPhoto;
+    private String description;
 }

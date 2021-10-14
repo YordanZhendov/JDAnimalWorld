@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,9 @@ public class Accessory extends BaseEntity{
     private BigDecimal accessoryPrice;
     @Column(name= "picture_accessory")
     private String urlAccessoryPhoto;
+    @Column(name = "description")
+    @Type(type="text")
+    private String description;
     @ManyToOne
     private User user;
 

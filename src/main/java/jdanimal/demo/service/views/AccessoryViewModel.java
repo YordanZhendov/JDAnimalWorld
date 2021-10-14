@@ -20,5 +20,6 @@ public class AccessoryViewModel {
     private int daysUsed;
     private BigDecimal accessoryPrice;
     private String urlAccessoryPhoto;
+    private String description;
     private User user;
 }

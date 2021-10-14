@@ -21,27 +21,22 @@
         <br>
         <br>
         <div class="animalsList">
-            <form class="row" method="GET" action="#">
-                <div class="searchInput">
-                    <div class="ms-4 mb-1">
-                        <input type="text" class="form-control-input" placeholder="Search.." name="search">
-                    </div>
-                    <div class="ms-4">
-                        <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                    </div>
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-5 dropdown center">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter By -> ..
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/filter-by/animals}">Animals</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filter-by/accessories}">Accessories</a></li>
+                        <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
+                    </ul>
                 </div>
-            </form>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownf" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Filter by
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownf">
-                    <li><a class="dropdown-item" >Animal</a></li>
-                    <li><a class="dropdown-item" >Stores</a></li>
-                    <li><a class="dropdown-item" >Accessories</a></li>
-                </ul>
+                <div class="col-2"></div>
             </div>
+            <br>
             <br>
             <div class="row">
                 <div class="col-4 card m-5" style="width: 18rem;" th:each="animal : ${animals}" th:object="${animal}">
@@ -49,14 +44,14 @@
                     <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${animal.getNameOfAnimal()}"></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text" th:text="${animal.getDescription()}"></p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-light" th:text="|Animal Type: *{typeOfAnimal}|"></li>
                         <li class="list-group-item" th:text="|Age: *{ageOfAnimal}|"></li>
                         <li class="list-group-item bg-light" th:text="|Favourite Food: *{foodOfAnimal}|"></li>
                         <li class="list-group-item" th:text="|The Lovely Games: *{gamesOfAnimal}|"></li>
-                        <li class="list-group-item bg-light" th:text="|THe Weight: *{ageOfAnimal}|"></li>
+                        <li class="list-group-item bg-light" th:text="|The Weight: *{ageOfAnimal}|"></li>
                     </ul>
                     <div class="card-body">
                         <div class="ms-2 me-1">
@@ -79,10 +74,9 @@
                     <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
                     <div class="card-body" th:each="accessory : ${accessories}" th:object="${accessory}">
                         <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text" th:text="${accessory.getDescription()}"></p>
                     </div>
                     <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
-                        <li class="list-group-item bg-light" th:text="|Accessory Name: ${accessory.getAccessoryName()}|"></li>
                         <li class="list-group-item" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
                         <li class="list-group-item bg-light" th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
                     </ul>

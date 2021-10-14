@@ -30,7 +30,6 @@ public class UserAnimalUploadModel {
     private String kilogramsOfAnimal;
     private String availableTill;
     private String urlAnimalPhoto;
-
-
+    private String description;
 
 }

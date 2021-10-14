@@ -59,4 +59,17 @@ public class HomeController {
         model.addAttribute("animals",allAnimals);
         return "home";
     }
+
+    @GetMapping("/filter-by/animals")
+    public String filterbyAnimal(Model model){
+        List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
+        model.addAttribute("animals",allAnimals);
+      return "homebyanimals";
+    };
+    @GetMapping("/filter-by/accessories")
+    public String filterbyAccessory(Model model){
+        List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
+        model.addAttribute("accessories",allAccessories);
+      return "homebyaccessories";
+    };
 }

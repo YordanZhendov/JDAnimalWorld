@@ -19,4 +19,6 @@ public class UserAnimalUploadDTO {
     private String kilogramsOfAnimal;
     private String availableTill;
     private String urlAnimalPhoto;
+    private String description;
+
 }

@@ -1,83 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 
 
 <head th:replace="fragments/commons::head"></head>
 
+
 <body class="mainb">
 <div class="wrapper">
     <header th:replace="fragments/commons::header"></header>
-    <main class="row">
-        <div class="d-flex">
-            <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
-            <div class="col-2"></div>
-            <form class="col-7" action="/user/animal/upload" method="POST" enctype="multipart/form-data" th:object="${userAnimalUploadModel}">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="text-center h2 border-bottom border-danger"><strong>Animal Form</strong></div>
-                <ul>
-                    <div id="addAnimalForm" class="row">
-                    
-                        <div id="inputInfoAnimal" class="col-8">
-                            <br>
-                            <br>
-                            <div>
-                                <strong><i></italic><label>Name:</label></i></strong>
-                                <input th:field="*{nameOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="nameOfAnimal" id="nameOfAnimal">
-                                <small th:if="${#fields.hasErrors('nameOfAnimal')}" th:errors="*{nameOfAnimal}" class="text-danger">error</small>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Type:</label></i></strong>
-                                <input th:field="*{typeOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Type..." type="text" name="typeOfAnimal" id="typeOfAnimal">
-                                <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" class="text-danger">error</small>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Age:</label></i></strong>
-                                <input th:field="*{ageOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear g-3" placeholder="Age..." type="text" name="ageOfAnimal" id="ageOfAnimal">
-                                <small th:if="${#fields.hasErrors('ageOfAnimal')}" th:errors="*{ageOfAnimal}" class="text-danger">error</small>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Games:</label></i></strong>
-                                <input  class="form-control animalInputClear" placeholder="Games..." type="text" name="gamesOfAnimal" id="gamesOfAnimal">
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Food:</label></i></strong>
-                                <input th:field="*{foodOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Food..." type="text" name="foodOfAnimal" id="foodOfAnimal">
-                                <small th:if="${#fields.hasErrors('foodOfAnimal')}" th:errors="*{foodOfAnimal}" class="text-danger">error</small>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Kilograms:</label></i></strong>
-                                <input th:field="*{kilogramsOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear" placeholder="Kilograms..." type="text" name="kilogramsOfAnimal" id="kilogramsOfAnimal">
-                                <small th:if="${#fields.hasErrors('kilogramsOfAnimal')}" th:errors="*{kilogramsOfAnimal}" class="text-danger">error</small>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Description: </label></i></strong>
-                                <textarea class="form-control animalInputClear" placeholder="Description..." type="text" name="description" id="description" rows="4" cols="25"></textarea>
-                            </div>
-                            <div class="mt-3">
-                                <strong><i><label>Available till:</label></i></strong>
-                                <input class="form-control" placeholder="Date..."  type="date" id="available" name="availableTill">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Animal</button>
-                        </div>
-                    </div>
-                </ul>
-            </form>
-            <div class="col-3"></div>
-        </div>
+    <main>
+        <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="animalsList">
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-5 dropdown center">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter By -> ..
+                    </a>
 
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/filter-by/animals}">Animals</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filter-by/accessories}">Accessories</a></li>
+                        <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
+                    </ul>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
+                    <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
+                    <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                    <div class="card-body" th:each="accessory : ${accessories}" th:object="${accessory}">
+                        <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
+                        <p class="card-text" th:text="${accessory.getDescription()}"></p>
+                    </div>
+                    <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
+                        <li class="list-group-item" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
+                        <li class="list-group-item bg-light" th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="ms-2 me-1">
+                            <p>
+                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
+                                    Owner Details:
+                                </button>
+                            </p>
+                        </div>
+                        <div class="homeDetails collapse col-12 mt-5" id="ownerAccDetails" th:each="accessory : ${accessories}" th:object="${accessory}" >
+                            <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                            <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                            <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                            <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
@@ -222,7 +212,6 @@
     function clearTheForm(){
         var inputInfoAnimalClear=document.getElementById('inputInfoAnimal');
         var elements=inputInfoAnimalClear.getElementsByTagName('input')
-        inputInfoAnimalClear.getElementsByTagName('textarea')[0].value='';
         for(let i=0;i < elements.length; i++){
             elements[i].value='';
 
@@ -241,44 +230,44 @@
     var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
     var elements=[navigationBar,logoutB,clearB,uploadB];
 
-   
+
     function changeColorToLigthBlue(){
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeS[index]);
             }
         }
     }
-    
+
     function changeColorToLigthGreen(){
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeT[index]);
             }
         }
@@ -287,19 +276,19 @@
     function changeColorDefault(){
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeF[index]);
             }
         }
@@ -307,26 +296,27 @@
     function changeColorToRed(){
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeD[index]);
             }
         }
     }
-      //tooltip
-       $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+
+    //tooltip
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
 </script>
@@ -374,7 +364,7 @@
             display: inline;
         }
         #inputInfoAnimal{
-            width: 100%;    
+            width: 100%;
         }
 
     }
@@ -383,25 +373,29 @@
         color: white;
     }
 
+    footer {
+        margin-top: 50px;
+    }
+
 
     .profilInput {
         display: none;
     }
 
     .form-control {
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.075) inset;
-    color: #555;
-    display: block;
-    font-size: 10px;
-    height: 40px;
-    line-height: 1.42857;
-    padding: 6px 20px;
-    width: 100%;  
-}
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.075) inset;
+        color: #555;
+        display: block;
+        font-size: 10px;
+        height: 40px;
+        line-height: 1.42857;
+        padding: 6px 20px;
+        width: 100%;
+    }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -409,6 +403,5 @@
         crossorigin="anonymous"></script>
 
 
+
 </html>
-
-

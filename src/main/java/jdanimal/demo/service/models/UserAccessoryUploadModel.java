@@ -27,4 +27,5 @@ public class UserAccessoryUploadModel {
     @Min(0)
     @NotNull
     private BigDecimal accessoryPrice;
+    private String description;
 }

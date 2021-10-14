@@ -7,19 +7,14 @@ import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAnimalDeleteModel;
 import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
