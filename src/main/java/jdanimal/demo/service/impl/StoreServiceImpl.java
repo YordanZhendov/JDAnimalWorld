@@ -56,4 +56,9 @@ public class StoreServiceImpl implements StoreService {
         return allStores.stream().filter(storeViewModel -> storeViewModel.getUser().getUsername().equals(username)).collect(Collectors.toList());
     }
 
+    @Override
+    public void removeStore(String id) {
+        this.storeRepository.deleteById(id);
+    }
+
 }

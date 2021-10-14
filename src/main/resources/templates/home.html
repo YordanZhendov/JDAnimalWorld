@@ -43,105 +43,67 @@
                 </ul>
             </div>
             <br>
-<!--            Animal list-->
-            <ul class="list-group ms-3 me-3 list-group-flush">
-                <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
-                    th:each="animal : ${animals}" th:object="${animal}">
-                    <div class="form-check mt-5 me-5">
-                        <a th:href="@{/user/animal/like/{id}(id=${animal.getId()})}" class="btn btn-outline-success position-absolute top-0 start-0">Like<i class="fas fa-user-times ml-2"></i></a>
-                        <img width="100" height="100" class="rounded-circle mt-5 me-3 position-absolute top-0 end-0" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+            <div class="row">
+                <div class="col-4 card m-5" style="width: 18rem;" th:each="animal : ${animals}" th:object="${animal}">
+                    <a th:href="@{/user/animal/like/{id}(id=${animal.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
+                    <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${animal.getNameOfAnimal()}"></h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                    <div class="ms-2 me-1">
-                        <p>
-                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetails" aria-expanded="false" aria-controls="ownerDetails">
-                                Owner Details:
-                            </button>
-                        </p>
-                    </div>
-                    <div class="collapse col-12 mt-5" id="ownerDetails">
-                        <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                        <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                        <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                    </div>
-                    <div class="animalallList justify-content-between align-items-start">
-                        <div class="col-5 ms-3 me-1 mt-5">
-                            <div class="pictureAnimalSlide">
-                                <strong><i><div class="h-1 ms-5" th:text="| ${animal.getNameOfAnimal()}|">Rayan</div></i></strong>
-                                <br>
-                            </div>
-                            <img width="100" height="100" class="rounded mb-2" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
-                            <strong><i><div class="h-1 me-2 mt-1 position-absolute top-0 end-0" th:text="| Available untill: ${animal.getAvailableTill()}|"></div></i></strong>
-                        </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-light" th:text="|Animal Type: *{typeOfAnimal}|"></li>
+                        <li class="list-group-item" th:text="|Age: *{ageOfAnimal}|"></li>
+                        <li class="list-group-item bg-light" th:text="|Favourite Food: *{foodOfAnimal}|"></li>
+                        <li class="list-group-item" th:text="|The Lovely Games: *{gamesOfAnimal}|"></li>
+                        <li class="list-group-item bg-light" th:text="|THe Weight: *{ageOfAnimal}|"></li>
+                    </ul>
+                    <div class="card-body">
                         <div class="ms-2 me-1">
                             <p>
-                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    Animal Details:
+                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
+                                    Owner Details:
                                 </button>
                             </p>
                         </div>
-                    </div>
-                    <div class="collapse col-12 mt-5" id="collapseExample">
-                        <div class="card card-body bg-light" th:text="|Animal Type: *{typeOfAnimal}|">
-                        </div>
-                        <div class="card card-body bg-light" th:text="|Age: *{ageOfAnimal}|">
-                        </div>
-                        <div class="card card-body" th:text="|Favourite Food: *{foodOfAnimal}|">
-                        </div>
-                        <div class="card card-body bg-light" th:text="|The Lovely Games: *{gamesOfAnimal}|">
-                        </div>
-                        <div class="card card-body " th:text="|THe Weight: *{ageOfAnimal}|">
+                        <div class="homeDetails collapse col-12 mt-5" id="ownerDetails">
+                            <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+                            <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                            <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                            <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                         </div>
                     </div>
-                </li>
-            </ul>
-<!--            Accessory List-->
-            <ul class="list-group ms-3 me-3 list-group-flush">
-                <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
-                    th:each="accessory : ${accessories}" th:object="${accessory}">
-                    <div class="form-check mt-5 me-5">
-                        <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-outline-success position-absolute top-0 start-0">Like<i class="fas fa-user-times ml-2"></i></a>
-                        <img width="100" height="100" class="rounded-circle mt-5 me-3 position-absolute top-0 end-0" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                </div>
+                <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
+                    <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
+                    <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                    <div class="card-body" th:each="accessory : ${accessories}" th:object="${accessory}">
+                        <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                    <div class="ms-2 me-1">
-                        <p>
-                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#ownerDetailsAccessory" aria-expanded="false" aria-controls="ownerDetailsAccessory">
-                                Owner Details:
-                            </button>
-                        </p>
-                    </div>
-                    <div class="collapse col-12 mt-5" id="ownerDetailsAccessory">
-                        <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                        <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                        <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                    </div>
-                    <div class="animalallList justify-content-between align-items-start">
-                        <div class="col-6 ms-3 me-1 mt-5">
-                            <div class="pictureAccessorySlide">
-                                <strong><i><div class="h-1 ms-5" th:text="| ${accessory.getAccessoryName()}|">Rayan</div></i></strong>
-                                <br>
-                            </div>
-                            <img width="100" height="100" class="rounded mb-2" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/></div>
-                        <strong><i><div class="h-1 me-2 mt-1 position-absolute top-0 end-0" th:text="| Available untill: ${accessory.getAvailableTill()}|"></div></i></strong>
+                    <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
+                        <li class="list-group-item bg-light" th:text="|Accessory Name: ${accessory.getAccessoryName()}|"></li>
+                        <li class="list-group-item" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
+                        <li class="list-group-item bg-light" th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
+                    </ul>
+                    <div class="card-body">
                         <div class="ms-2 me-1">
                             <p>
-                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleAccessory" aria-expanded="false" aria-controls="collapseExample">
-                                    Accessory Details:
+                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
+                                    Owner Details:
                                 </button>
                             </p>
                         </div>
-                    </div>
-                    <div class="collapse col-12 mt-5" id="collapseExampleAccessory">
-                        <div class="card card-body bg-light" th:text="|Accessory Name: *{getAccessoryName()}|">
-                        </div>
-                        <div class="card card-body bg-light" th:text="|Days used: *{getDaysUsed()}|">
-                        </div>
-                        <div class="card card-body" th:text="|Price: *{getAccessoryPrice()}|">
+                        <div class="homeDetails collapse col-12 mt-5" id="ownerAccDetails" th:each="accessory : ${accessories}" th:object="${accessory}" >
+                            <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                            <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                            <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                            <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                         </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
-
     </main>
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
