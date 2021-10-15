@@ -15,81 +15,46 @@
             <br>
             <br>
             <br>
-            <div class="animalsList ms-3 mt-5 me-3">
-                <div class="nav-item dropdown">
-                    <ul class="list-group ms-3 list-group-flush">
-                        <li class="list-group-item justify-content-between align-items-start border-top border-danger shadow p-3 mb-5 bg-body rounded"
-                            th:each="user : ${users}" th:object="${user}">
-                            <img th:src="@{${user.getUrlProfilePicture()}}"
-                                 width="100" height="100" class="rounded-circle mb-2 " alt="Foto Is Missing :-)">
-                            <div class="card card-body bg-light  text-right"
-                                 th:text="|Owner: ${user.getUsername()}|"><strong><i>Username: Jordan</i>
-                            </strong>
-                            </div>
-                            <div class="ms-2 me-1">
-                                <p>
-                                    <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#ownerDetails" aria-expanded="false"
-                                        aria-controls="ownerDetails">
-                                        Account Details:
-                                    </button>
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col collapse mt-5" id="ownerDetails">
-                                    <div class="card card-body bg-light" th:text="|Owner: ${user.getFullName()}|">Owner:
-                                        Yordan Nikolov Zhendov</div>
-                                    <div class="card card-body" th:text="|PhoneNumber: ${user.getPhoneNumber()}|">
-                                        PhoneNumber: 089585594</div>
-                                    <div class="card card-body bg-light" th:text="|Email: ${user.getEmail()}|">Email:
-                                        jordna.zhendov@abv.bg</div>
-                                </div>
-                                <div class="col text-center d-inline">
-                                    <div class="col">
-                                        <p>
-                                            <button class="btn btn-success mt-4" type="submit">
-                                                Set Active!
-                                            </button>
-                                        </p>
-                                    </div>
-                                    <div class="col">
-                                        <p>
-                                            <button class="btn btn-danger mt-2" type="submit">
-                                                Suspend Account!
-                                            </button>
-                                        </p>
-                                    </div>
-                                    <div class="col">
-                                        <p>
-                                            <button class="btn btn-dark mt-2" type="submit">
-                                                Permanent Ban!
-                                            </button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5 border-bottom border-4 rounded-pill text-center h3 border-warning"><i>List
-                                    of Animals and Accessories</i></div>
-                            <div class="row d-inline" th:each="animal : ${user.getAnimals()}" th:object="${animal}">
-                                <div class="col">
-                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded">
-                                        <strong><div  th:text="${animal.getNameOfAnimal()}">Animal</div></strong>
-                                        <img th:src="@{${animal.getUrlAnimalPhoto()}}"
-                                             width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row d-inline" th:each="accessory : ${user.getAccessories()}" th:object="${accessory}">
-                                <div class="col">
-                                    <div class="card card-body bg-light shadow p-3 mb-5 bg-body rounded" th:text="${accessory.getAccessoryName()}">Accessory
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+            <div class="row">
+                <div class="col-5 card m-5" style="width: 18rem;" th:each="user : ${users}" th:object="${user}">
+                <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(user.getUrlProfilePicture() != null && !#strings.isEmpty(user.getUrlProfilePicture())) ? user.getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${user.getUsername()}"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${user.getUsername()}"></h5>
+                    <p class="card-text" th:text="${user.getFullName()}"></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light" th:text="|Animal count: *{getAnimals().size()}|"></li>
+                    <li class="list-group-item bg-light" th:text="|Accessory count: *{getAccessories().size()}|"></li>
+                </ul>
+                <div class="card-body">
+                    <div class="ms-2 me-1">
+                        <p>
+                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
+                                Owner Details:
+                            </button>
+                        </p>
+                    </div>
+                    <div class="homeDetails collapse col-12 mt-5" id="ownerDetails">
+                        <div class="card card-body" th:text="|PhoneNumber: ${user.getPhoneNumber()}|"></div>
+                        <div class="card card-body bg-light" th:text="|Email: ${user.getEmail()}|"></div>
+                    </div>
+                    <div class="col-5 dropdown center">
+                        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            User rights!!!
+                        </a>
 
-                    </ul>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item " th:href="@{/user/activate/{id}(id=${user.getId()})}">Set Active!</a></li>
+                            <li><a class="dropdown-item " th:href="@{/user/deactive/temporary/{id}(id=${user.getId()})}">Suspend Account!</a></li>
+                            <li><a class="dropdown-item " th:href="@{/user/deactive/forever/{id}(id=${user.getId()})}">Permanent Ban!</a></li>
+                            <li><a class="dropdown-item bg-warning" th:href="@{/user/delete/{id}(id=${user.getId()})}" >Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
                 </div>
             </div>
+            </div>
+
         </main>
         <footer th:replace="fragments/commons::footer"></footer>
     </div>
@@ -102,8 +67,23 @@
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
 
-    }
+        checkColorCookie();
 
+    }
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
+    }
     // weather button
 
     function showWeather() {
@@ -231,96 +211,104 @@
         }
     }
 
-    var themeF = ['bg-secondary', 'btn-danger', 'btn-secondary', 'btn-secondary'];
-    var themeS = ['bg-primary', 'btn-warning', 'btn-primary', 'btn-primary'];
-    var themeT = ['bg-success', 'btn-danger', 'btn-success', 'btn-success'];
-    var themeD = ['bg-danger', 'btn-success', 'btn-danger', 'btn-danger'];
-    var navigationBar = document.getElementsByTagName('nav')[0];
-    var logoutB = navigationBar.getElementsByTagName('button')[1];
-    var clearB = document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
-    var uploadB = document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
-    var elements = [navigationBar, logoutB, clearB, uploadB];
+    //changing theme color
+    var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
+    var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
+    var themeT=['bg-success','btn-danger','btn-success','btn-success'];
+    var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
+    var navigationBar=document.getElementsByTagName('navbar')[0];
+    var logoutB=navigationBar.getElementsByTagName('button')[1];
+    var elements=[navigationBar,logoutB];
 
 
-    function changeColorToLigthBlue() {
-        if (navigationBar.classList.contains('bg-secondary')) {
+    function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
+
+        if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeF[index], themeS[index]);
+                elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-success')) {
+        if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeT[index], themeS[index]);
+                elements[index].classList.replace(themeT[index],themeS[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-danger')) {
+        if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeD[index], themeS[index]);
-            }
-        }
-    }
-
-    function changeColorToLigthGreen() {
-        if (navigationBar.classList.contains('bg-secondary')) {
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeF[index], themeT[index]);
-            }
-        }
-        if (navigationBar.classList.contains('bg-primary')) {
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeS[index], themeT[index]);
-            }
-        }
-        if (navigationBar.classList.contains('bg-danger')) {
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeD[index], themeT[index]);
+                elements[index].classList.replace(themeD[index],themeS[index]);
             }
         }
     }
 
-    function changeColorDefault() {
-        if (navigationBar.classList.contains('bg-success')) {
+    function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
+        if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeT[index], themeF[index]);
+                elements[index].classList.replace(themeF[index],themeT[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-primary')) {
+        if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeS[index], themeF[index]);
+                elements[index].classList.replace(themeS[index],themeT[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-danger')) {
+        if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeD[index], themeF[index]);
+                elements[index].classList.replace(themeD[index],themeT[index]);
             }
         }
     }
-    function changeColorToRed() {
-        if (navigationBar.classList.contains('bg-success')) {
+
+    function changeColorDefault(){
+        document.cookie = "color=default";
+
+        if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeT[index], themeD[index]);
+                elements[index].classList.replace(themeT[index],themeF[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-primary')) {
+        if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeS[index], themeD[index]);
+                elements[index].classList.replace(themeS[index],themeF[index]);
             }
         }
-        if (navigationBar.classList.contains('bg-secondary')) {
+        if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
 
-                elements[index].classList.replace(themeF[index], themeD[index]);
+                elements[index].classList.replace(themeD[index],themeF[index]);
+            }
+        }
+    }
+    function changeColorToRed(){
+        document.cookie = "color=red";
+
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeT[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeS[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeF[index],themeD[index]);
             }
         }
     }

@@ -26,4 +26,6 @@ public interface UserService extends UserDetailsService {
     void removeAnimalFromUsers(Animal animalById);
     List<AccessoryViewModel> getAllAccessoriesByUser(String username);
     void removeAccessoryFromUsers(Accessory accessoryById);
+    void removeUser(String id);
+
 }

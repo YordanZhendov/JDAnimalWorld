@@ -64,7 +64,9 @@ public class AnimalServiceImpl implements AnimalService {
         User byUsername = userRepository.findByUsername(currentUserName);
         Animal animalById = animalRepository.findAnimalById(id);
         byUsername.getLikedAnimals().add(animalById);
+        animalById.getUsers().add(byUsername);
         userRepository.saveAndFlush(byUsername);
+        animalRepository.saveAndFlush(animalById);
     }
 
     @Override
@@ -72,6 +74,8 @@ public class AnimalServiceImpl implements AnimalService {
         User byUsername = userRepository.findByUsername(currentUserName);
         Animal animalById = animalRepository.findAnimalById(id);
         byUsername.getLikedAnimals().remove(animalById);
+        animalById.getUsers().remove(byUsername);
         userRepository.saveAndFlush(byUsername);
+        animalRepository.saveAndFlush(animalById);
     }
 }

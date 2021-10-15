@@ -40,6 +40,8 @@ public class Animal extends BaseEntity{
     private String description;
     @ManyToOne
     private User user;
+    @ManyToMany
+    private Set<User> users;
 
 
 }

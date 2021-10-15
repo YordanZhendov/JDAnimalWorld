@@ -29,8 +29,8 @@
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" th:href="@{/filter-by/animals}">Animals</a></li>
-                        <li><a class="dropdown-item" th:href="@{/filter-by/accessories}">Accessories</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filterby/animals}">Animals</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filterby/accessories}">Accessories</a></li>
                         <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
                     </ul>
                 </div>
@@ -79,9 +79,22 @@
         getCoordintes();
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
+        checkColorCookie();
 
     }
-
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
+    }
     // weather button
 
     function showWeather() {
@@ -225,16 +238,17 @@
     var themeT=['bg-success','btn-danger','btn-success','btn-success'];
     var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
     var navigationBar=document.getElementsByTagName('nav')[0];
-    var logoutB=navigationBar.getElementsByTagName('button')[1];
-    var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
-    var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
-    var elements=[navigationBar,logoutB,clearB,uploadB];
+    var logoutB=navigationBar.getElementsByTagName('button')[0];
+    var elements=[navigationBar,logoutB];
+    console.log(navigationBar)
+    console.log(logoutB)
 
 
     function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
@@ -253,6 +267,8 @@
     }
 
     function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
 
@@ -274,6 +290,8 @@
     }
 
     function changeColorDefault(){
+        document.cookie = "color=default";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 
@@ -294,6 +312,8 @@
         }
     }
     function changeColorToRed(){
+        document.cookie = "color=red";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 

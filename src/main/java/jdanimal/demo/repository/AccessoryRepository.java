@@ -17,4 +17,7 @@ public interface AccessoryRepository extends JpaRepository<Accessory,String> {
 
     Accessory findAccessoryById(String id);
 
+    @Query("select a from Accessory as a WHERE a.user.id=?1")
+    List<Accessory> getAccessoryByUserId(String id);
+
 }

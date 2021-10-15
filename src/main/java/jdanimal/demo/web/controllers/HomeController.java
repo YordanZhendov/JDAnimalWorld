@@ -15,6 +15,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -23,7 +26,6 @@ public class HomeController {
 
     private final AnimalService animalService;
     private final AccessoryService accessoryService;
-    private final UserService userService;
 
     @GetMapping("/users/login")
     public String logIn(){
@@ -52,7 +54,7 @@ public class HomeController {
     }
 
     @GetMapping("/user/home")
-    public String getHome(Model model){      
+    public String getHome(Model model){
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
         model.addAttribute("accessories",allAccessories);
@@ -60,13 +62,15 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/filter-by/animals")
-    public String filterbyAnimal(Model model){
+    @GetMapping("/filterby/animals")
+    public String filterbyAnimal(Model model, HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        System.out.println(cookies[0].getValue());
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);
       return "homebyanimals";
     };
-    @GetMapping("/filter-by/accessories")
+    @GetMapping("/filterby/accessories")
     public String filterbyAccessory(Model model){
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
         model.addAttribute("accessories",allAccessories);

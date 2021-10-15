@@ -135,8 +135,7 @@
                 <div id="myLikedAccessories">
                     <div th:each="accessory : ${likedAccessories}">
                         <strong><p th:text="${accessory.getAccessoryName()}"></p></strong>
-                        <img th:src="@{${accessory.getUrlAccessoryPhoto()}}"
-                             width="100" height="100" class="rounded-circle mb-2" alt="Foto Is Missing :-)">
+                        <img width="100" height="100" class="rounded-circle mb-2" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
                         <a th:href="@{/user/animal/dislike/{id}(id=${accessory.getId()})}" class="btn btn-outline-danger ms-2">Dislike<i class="fas fa-user-times ml-2"></i></a>
                     </div>
                 </div>
@@ -154,7 +153,22 @@
         getCoordintes();
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
+        checkColorCookie();
 
+    }
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
     }
 
     // weather button
@@ -295,90 +309,99 @@
     var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
     var elements=[navigationBar,logoutB,clearB,uploadB];
 
-   
+
     function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeS[index]);
             }
         }
     }
-    
+
     function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeT[index]);
             }
         }
     }
 
     function changeColorDefault(){
+        document.cookie = "color=default";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeF[index]);
             }
         }
     }
     function changeColorToRed(){
+        document.cookie = "color=red";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeD[index]);
             }
         }
     }
-      
+
       //tooltip
        $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   

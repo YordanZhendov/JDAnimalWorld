@@ -73,9 +73,23 @@
         getCoordintes();
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
+        checkColorCookie();
 
     }
 
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
+    }
     // weather button
 
     function showWeather() {
@@ -226,85 +240,94 @@
     var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
     var elements=[navigationBar,logoutB,clearB,uploadB];
 
-   
+
     function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeS[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeS[index]);
             }
         }
     }
-    
+
     function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeT[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeT[index]);
             }
         }
     }
 
     function changeColorDefault(){
+        document.cookie = "color=default";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeF[index]);
             }
         }
         if(navigationBar.classList.contains('bg-danger')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeD[index],themeF[index]);
             }
         }
     }
     function changeColorToRed(){
+        document.cookie = "color=red";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeT[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-primary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeS[index],themeD[index]);
             }
         }
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-                
+
                 elements[index].classList.replace(themeF[index],themeD[index]);
             }
         }

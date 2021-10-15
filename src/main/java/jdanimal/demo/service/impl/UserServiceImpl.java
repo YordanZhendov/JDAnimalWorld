@@ -1,14 +1,12 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.Accessory;
-import jdanimal.demo.data.Animal;
+import jdanimal.demo.data.*;
 import jdanimal.demo.data.DTO.UserRegisterDTO;
 import jdanimal.demo.data.DTO.UserLoginDTO;
 import jdanimal.demo.data.DTO.UserProfileDTO;
-import jdanimal.demo.data.Role;
-import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
+import jdanimal.demo.repository.StoreRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
@@ -37,6 +35,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final AnimalRepository animalRepository;
     private final AccessoryRepository accessoryRepository;
+    private final StoreRepository storeRepository;
     private final UserValidationSerivce userValidationSerivce;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
@@ -120,6 +119,37 @@ public class UserServiceImpl implements UserService {
         for (User allUser : allUsers) {
             allUser.getLikedAccessories().remove(accessoryById);
         }
+    }
+
+    @Override
+    public void removeUser(String id) {
+        List<User> allUsersInDB = getAllUsersInDB();
+        List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
+        for (Animal animal : animalByUser) {
+            for (User user : allUsersInDB) {
+                user.getLikedAnimals().remove(animal);
+                userRepository.saveAndFlush(user);
+            }
+            animalRepository.deleteById(animal.getId());
+        }
+        List<Accessory> accessoriesByUser = accessoryRepository.getAccessoryByUserId(id);
+        for (Accessory accessory : accessoriesByUser) {
+
+            for (User user : allUsersInDB) {
+                user.getLikedAccessories().remove(accessory);
+                userRepository.saveAndFlush(user);
+            }
+            accessoryRepository.deleteById(accessory.getId());
+        }
+        List<Store> storeByUser = storeRepository.getStoreByUserId(id);
+        for (Store store : storeByUser) {
+            storeRepository.deleteById(store.getId());
+
+        }
+
+
+        this.userRepository.deleteById(id);
+
     }
 
 

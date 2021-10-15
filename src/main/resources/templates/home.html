@@ -29,8 +29,8 @@
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" th:href="@{/filter-by/animals}">Animals</a></li>
-                        <li><a class="dropdown-item" th:href="@{/filter-by/accessories}">Accessories</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filterby/animals}">Animals</a></li>
+                        <li><a class="dropdown-item" th:href="@{/filterby/accessories}">Accessories</a></li>
                         <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
                     </ul>
                 </div>
@@ -77,8 +77,11 @@
                         <p class="card-text" th:text="${accessory.getDescription()}"></p>
                     </div>
                     <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
-                        <li class="list-group-item" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
-                        <li class="list-group-item bg-light" th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
+                        <li class="list-group-item bg-light" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
+                        <li class="list-group-item " th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
+                        <li class="list-group-item bg-light" >---------</li>
+                        <li class="list-group-item" >---------</li>
+                        <li class="list-group-item bg-light">---------</li>
                     </ul>
                     <div class="card-body">
                         <div class="ms-2 me-1">
@@ -109,8 +112,23 @@
         getCoordintes();
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
-
+        checkColorCookie();
     }
+
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
+    }
+
 
     // weather button
 
@@ -255,16 +273,15 @@
     var themeT=['bg-success','btn-danger','btn-success','btn-success'];
     var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
     var navigationBar=document.getElementsByTagName('nav')[0];
-    var logoutB=navigationBar.getElementsByTagName('button')[1];
-    var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
-    var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
-    var elements=[navigationBar,logoutB,clearB,uploadB];
+    var logoutB=navigationBar.getElementsByTagName('button')[0];
+    var elements=[navigationBar,logoutB];
 
 
     function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
-
                 elements[index].classList.replace(themeF[index],themeS[index]);
             }
         }
@@ -283,6 +300,8 @@
     }
 
     function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
         if(navigationBar.classList.contains('bg-secondary')){
             for (let index = 0; index < elements.length; index++) {
 
@@ -304,6 +323,8 @@
     }
 
     function changeColorDefault(){
+        document.cookie = "color=default";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 
@@ -324,6 +345,8 @@
         }
     }
     function changeColorToRed(){
+        document.cookie = "color=red";
+
         if(navigationBar.classList.contains('bg-success')){
             for (let index = 0; index < elements.length; index++) {
 
@@ -343,6 +366,7 @@
             }
         }
     }
+
 
     //tooltip
     $(document).ready(function(){

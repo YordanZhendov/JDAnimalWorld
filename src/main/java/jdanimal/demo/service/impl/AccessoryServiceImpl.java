@@ -64,7 +64,9 @@ public class AccessoryServiceImpl implements AccessoryService {
         User byUsername = userRepository.findByUsername(currentUserName);
         Accessory accessoryById = accessoryRepository.findAccessoryById(id);
         byUsername.getLikedAccessories().add(accessoryById);
+        accessoryById.getUsers().add(byUsername);
         userRepository.saveAndFlush(byUsername);
+        accessoryRepository.saveAndFlush(accessoryById);
     }
 
     @Override
@@ -72,7 +74,9 @@ public class AccessoryServiceImpl implements AccessoryService {
         User byUsername = userRepository.findByUsername(currentUserName);
         Accessory accessoryById = accessoryRepository.findAccessoryById(id);
         byUsername.getLikedAccessories().remove(accessoryById);
+        accessoryById.getUsers().remove(byUsername);
         userRepository.saveAndFlush(byUsername);
+        accessoryRepository.saveAndFlush(accessoryById);
     }
 
 }
