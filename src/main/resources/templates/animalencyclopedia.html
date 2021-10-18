@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments/commons::head"></head>
+
+
+<body class="mainb">
+<div class="wrapper">
+    <header th:replace="fragments/commons::header"></header>
+
+    <main>
+        <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="sign in col-9">
+                <form th:action="@{/getallanimals/by{inputtype}}" method="post" class="row g-3 border-top border-primary border-1">
+                    <div th:if="${param.error}">
+                 </div>
+                    <img width="150" height="220" class="welcomePicture mt-5 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
+                    <div class="ms-5">
+                        <input type="text" class="form-control" placeholder="Enter Your Favourite Animal Here ... " name="favouriteAnimal" id="searchanimal">
+                    </div>
+                </form>
+            </div>
+            <div class="col-1"></div>
+            <div class="navigator col-1">
+                <div class="staticnav h4 mt-5 position-fixed"></div>
+            </div>
+        </div>
+        <div class="animalsGroup">
+            <div>
+                <h1 id="Dog"> Dog</h1>
+                <img class="rounded-circle mt-5"
+                     src="https://www.zooplus.co.uk/magazine/wp-content/uploads/2019/03/Golden-retriever-dog-breed-1.jpg"
+                     width="150" height="150" alt="...">
+                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
+
+                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+            </div>
+            <div>
+                <h1 id="Cat"> Cat</h1>
+                <img class="rounded-circle mt-5"
+                     src="https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d"
+                     width="150" height="150" alt="...">
+                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
+
+                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+            </div>
+            <div>
+                <h1 id="Lion"> Lion</h1>
+                <img class="rounded-circle mt-5"
+                     src="https://media.istockphoto.com/photos/lion-sitting-looking-away-panthera-leo-10-years-old-isolated-picture-id455663609?k=20&m=455663609&s=612x612&w=0&h=1J2LDKEn05YnOIm0XmZ69VUdH39KUGWfiBF1bEouNMo="
+                     width="150" height="150" alt="...">
+                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
+
+                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+            </div>
+            <div>
+                <h1 id="Fish"> Fish</h1>
+                <img class="rounded-circle mt-5"
+                     src="https://i.insider.com/57a4db43dd089551028b4663?width=1136&format=jpeg"
+                     width="150" height="150" alt="...">
+                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
+
+                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+            </div>
+            <div>
+                <h1 id="Mouse"> Mouse</h1>
+                <img class="rounded-circle mt-5"
+                     src="https://assets.manufactum.de/p/085/085548/85548_02.jpg/koesen-white-mouse.jpg"
+                     width="150" height="150" alt="...">
+                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
+
+                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+<script>
+    window.onload = function () {
+        getCoordintes();
+        weatheInfo();
+        window.setInterval(function () { weatheInfo() }, 1000);
+        checkAcceptLocation()
+        focusIndexPageSign();
+        createMenu();
+        clicked();
+        checkColorCookie();
+
+    }
+    //colorCookie
+    function checkColorCookie(){
+        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
+
+        if(cuttedCookie==="lightblue"){
+            changeColorToLigthBlue()
+        }else if(cuttedCookie==="lightgreen"){
+            changeColorToLigthGreen()
+        }else if(cuttedCookie==="red"){
+            changeColorToRed()
+        }else {
+            changeColorDefault()
+        }
+    }
+
+    function focusIndexPageSign() {
+        document.getElementById('searchanimal').focus();
+    }
+
+    // weather button
+
+    function showWeather() {
+        document.getElementById('weatherWindow').style.display = 'block';
+    }
+    function hideWeather() {
+        document.getElementById('weatherWindow').style.display = 'none';
+    }
+    //date
+    function weatheInfo() {
+        var todayt = new Date();
+        var seconds = todayt.getSeconds();
+        var minutes = todayt.getMinutes();
+        var hours = todayt.getHours();
+        if (seconds < 10) {
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':0' + seconds;
+            if(minutes <10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        } else if(minutes<10){
+            document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':' + seconds;
+            if(seconds<10){
+                document.getElementById('currentTime').innerText = hours + ':0' + minutes + ':0' + seconds;
+                if(hours<10){
+                    document.getElementById('currentTime').innerText = '0'+ hours + ':0' + minutes + ':' + seconds;
+                }
+            }
+        }else{
+            document.getElementById('currentTime').innerText = hours + ':' + minutes + ':' + seconds;
+        }
+    };
+    //city
+    // Step 1: Get user coordinates
+    function getCoordintes() {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+            var lat = crd.latitude.toString();
+            var lng = crd.longitude.toString();
+            var coordinates = [lat, lng];
+            getCity(coordinates);
+            return;
+
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    // Step 2: Get city name
+    function getCity(coordinates) {
+        var xhr = new XMLHttpRequest();
+        var lat = coordinates[0];
+        var lng = coordinates[1];
+        checkAcceptLocation(lat,lng);
+        const api="42f8451fedbcbef6488a995e06463d3b"
+        xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${api}`);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+        xhr.addEventListener("readystatechange", processRequest, false);
+
+        function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                var city = response.name;
+                var country = response.sys.country;
+                var currentTemp = response.main.temp;
+
+                document.getElementById('currentCity').innerText=city+', '+country;
+                document.getElementById('currentTemp').innerText=Math.round(currentTemp-273.15,2)+'°C';
+                return;
+            }
+        }
+    }
+
+    function checkAcceptLocation(lat,lng){
+        if(lat!=undefined && lng!=undefined){
+            document.getElementById('weatherLi').style.display="block";
+            showWeather()
+        }else{
+            document.getElementById('weatherLi').style.display="none";
+            hideWeather()
+        }
+    }
+
+
+    // navigation menu
+
+    function createMenu() {
+
+
+        var h1tags = document.getElementsByTagName('h1');
+        var navmenu = document.getElementsByClassName('staticnav')[0];
+
+        for (i = 0; i < h1tags.length; i++) {
+            var liTag = document.createElement('ul')
+            var anchorTag = document.createElement('a')
+
+            if (h1tags[i].id.length > 0) {
+                anchorTag.setAttribute('href', "#" + h1tags[i].id)
+
+            } else {
+                anchorTag.setAttribute('href', "#" + h1tags[i].innerText)
+            }
+
+            anchorTag.innerHTML = h1tags[i].textContent
+            liTag.appendChild(anchorTag)
+            navmenu.appendChild(liTag)
+        }
+    }
+
+    function clicked() {
+        var menuto = document.getElementsByClassName('staticnav')[0];
+        var anchorTagtwo = menuto.getElementsByTagName('a')
+
+
+    };
+
+
+    //changing theme color
+    var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
+    var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
+    var themeT=['bg-success','btn-danger','btn-success','btn-success'];
+    var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
+    var navigationBar=document.getElementsByTagName('nav')[0];
+    var logoutB=navigationBar.getElementsByTagName('button')[1];
+    var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
+    var elements=[navigationBar,logoutB,clearB];
+
+
+    function changeColorToLigthBlue(){
+
+        document.cookie = "color=lightblue";
+
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeF[index],themeS[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeT[index],themeS[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeD[index],themeS[index]);
+            }
+        }
+    }
+
+    function changeColorToLigthGreen(){
+        document.cookie = "color=lightgreen";
+
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeF[index],themeT[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeS[index],themeT[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeD[index],themeT[index]);
+            }
+        }
+    }
+
+    function changeColorDefault(){
+        document.cookie = "color=default";
+
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeT[index],themeF[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeS[index],themeF[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-danger')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeD[index],themeF[index]);
+            }
+        }
+    }
+    function changeColorToRed(){
+        document.cookie = "color=red";
+
+        if(navigationBar.classList.contains('bg-success')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeT[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-primary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeS[index],themeD[index]);
+            }
+        }
+        if(navigationBar.classList.contains('bg-secondary')){
+            for (let index = 0; index < elements.length; index++) {
+
+                elements[index].classList.replace(themeF[index],themeD[index]);
+            }
+        }
+    }
+
+</script>
+<style>
+    body{
+        max-width: 1800px;
+        margin: auto;
+    }
+
+    .backImage{
+        max-width: 1800px;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        z-index: -2;
+        position: fixed;
+    }
+
+    .navbar{
+        max-width: 1800px;
+        margin: auto;
+        z-index: 4
+    }
+
+    .animalsGroup h1{
+        margin-top: 3%;
+        padding-top: 4%;
+
+    }
+    .staticnav li{
+        border-left: 5px solid rgba(255, 199, 199,0);
+    }
+    .staticnav a{
+        padding-left: 5px;
+    }
+    .navigator{
+        margin-top: 10%;
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .navigator{
+            display: none;
+        }
+    }
+
+    footer{
+        margin-top: 50px;
+    }
+    .animalsGroup{
+        margin-left: 5%;
+        margin-right: 30%;
+        margin-top: 5%;
+    }
+
+    /* //weather */
+
+    #weatherWindow{
+        display: none;
+        z-index: -1;
+    }
+
+
+    /* Homepage */
+    @media only screen and (max-width: 700px) {
+        .row >.inlineForms{
+            display: inline !important;
+        }
+    }
+
+    .welcomePicture{
+        width: 1800px;
+        margin:auto;
+    }
+
+</style>
+
+</html>

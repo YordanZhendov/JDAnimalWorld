@@ -83,10 +83,8 @@
                     </div>
                 </form>
             </div>
-            <div class="col-1"></div>
-            <div class="navigator col-1">
-                <div class="staticnav h4 mt-5 position-fixed">
-                </div>
+            <div class="navigator col-1 ms-5">
+                <img class="animalBar" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/animalbar.jpg" alt="" srcset="">
             </div>
         </div>
 
@@ -114,32 +112,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-         <div class="animalsGroup">
-            <h1 id="Dogs"><img class="rounded-circle"
-                               src="https://www.hainesroadanimalhospital.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=-kzTcc9h"
-                               width="100" height="100" alt="..."> Dogs</h1>
-            <label  class="form-label">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
-
-            <h1 id="Cats"><img class="rounded-circle" src="https://timesofindia.indiatimes.com/photo/67586673.cms"
-                               width="100" height="100" alt="..."> Cats</h1>
-            <label  class="form-label"> The cat is a domestic species of small
-                carnivorous mammal.It is the only domesticated species in the family Felidae and is often
-                referred to as the domestic cat to distinguish it from the wild members of the family. A cat can
-                either be a house cat, a farm cat or a feral cat; the latter ranges freely and avoids human
-                contact. Domestic cats are valued by humans for companionship and their ability to hunt rodents.
-                About 60 cat breeds are recognized by various cat registries.</label>
-
-            <h1 id="Fishes"><img class="rounded-circle"
-                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOEUZXsjo_XP1lQUY27_i3-vhYq1DjnT9Tkg&usqp=CAU"
-                                 width="100" height="100" alt="..."> Fishes</h1>
-            <label class="form-label"> Fish are aquatic, craniate, gill-bearing animals that
-                lack limbs with digits. They form a sister group to the tunicates, together forming the olfactores.
-                Included in this definition are the living hagfish, lampreys, and cartilaginous and bony fish as
-                well as various extinct related groups. Around 99% of living fish species are ray-finned fish,
-                belonging to the class Actinopterygii, with over 95% belonging to the teleost subgrouping.</label>
         </div>
     </main>
     
@@ -271,83 +243,6 @@ The dog has been selectively bred over millennia for various behaviors, sensory 
     }
 
 
-    // navigation menu
-
-    function createMenu() {
-
-
-        var h1tags = document.getElementsByTagName('h1');
-        var navmenu = document.getElementsByClassName('staticnav')[0];
-
-        for (i = 0; i < h1tags.length; i++) {
-            var liTag = document.createElement('ul')
-            var anchorTag = document.createElement('a')
-
-            if (h1tags[i].id.length > 0) {
-                anchorTag.setAttribute('href', "#" + h1tags[i].id)
-
-            } else {
-                anchorTag.setAttribute('href', "#" + h1tags[i].innerText)
-            }
-
-            anchorTag.innerHTML = h1tags[i].textContent
-            liTag.appendChild(anchorTag)
-            navmenu.appendChild(liTag)
-        }
-    }
-
-    function clicked() {
-        var menuto = document.getElementsByClassName('staticnav')[0];
-        var anchorTagtwo = menuto.getElementsByTagName('a')
-        for (let i = 0; i < anchorTagtwo.length; i++) {
-            anchorTagtwo[i].addEventListener('click', () => resolveDOMPrecedence(i));
-        }
-
-    };
-
-    function resolveDOMPrecedence(index) {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                myFunction(index);
-            }, 25);
-        });
-    }
-
-    function myFunction(parami) {
-
-        var h1Tags = document.getElementsByTagName('h1');
-        var statictag = document.getElementsByClassName('staticnav')[0]
-        var ulTags = statictag.getElementsByTagName('ul');
-        var index = 0;
-
-        var scrolpx = window.pageYOffset;
-        var bodyOff = window.innerHeight;
-        var tocompare = scrolpx + (bodyOff * 0.4);
-
-        for (i = 0; i < h1Tags.length; i++) {
-            if (tocompare > h1Tags[i].offsetTop) {
-                index = i;
-            }
-        };
-
-        for (i = 0; i < h1Tags.length; i++) {
-            ulTags[i].style.borderLeft = '5px solid rgba(255, 199, 199,0)';
-            ulTags[i].style.fontWeight = '100';
-        };
-
-
-        if (parami == undefined) {
-            ulTags[index].style.borderLeft = '5px solid lightblue';
-            ulTags[index].style.fontWeight = '700';
-
-        } else {
-            ulTags[parami].style.borderLeft = '5px solid lightblue';
-            ulTags[parami].style.fontWeight = '700';
-
-        }
-
-    }
-
     function makeChanges() {
         var inputsUpdate = document.getElementsByClassName('profilInput');
         var inputsInfo = document.getElementsByClassName('profileInfo');
@@ -370,6 +265,9 @@ The dog has been selectively bred over millennia for various behaviors, sensory 
     body{
         max-width: 1800px;
         margin: auto;
+    }
+    .animalBar{
+        margin-left: 50px;
     }
 
     .toast:not(.showing):not(.show){
@@ -412,11 +310,6 @@ The dog has been selectively bred over millennia for various behaviors, sensory 
     }
     footer{
         margin-top: 50px;
-    }
-    .animalsGroup{
-        margin-left: 5%;
-        margin-right: 30%;
-        margin-top: 5%;
     }
 
     /* //weather */
