@@ -248,18 +248,10 @@
                 var response = JSON.parse(xhr.responseText);
                 var city = response.name;
                 var country = response.sys.country;
-                var currentTemp = response.main.temp;
-                var currentSit = response.weather[0].main;
-                var currentSpeed = response.wind.speed;
-                var currentHumidity = response.main.humidity;
-                var currentImage = response.weather[0].icon;
+                var currentTemp = response.main.temp
                 document.getElementById('currentCity').innerText=city+', '+country;
                 document.getElementById('currentTemp').innerText=Math.round(currentTemp-273.15,2)+'°C';
-                document.getElementById('currentSit').innerText=currentSit;
-                document.getElementById('currentSpeed').innerText=currentSpeed+'m/s';
-                document.getElementById('currentHumidity').innerText=currentHumidity+'%';
-                document.getElementById('currentImage').src=`http://openweathermap.org/img/w/${currentImage}.png`;
-                return;
+                 return;
             }
         }
     }
@@ -306,8 +298,7 @@
     var navigationBar=document.getElementsByTagName('nav')[0];
     var logoutB=navigationBar.getElementsByTagName('button')[1];
     var clearB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[0];
-    var uploadB=document.getElementsByTagName('form')[0].getElementsByTagName('button')[1];
-    var elements=[navigationBar,logoutB,clearB,uploadB];
+    var elements=[navigationBar,logoutB,clearB];
 
 
     function changeColorToLigthBlue(){

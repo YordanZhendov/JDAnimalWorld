@@ -8,7 +8,7 @@
 
 <body class="mainb">
 <div class="wrapper">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="fragments/commonsByFilter::header"></header>
     <main>
         <img src="https://st4.depositphotos.com/24595320/25653/v/950/depositphotos_256538770-stock-illustration-cute-shiba-inu-dog-seamless.jpg" class="backImage"/>
         <br>
@@ -20,55 +20,70 @@
         <br>
         <br>
         <br>
-        <div class="animalsList">
-            <div class="row">
-                <div class="col-5"></div>
-                <div class="col-5 dropdown center">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filter By -> ..
-                    </a>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col dropdown center">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtered By Animal
+                </a>
 
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" th:href="@{/filterby/animals}">Animals</a></li>
-                        <li><a class="dropdown-item" th:href="@{/filterby/accessories}">Accessories</a></li>
-                        <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
-                    </ul>
-                </div>
-                <div class="col-2"></div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" th:href="@{/user/filterby/animals}">Animals</a></li>
+                    <li><a class="dropdown-item" th:href="@{/user/filterby/accessories}">Accessories</a></li>
+                    <li><a class="dropdown-item" th:href="@{/user/home}">Show all</a></li>
+                </ul>
             </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col-4 card m-5" style="width: 18rem;" th:each="animal : ${animals}" th:object="${animal}">
-                    <a th:href="@{/user/animal/like/{id}(id=${animal.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
-                    <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${animal.getNameOfAnimal()}"></h5>
-                        <p class="card-text" th:text="${animal.getDescription()}"></p>
+            <div class="col"></div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-4 card m-5" style="width: 18rem;" th:each="animal : ${animals}" th:object="${animal}">
+                <a th:href="@{/user/animal/like/{id}(id=${animal.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
+                <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${animal.getNameOfAnimal()}"></h5>
+                    <p class="card-text" th:text="${animal.getDescription()}"></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light" th:text="|Animal Type: *{typeOfAnimal}|"></li>
+                    <li class="list-group-item" th:text="|Age: *{ageOfAnimal}|"></li>
+                    <li class="list-group-item bg-light" th:text="|Favourite Food: *{foodOfAnimal}|"></li>
+                    <li class="list-group-item" th:text="|The Lovely Games: *{gamesOfAnimal}|"></li>
+                    <li class="list-group-item bg-light" th:text="|The Weight: *{ageOfAnimal}|"></li>
+                </ul>
+                <div class="card-body">
+                    <div class="ms-2 me-1">
+                        <p>
+                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
+                                Owner Details:
+                            </button>
+                        </p>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-light" th:text="|Animal Type: *{typeOfAnimal}|"></li>
-                        <li class="list-group-item" th:text="|Age: *{ageOfAnimal}|"></li>
-                        <li class="list-group-item bg-light" th:text="|Favourite Food: *{foodOfAnimal}|"></li>
-                        <li class="list-group-item" th:text="|The Lovely Games: *{gamesOfAnimal}|"></li>
-                        <li class="list-group-item bg-light" th:text="|The Weight: *{ageOfAnimal}|"></li>
-                    </ul>
-                    <div class="card-body">
-                        <div class="ms-2 me-1">
-                            <p>
-                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
-                                    Owner Details:
-                                </button>
-                            </p>
-                        </div>
-                        <div class="homeDetails collapse col-12 mt-5" id="ownerDetails">
-                            <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
-                            <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                            <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                            <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                        </div>
+                    <div class="homeDetails collapse col-12 mt-5" id="ownerDetails">
+                        <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+                        <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                        <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                        <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col ms-5">
+                <p><strong>🐶 Animals Asked People for Help</strong></p>
+                <iframe width="300" height="100" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+            </div>
+            <div class="col ms-5">
+                <p><strong>🐶 Animals Saved Human Lives</strong></p>
+                <iframe width="300" height="100" src="https://www.youtube.com/embed/yPmrvmPWePE">
+                </iframe>
+            </div>
+            <div class="col ms-5">
+                <p><strong>🐶 LAUGH with Dog's life</strong></p>
+                <iframe width="300" height="100" src="https://www.youtube.com/embed/1HygThMLzGs">
+                </iframe>
             </div>
         </div>
     </main>
@@ -81,23 +96,9 @@
         checkAcceptLocation()
         getCoordintes();
         weatheInfo();
-        window.setInterval(function () { weatheInfo() }, 1000);
-        checkColorCookie();
-
-    }
-    //colorCookie
-    function checkColorCookie(){
-        let cuttedCookie=document.cookie.substring(6,document.cookie.length);
-        console.log(cuttedCookie);
-        if(cuttedCookie==="lightblue"){
-            changeColorToLigthBlue()
-        }else if(cuttedCookie==="lightgreen"){
-            changeColorToLigthGreen()
-        }else if(cuttedCookie==="red"){
-            changeColorToRed()
-        }else {
-            changeColorDefault()
-        }
+        window.setInterval(function () {
+            weatheInfo()
+        }, 1000);
     }
 
     // weather button
@@ -178,17 +179,10 @@
                 var city = response.name;
                 var country = response.sys.country;
                 var currentTemp = response.main.temp;
-                var currentSit = response.weather[0].main;
-                var currentSpeed = response.wind.speed;
-                var currentHumidity = response.main.humidity;
-                var currentImage = response.weather[0].icon;
+
                 document.getElementById('currentCity').innerText = city + ', ' + country;
                 document.getElementById('currentTemp').innerText = Math.round(currentTemp - 273.15, 2) + '°C';
-                document.getElementById('currentSit').innerText = currentSit;
-                document.getElementById('currentSpeed').innerText = currentSpeed + 'm/s';
-                document.getElementById('currentHumidity').innerText = currentHumidity + '%';
-                document.getElementById('currentImage').src = `http://openweathermap.org/img/w/${currentImage}.png`;
-                return;
+              return;
             }
         }
     }
@@ -237,105 +231,6 @@
 
     }
 
-    //changing theme color
-    var themeF=['bg-secondary','btn-danger','btn-secondary','btn-secondary'];
-    var themeS=['bg-primary','btn-warning','btn-primary','btn-primary'];
-    var themeT=['bg-success','btn-danger','btn-success','btn-success'];
-    var themeD=['bg-danger','btn-success','btn-danger','btn-danger'];
-    var navigationBar=document.getElementsByTagName('nav')[0];
-    var logoutB=navigationBar.getElementsByTagName('button')[0];
-    var elements=[navigationBar,logoutB];
-
-
-    function changeColorToLigthBlue(){
-
-        document.cookie = "color=lightblue";
-        if(navigationBar.classList.contains('bg-secondary')){
-            for (let index = 0; index < elements.length; index++) {
-                elements[index].classList.replace(themeF[index],themeS[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-success')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeT[index],themeS[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-danger')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeD[index],themeS[index]);
-            }
-        }
-    }
-
-    function changeColorToLigthGreen(){
-        document.cookie = "color=lightgreen";
-
-        if(navigationBar.classList.contains('bg-secondary')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeF[index],themeT[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-primary')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeS[index],themeT[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-danger')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeD[index],themeT[index]);
-            }
-        }
-    }
-
-    function changeColorDefault(){
-        document.cookie = "color=default";
-
-        if(navigationBar.classList.contains('bg-success')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeT[index],themeF[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-primary')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeS[index],themeF[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-danger')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeD[index],themeF[index]);
-            }
-        }
-    }
-    function changeColorToRed(){
-        document.cookie = "color=red";
-
-        if(navigationBar.classList.contains('bg-success')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeT[index],themeD[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-primary')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeS[index],themeD[index]);
-            }
-        }
-        if(navigationBar.classList.contains('bg-secondary')){
-            for (let index = 0; index < elements.length; index++) {
-
-                elements[index].classList.replace(themeF[index],themeD[index]);
-            }
-        }
-    }
 
     //tooltip
     $(document).ready(function(){

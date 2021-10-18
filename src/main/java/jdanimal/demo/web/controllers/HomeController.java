@@ -62,15 +62,14 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/filterby/animals")
-    public String filterbyAnimal(Model model, HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        System.out.println(cookies[0].getValue());
+    @GetMapping("/user/filterby/animals")
+    public String filterbyAnimal(Model model){
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
         model.addAttribute("animals",allAnimals);
       return "homebyanimals";
     };
-    @GetMapping("/filterby/accessories")
+
+    @GetMapping("/user/filterby/accessories")
     public String filterbyAccessory(Model model){
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
         model.addAttribute("accessories",allAccessories);
