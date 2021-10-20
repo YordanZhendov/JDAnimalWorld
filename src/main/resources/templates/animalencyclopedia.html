@@ -17,12 +17,13 @@
         <br>
         <div class="row">
             <div class="sign in col-9">
-                <form th:action="@{/getallanimals/by{inputtype}}" method="post" class="row g-3 border-top border-primary border-1">
+<!--                th:action="@{/getallanimals/by{inputtype}}" method="post"-->
+                <form class="row g-3 border-top border-primary border-1">
                     <div th:if="${param.error}">
                  </div>
                     <img width="150" height="220" class="welcomePicture mt-5 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
                     <div class="ms-5">
-                        <input type="text" class="form-control" placeholder="Enter Your Favourite Animal Here ... " name="favouriteAnimal" id="searchanimal">
+                        <input type="text" class="form-control" placeholder="Enter Your Favourite Animal Here ...(IN DEVELOPING) " name="favouriteAnimal" id="searchanimal">
                     </div>
                 </form>
             </div>
