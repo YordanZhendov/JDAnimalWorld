@@ -32,9 +32,23 @@
                         <a class="nav-link active" th:href="@{/user/profile}"><span><strong> My Profile
                                         </strong></span></a>
                     </li>
-                    <li class="nav-item" sec:authorize-url="/user/users-control">
-                        <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>
+                    <li class="nav-item dropdown" sec:authorize-url="/user/users-control">
+                        <a class="nav-link dropdown-toggle active" href="#" id="adminControl" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false"><strong>Admin Control</strong>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="adminControl">
+                            <li class="nav-item" sec:authorize-url="/user/users-control">
+                                <a class="dropdown-item" th:href="@{/user/users-control}">+/- Users Control</a>
+                            </li>
+                            <li class="nav-item" sec:authorize-url="/user/users-control">
+                                <a class="dropdown-item" th:href="@{/encyclopedia/add}">+/- Encyclopedia</a>
+                            </li>
+                        </ul>
                     </li>
+
+<!--                    <li class="nav-item" sec:authorize-url="/user/users-control">-->
+<!--                        <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>-->
+<!--                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navBarAdd" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false"><strong>+ Click to Add</strong>
