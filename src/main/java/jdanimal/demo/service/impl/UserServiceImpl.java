@@ -168,6 +168,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllUsersForUserControl(){
+        return this.userRepository.getAllUsersByAccessoryType();
+    }
+
+    @Override
     public void saveUrl(String username,String fileName) {
         User byUsername = this.userRepository.findByUsername(username);
         byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);

@@ -31,9 +31,10 @@ public class UserControlController {
     @GetMapping("/users-control")
     public String userControlPage(Model model){
 
-        List<User> users=userService.getAllUsersInDB();
+        List<User> users=this.userService.getAllUsersForUserControl();
 
         model.addAttribute("users",users);
+
         return "users-control";
     }
     @GetMapping("/delete/{id}")
