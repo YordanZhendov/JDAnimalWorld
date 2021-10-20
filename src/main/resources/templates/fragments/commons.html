@@ -10,7 +10,7 @@
 </head>
 <body>
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed d-inline">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-3 col-12 position-fixed d-inline">
         <div class="container-fluid ">
             <img title="Animals World" th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
             <a class="navbar-brand ms-1" th:href="@{/user/home}" >Home</a>
@@ -40,15 +40,11 @@
                             <li class="nav-item" sec:authorize-url="/user/users-control">
                                 <a class="dropdown-item" th:href="@{/user/users-control}">+/- Users Control</a>
                             </li>
-                            <li class="nav-item" sec:authorize-url="/user/users-control">
+                            <li class="nav-item" sec:authorize-url="/encyclopedia/add">
                                 <a class="dropdown-item" th:href="@{/encyclopedia/add}">+/- Encyclopedia</a>
                             </li>
                         </ul>
                     </li>
-
-<!--                    <li class="nav-item" sec:authorize-url="/user/users-control">-->
-<!--                        <a class="nav-link active" th:href="@{/user/users-control}"><span><strong> Users Control</strong></span></a>-->
-<!--                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navBarAdd" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false"><strong>+ Click to Add</strong>
@@ -76,21 +72,21 @@
                         <a class="nav-link active" th:href="@{/user/animalencyclopedia}" data-toggle="tooltip"  title="Animal Encyclopedia"><strong> Encyclopedia &#9432;
                                         </strong></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Change Themes
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" onclick="changeColorToLigthBlue()">Lightblue</a></li>
-                            <li><a class="dropdown-item" onclick="changeColorToLigthGreen()">Lightgreen</a></li>
-                            <li><a class="dropdown-item" onclick="changeColorDefault()">Default</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" onclick="changeColorToRed()">Red</a></li>
-                        </ul>
-                    </li>
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"-->
+<!--                           data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                            Change Themes-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" onclick="changeColorToLigthBlue()">Lightblue</a></li>-->
+<!--                            <li><a class="dropdown-item" onclick="changeColorToLigthGreen()">Lightgreen</a></li>-->
+<!--                            <li><a class="dropdown-item" onclick="changeColorDefault()">Default</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" onclick="changeColorToRed()">Red</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
                             Reserved &copy;JD</a>
