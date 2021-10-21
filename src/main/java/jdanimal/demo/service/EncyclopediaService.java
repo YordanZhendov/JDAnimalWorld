@@ -9,4 +9,5 @@ public interface EncyclopediaService {
     void saveInDB(EncyclopediaAnimalBinding encyclopediaAnimalBinding);
     List<EncyclopediaAnimalViewModel> findAllAnimalsInEncyclopedia();
     void removeAnimalFromEncyclopedia(String id);
+    List<EncyclopediaAnimalViewModel> animalsFilterbyName(String type);
 }

@@ -1,14 +1,13 @@
 package jdanimal.demo.data;
 
+import jdanimal.demo.data.enums.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "encyclopedia")
@@ -18,8 +17,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class EncyclopediaAnimal extends BaseEntity{
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_of_animal")
-    private String typeOfAnimal;
+    private AnimalType typeOfAnimal;
     @Column(name = "description")
     @Type(type="text")
     private String description;

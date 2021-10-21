@@ -25,10 +25,18 @@
                         <div id="inputInfoAnimal" class="col-8">
                             <br>
                             <br>
-                            <div>
-                                <strong><i></italic><label>Type:</label></i></strong>
-                                <input th:field="*{typeOfAnimal}" th:errorclass="bg-warning" class="form-control animalInputClear border-round" placeholder="Name..." type="text" name="typeOfAnimal" id="typeOfAnimal">
-                                <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" class="text-danger">error</small>
+                            <div class="form-group row">
+                                <strong><i><label for="typeOfAnimal" class="col">Category:</label></i></strong>
+                                <div class="col">
+                                    <select th:field="*{typeOfAnimal}" th:errorclass="bg-warning" id="typeOfAnimal" name="typeOfAnimal" class="form-control"
+                                            aria-describedby="typeOfAnimalHelpInline">
+                                        <option value="" selected>Type of Animal...</option>
+                                        <option th:each="s: ${T(jdanimal.demo.data.enums.AnimalType).values()}" th:value="${s}" th:text="${s}">Animal</option>
+                                    </select>
+                                    <small th:if="${#fields.hasErrors('typeOfAnimal')}" th:errors="*{typeOfAnimal}" id="categoryHelpInline" class="text-danger">
+                                        You must select the category.
+                                    </small>
+                                </div>
                             </div>
                             <div class="mt-3">
                                 <strong><i><label>Description: </label></i></strong>
@@ -232,6 +240,11 @@
         margin-top: 3%;
         padding-top: 4%;
 
+    }
+
+    .dropdown-menu {
+        max-height:200px;
+        overflow:scroll;
     }
 
     .navbar {

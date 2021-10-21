@@ -2,6 +2,7 @@ package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.DTO.EncyclopediaAnimalBinding;
 import jdanimal.demo.data.EncyclopediaAnimal;
+import jdanimal.demo.data.enums.AnimalType;
 import jdanimal.demo.repository.EncyclopediaRepository;
 import jdanimal.demo.service.EncyclopediaService;
 import jdanimal.demo.service.models.EncyclopediaAnimalUploadModel;
@@ -37,6 +38,13 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
     @Override
     public void removeAnimalFromEncyclopedia(String id) {
         this.encyclopediaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<EncyclopediaAnimalViewModel> animalsFilterbyName(String type) {
+        AnimalType animalType = AnimalType.valueOf(type);
+        return this.encyclopediaRepository.getAllByTypeOfAnimal(animalType).stream().map(encyclopediaAnimal ->
+                this.modelMapper.map(encyclopediaAnimal,EncyclopediaAnimalViewModel.class)).collect(Collectors.toList());
     }
 
 }

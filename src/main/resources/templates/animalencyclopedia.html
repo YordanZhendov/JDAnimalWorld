@@ -23,27 +23,30 @@
                 <div class="ms-5 mb-2">
                             <div class="col dropdown center">
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Filter by Animal/Accessory
+                                    Filter by Animal's type
                                 </a>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/user/animalencyclopedia}">Show All</a>
+                                    </li>
                                     <li th:each="s: ${T(jdanimal.demo.data.enums.AnimalType).values()}" th:object="${s}">
                                         <a class="dropdown-item" th:href="@{/animal/filter/{name}(name=${s.name()})}" th:text="*{name()}">Animals</a>
                                     </li>
                                 </ul>
                             </div>
                     </div>
-                <img width="50%" height="80%" class="mt-4 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
             </div>
             <div class="col-3"></div>
             <div class="navigator col-1 ms-5 ">
                 <div class="staticnav h2 ms-5 position-fixed"></div>
             </div>
         </div>
+        <img width="30%" height="50%" class="ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
         <div class="animalsGroup" th:each="a : ${animals}" th:object="${a}">
             <div>
                 <h1 id="Dog" th:text="*{typeOfAnimal}">Dog</h1>
-                <img class="rounded-circle mt-2"
+                <img class="rounded-circle"
                     th:src="*{animalPhotoUrl}"
                      width="150" height="150" alt="...">
                 <label  class="form-label h4" th:text="*{description}">Animal Info."</label>
@@ -214,6 +217,11 @@
         opacity: 0.2;
         z-index: -2;
         position: fixed;
+    }
+
+    .dropdown-menu {
+        max-height:200px;
+        overflow:scroll;
     }
 
     .navbar{

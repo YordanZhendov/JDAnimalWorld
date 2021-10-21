@@ -3,6 +3,7 @@ package jdanimal.demo.web.controllers;
 import jdanimal.demo.data.DTO.EncyclopediaAnimalBinding;
 import jdanimal.demo.service.EncyclopediaService;
 import jdanimal.demo.service.UserService;
+import jdanimal.demo.service.views.EncyclopediaAnimalViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -59,12 +61,19 @@ public class EncyclopediaController {
         return "redirect:/user/animalencyclopedia";
     }
 
-    @DeleteMapping("/encyclopedia/animal/delete/{id}")
+    @GetMapping("/encyclopedia/animal/delete/{id}")
     public String deletAnimaltoEncyclopediaeAnimal(@PathVariable(name = "id") String id){
         this.encyclopediaService.removeAnimalFromEncyclopedia(id);
         return "redirect:/user/animalencyclopedia";
     }
 
+
+    @GetMapping("/animal/filter/{name}")
+    public String filterbyAnimal(@PathVariable(name = "name") String type,
+                                 Model model){
+        model.addAttribute("animals",this.encyclopediaService.animalsFilterbyName(type));
+        return "animalencyclopedia";
+    }
 
     @ModelAttribute
     public EncyclopediaAnimalBinding encyclopediaAnimalBinding(){

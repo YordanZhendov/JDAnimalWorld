@@ -1,5 +1,6 @@
 package jdanimal.demo.service.models;
 
+import jdanimal.demo.data.enums.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EncyclopediaAnimalUploadModel {
 
-    private String typeOfAnimal;
+    private AnimalType typeOfAnimal;
     private String description;
     private String animalPhotoUrl;
 }

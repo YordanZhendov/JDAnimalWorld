@@ -1,11 +1,13 @@
 package jdanimal.demo.data.DTO;
 
+import jdanimal.demo.data.enums.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -13,8 +15,8 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class EncyclopediaAnimalBinding {
 
-    @NotEmpty(message = "Type needed!")
-    private String typeOfAnimal;
+    @NotNull(message = "Category needed!")
+    private AnimalType typeOfAnimal;
     @NotEmpty(message = "Description needed!")
     private String description;
     @NotEmpty(message = "Photo Url needed!")
