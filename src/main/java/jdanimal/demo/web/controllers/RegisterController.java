@@ -19,11 +19,11 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-public class LoginRegisterController {
+public class RegisterController {
 
     private final UserService userService;
-    private final ModelMapper modelMapper;
 
+    //Registration page
     @GetMapping("/users/register")
         public String register(Model model){
             if(!model.containsAttribute("isFound")){
@@ -33,6 +33,7 @@ public class LoginRegisterController {
 
     }
 
+    //Registration form, details checked with JS and check for existing user with validation
     @PostMapping("/users/register")
     public String registerUser(@Valid UserRegistrationModel userRegistrationModel,
                            BindingResult bindingResult,
@@ -46,9 +47,9 @@ public class LoginRegisterController {
             return "redirect:/users/register";
         }
 
-        boolean register = this.userService.register(userRegistrationModel);
+        boolean userNotFound = this.userService.register(userRegistrationModel);
 
-        if(!register){
+        if(!userNotFound){
             redirectAttributes.addFlashAttribute("isFound",false);
             return "redirect:/users/register";
         }

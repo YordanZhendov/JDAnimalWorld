@@ -30,6 +30,7 @@ public class StoreController {
 
     private final StoreService storeService;
 
+    //store form page
     @GetMapping("/addanimaltore")
     public String addStore(Model model){
         if(!model.containsAttribute("userStoreUploadModel")){
@@ -38,13 +39,14 @@ public class StoreController {
         return "addstore";
     }
 
+    //stores page
     @GetMapping("/animalstores")
     public String store(Model model){
         model.addAttribute("storeViewModel",this.storeService.getAllStores());
         return "store";
     }
 
-
+    //store upload
     @PostMapping("/store/upload")
     public String uploadStore(@Valid UserStoreUploadModel userStoreUploadModel,
                               BindingResult bindingResult,
@@ -68,6 +70,7 @@ public class StoreController {
 
     };
 
+    //store delete
     @GetMapping("/store/delete/{id}")
     public String deleteStore(@PathVariable(name = "id") String id){
         this.storeService.removeStore(id);

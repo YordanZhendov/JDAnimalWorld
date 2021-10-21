@@ -24,7 +24,7 @@ public class AnimalController {
     private final UserService userService;
     private final AnimalService animalService;
 
-
+    //animal form page
     @GetMapping("/animal")
     public String addAnimal(Model model){
         if(!model.containsAttribute("userAnimalUploadModel")){
@@ -33,6 +33,7 @@ public class AnimalController {
         return "animal";
     }
 
+    //animal upload
     @PostMapping("/animal/upload")
     public String uploadAnimal(@Valid UserAnimalUploadModel userAnimalUploadModel,
                                BindingResult bindingResult,
@@ -45,9 +46,11 @@ public class AnimalController {
                     "org.springframework.validation.BindingResult.userAnimalUploadModel",bindingResult);
             return "redirect:/user/animal";
         }
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
+
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
             this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo);
             return "redirect:/user/home";

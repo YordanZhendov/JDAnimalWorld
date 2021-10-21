@@ -28,6 +28,7 @@ public class UserControlController {
 
     private final UserService userService;
 
+    //admin control page
     @GetMapping("/users-control")
     public String userControlPage(Model model){
 
@@ -37,6 +38,8 @@ public class UserControlController {
 
         return "users-control";
     }
+
+    //delete user
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable(name = "id") String id){
         this.userService.removeUser(id);

@@ -25,11 +25,13 @@ public class EncyclopediaController {
     private final EncyclopediaService encyclopediaService;
     private final UserService userService;
 
+    //encyclopedia form page
     @GetMapping("/encyclopedia/add")
     public String add(){
         return "addencyclopedia";
     }
 
+    //encyclipedia page
     @GetMapping("/user/animalencyclopedia")
     public String animalEncyclopedia(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,6 +46,7 @@ public class EncyclopediaController {
         return "animalencyclopedia";
     }
 
+    //encyclopedia upload
     @PostMapping("/add/animal/encyclopedia")
     public String addAnimaltoEncyclopedia(@Valid EncyclopediaAnimalBinding encyclopediaAnimalBinding,
                                           BindingResult bindingResult,
@@ -61,13 +64,14 @@ public class EncyclopediaController {
         return "redirect:/user/animalencyclopedia";
     }
 
+    //encyclopedia delete
     @GetMapping("/encyclopedia/animal/delete/{id}")
     public String deletAnimaltoEncyclopediaeAnimal(@PathVariable(name = "id") String id){
         this.encyclopediaService.removeAnimalFromEncyclopedia(id);
         return "redirect:/user/animalencyclopedia";
     }
 
-
+    //encyclopedia delete
     @GetMapping("/animal/filter/{name}")
     public String filterbyAnimal(@PathVariable(name = "name") String type,
                                  Model model){

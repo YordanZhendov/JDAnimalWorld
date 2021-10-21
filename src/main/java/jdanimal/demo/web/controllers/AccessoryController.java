@@ -26,6 +26,7 @@ public class AccessoryController {
     private final AccessoryService accessoryService;
     private final UserService userService;
 
+    //accessory page
     @GetMapping("/user/accessory")
     public String accessoryPage(Model model) {
 
@@ -36,6 +37,7 @@ public class AccessoryController {
 
     }
 
+    //accessory upload
     @PostMapping("/user/accessory/upload")
     public String accessoryUpload(@Valid UserAccessoryUploadModel userAccessoryUploadModel,
                                   BindingResult bindingResult,
