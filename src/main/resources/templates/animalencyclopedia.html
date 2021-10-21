@@ -16,29 +16,34 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
         <div class="row">
-            <div class="sign in col-7">
-                <form th:action="@{/animal/filter}" th:method="get" class="row g-3 border-top border-primary border-1">
-                    <img width="30%" height="80%" class="welcomePicture mt-5 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
-                    <div class="ms-5">
-                        <select id="animalType" name="animalType" class="form-select"
-                                aria-describedby="animalTypeHelpInline">
-                            <option value="" selected>Filter...</option>
-                            <option th:each="s: ${T(jdanimal.demo.data.enums.AnimalType).values()}" th:value="${s}" th:text="${s}">Animal</option>
-                        </select>
-                        <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Search</button>
+            <div class="sign in col-5">
+                <div class="ms-5 mb-2">
+                            <div class="col dropdown center">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Filter by Animal/Accessory
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li th:each="s: ${T(jdanimal.demo.data.enums.AnimalType).values()}" th:object="${s}">
+                                        <a class="dropdown-item" th:href="@{/animal/filter/{name}(name=${s.name()})}" th:text="*{name()}">Animals</a>
+                                    </li>
+                                </ul>
+                            </div>
                     </div>
-                </form>
+                <img width="50%" height="80%" class="mt-4 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
             </div>
             <div class="col-3"></div>
             <div class="navigator col-1 ms-5 ">
-                <div class="staticnav h2 ms-5 mt-5 position-fixed"></div>
+                <div class="staticnav h2 ms-5 position-fixed"></div>
             </div>
         </div>
         <div class="animalsGroup" th:each="a : ${animals}" th:object="${a}">
             <div>
                 <h1 id="Dog" th:text="*{typeOfAnimal}">Dog</h1>
-                <img class="rounded-circle mt-5"
+                <img class="rounded-circle mt-2"
                     th:src="*{animalPhotoUrl}"
                      width="150" height="150" alt="...">
                 <label  class="form-label h4" th:text="*{description}">Animal Info."</label>
@@ -265,11 +270,6 @@
         .row >.inlineForms{
             display: inline !important;
         }
-    }
-
-    .welcomePicture{
-        width: 1800px;
-        margin:auto;
     }
 
 </style>
