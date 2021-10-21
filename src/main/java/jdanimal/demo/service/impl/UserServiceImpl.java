@@ -11,6 +11,7 @@ import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
+import jdanimal.demo.service.models.UserRegistrationModel;
 import jdanimal.demo.service.models.UserUpdateProfileModel;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
@@ -44,15 +45,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void register(UserRegisterDTO userRegisterDTO) {
+    public boolean register(UserRegistrationModel userRegistrationModel) {
+        UserRegisterDTO userRegisterDTO = this.modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
+
         if(!validationUtil.isValid(userRegisterDTO)){
-            return;
+            return false;
         }
 
         User user=this.modelMapper.map(userRegisterDTO,User.class);
 
         if(!userValidationSerivce.checkUser(user)){
-            return;
+            return false;
         }
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
@@ -70,6 +73,7 @@ public class UserServiceImpl implements UserService {
             user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
         }
         this.userRepository.save(user);
+        return true;
 
     }
 

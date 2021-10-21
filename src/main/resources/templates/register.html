@@ -12,6 +12,11 @@
         <div class="row">
             <div class="register col-9">
                 <form class="row g-3 border-top border-primary border-1" th:object="${userRegistrationModel}" th:action="@{/users/register}" method="post">
+                    <h3 th:if="${isFound == false}" class="mt-5 text-center">
+                    <strong class="bg-blur rounded text-danger">
+                        User with such username or email already exists.
+                    </strong>
+                    </h3>
                     <div class="col-md-12 h4 text-center"><img class="ms-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4egqR9lKCqkPdZahfJ3RVyaGtw6qkkUIzikDD2vulqATGhrkOzH0qARjIaLV_BaAtu5M&usqp=CAU" alt="" srcset=""><strong>REGISTER</strong></div>
                     <div class="col-md-12">
                         <label class="form-label">Username</label>

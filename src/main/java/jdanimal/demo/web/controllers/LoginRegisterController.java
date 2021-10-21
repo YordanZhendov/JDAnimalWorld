@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,8 +26,8 @@ public class LoginRegisterController {
 
     @GetMapping("/users/register")
         public String register(Model model){
-            if(!model.containsAttribute("userRegistrationModel")){
-                model.addAttribute("userRegistrationModel",new UserRegistrationModel());
+            if(!model.containsAttribute("isFound")){
+                model.addAttribute("isFound",true);
             }
             return "register";
 
@@ -36,15 +37,28 @@ public class LoginRegisterController {
     public String registerUser(@Valid UserRegistrationModel userRegistrationModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
+
+
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationModel",userRegistrationModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationModel",bindingResult);
+
             return "redirect:/users/register";
         }
 
-        UserRegisterDTO mappedUser = this.modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
-        this.userService.register(mappedUser);
+        boolean register = this.userService.register(userRegistrationModel);
+
+        if(!register){
+            redirectAttributes.addFlashAttribute("isFound",false);
+            return "redirect:/users/register";
+        }
+
         return "redirect:/users/login";
+    }
+
+    @ModelAttribute
+    public UserRegistrationModel userRegistrationModel(){
+        return new UserRegistrationModel();
     }
 }
 
