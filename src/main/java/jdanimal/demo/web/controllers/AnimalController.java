@@ -32,10 +32,6 @@ public class AnimalController {
         }
         return "animal";
     }
-    @GetMapping("/animalencyclopedia")
-    public String animalEncyclopedia(){
-        return "animalencyclopedia";
-    }
 
     @PostMapping("/animal/upload")
     public String uploadAnimal(@Valid UserAnimalUploadModel userAnimalUploadModel,

@@ -15,68 +15,34 @@
         <br>
         <br>
         <br>
+        <br>
         <div class="row">
-            <div class="sign in col-9">
-<!--                th:action="@{/getallanimals/by{inputtype}}" method="post"-->
-                <form class="row g-3 border-top border-primary border-1">
-                    <div th:if="${param.error}">
-                 </div>
-                    <img width="150" height="220" class="welcomePicture mt-5 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
+            <div class="sign in col-7">
+                <form th:action="@{/animal/filter}" th:method="get" class="row g-3 border-top border-primary border-1">
+                    <img width="30%" height="80%" class="welcomePicture mt-5 ms-5" src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/tanks-encyclopedia-logo.png" alt="" srcset="">
                     <div class="ms-5">
-                        <input type="text" class="form-control" placeholder="Enter Your Favourite Animal Here ...(IN DEVELOPING) " name="favouriteAnimal" id="searchanimal">
+                        <select id="animalType" name="animalType" class="form-select"
+                                aria-describedby="animalTypeHelpInline">
+                            <option value="" selected>Filter...</option>
+                            <option th:each="s: ${T(jdanimal.demo.data.enums.AnimalType).values()}" th:value="${s}" th:text="${s}">Animal</option>
+                        </select>
+                        <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Search</button>
                     </div>
                 </form>
             </div>
-            <div class="col-1"></div>
-            <div class="navigator col-1">
-                <div class="staticnav h4 mt-5 position-fixed"></div>
+            <div class="col-3"></div>
+            <div class="navigator col-1 ms-5 ">
+                <div class="staticnav h2 ms-5 mt-5 position-fixed"></div>
             </div>
         </div>
-        <div class="animalsGroup">
+        <div class="animalsGroup" th:each="a : ${animals}" th:object="${a}">
             <div>
-                <h1 id="Dog"> Dog</h1>
+                <h1 id="Dog" th:text="*{typeOfAnimal}">Dog</h1>
                 <img class="rounded-circle mt-5"
-                     src="https://www.zooplus.co.uk/magazine/wp-content/uploads/2019/03/Golden-retriever-dog-breed-1.jpg"
+                    th:src="*{animalPhotoUrl}"
                      width="150" height="150" alt="...">
-                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
-            </div>
-            <div>
-                <h1 id="Cat"> Cat</h1>
-                <img class="rounded-circle mt-5"
-                     src="https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d"
-                     width="150" height="150" alt="...">
-                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
-            </div>
-            <div>
-                <h1 id="Lion"> Lion</h1>
-                <img class="rounded-circle mt-5"
-                     src="https://media.istockphoto.com/photos/lion-sitting-looking-away-panthera-leo-10-years-old-isolated-picture-id455663609?k=20&m=455663609&s=612x612&w=0&h=1J2LDKEn05YnOIm0XmZ69VUdH39KUGWfiBF1bEouNMo="
-                     width="150" height="150" alt="...">
-                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
-            </div>
-            <div>
-                <h1 id="Fish"> Fish</h1>
-                <img class="rounded-circle mt-5"
-                     src="https://i.insider.com/57a4db43dd089551028b4663?width=1136&format=jpeg"
-                     width="150" height="150" alt="...">
-                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
-            </div>
-            <div>
-                <h1 id="Mouse"> Mouse</h1>
-                <img class="rounded-circle mt-5"
-                     src="https://assets.manufactum.de/p/085/085548/85548_02.jpg/koesen-white-mouse.jpg"
-                     width="150" height="150" alt="...">
-                <label  class="form-label h4">The domestic dog is a domesticated descendant of the wolf. The dog derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nearest living relative. The dog was the first species to be domesticated, by hunter–gatherers over 15,000 years ago, before the development of agriculture. Their long association with humans has led dogs to be uniquely adapted to human behavior,leading to a large number of domestic individuals and the ability to thrive on a starch-rich diet that would be inadequate for other canids.
-
-                    The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes. Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend."</label>
+                <label  class="form-label h4" th:text="*{description}">Animal Info."</label>
+                <a th:unless="${hide == true}" th:href="@{/encyclopedia/animal/delete/{id}(id=${a.getId()})}" class="btn btn-danger ms-2">Delete<i class="fas fa-user-times ml-2"></i></a>
             </div>
         </div>
     </main>
@@ -93,15 +59,11 @@
         weatheInfo();
         window.setInterval(function () { weatheInfo() }, 1000);
         checkAcceptLocation()
-        focusIndexPageSign();
         createMenu();
         clicked();
 
     }
 
-    function focusIndexPageSign() {
-        document.getElementById('searchanimal').focus();
-    }
 
     // weather button
 
@@ -252,7 +214,9 @@
     .navbar{
         max-width: 1800px;
         margin: auto;
-        z-index: 4
+        z-index: 4;
+        background-color: rgba(31,90,120,0.9);
+
     }
 
     .animalsGroup h1{
@@ -276,9 +240,12 @@
         }
     }
 
-    footer{
+    footer {
         margin-top: 50px;
+        background-color: rgba(31,90,120,0.9);
+
     }
+
     .animalsGroup{
         margin-left: 5%;
         margin-right: 30%;

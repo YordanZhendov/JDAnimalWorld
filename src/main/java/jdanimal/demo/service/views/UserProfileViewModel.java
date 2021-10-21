@@ -2,6 +2,7 @@ package jdanimal.demo.service.views;
 
 import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
+import jdanimal.demo.data.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,5 @@ public class UserProfileViewModel {
     private String urlProfilePicture;
     private Set<Animal> likedAnimals;
     private Set<Accessory> likedAccessories;
+    private Set<Role> authorities;
 }
