@@ -136,7 +136,7 @@
                     <div th:each="accessory : ${likedAccessories}">
                         <strong><p th:text="${accessory.getAccessoryName()}"></p></strong>
                         <img width="100" height="100" class="rounded-circle mb-2" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
-                        <a th:href="@{/user/animal/dislike/{id}(id=${accessory.getId()})}" class="btn btn-outline-danger ms-2">Dislike<i class="fas fa-user-times ml-2"></i></a>
+                        <a th:href="@{/user/accessory/dislike/{id}(id=${accessory.getId()})}" class="btn btn-outline-danger ms-2">Dislike<i class="fas fa-user-times ml-2"></i></a>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-package jdanimal.demo.data.DTO;
+package jdanimal.demo.web.binding;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDTO {
+public class UserLoginBinding {
 
     private String username;
     private String password;

@@ -1,15 +1,13 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.DTO.UserStoreUploadDTO;
+import jdanimal.demo.service.models.UserStoreUploadModel;
 import jdanimal.demo.data.Store;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.StoreRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.StoreService;
-import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserStoreUploadModel;
+import jdanimal.demo.web.binding.UserStoreUploadBinding;
 import jdanimal.demo.service.views.StoreViewModel;
-import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -26,11 +24,11 @@ public class StoreServiceImpl implements StoreService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void uploadStore(UserStoreUploadModel userStoreUploadModel, String username) {
-        String[] split = userStoreUploadModel.getLocationPath().split("\\s+");
+    public void uploadStore(UserStoreUploadBinding userStoreUploadBinding, String username) {
+        String[] split = userStoreUploadBinding.getLocationPath().split("\\s+");
         String[] split1 = split[1].split("\"");
 
-        UserStoreUploadDTO mappedStore = this.modelMapper.map(userStoreUploadModel, UserStoreUploadDTO.class);
+        UserStoreUploadModel mappedStore = this.modelMapper.map(userStoreUploadBinding, UserStoreUploadModel.class);
         Store mappedStoreEntity = this.modelMapper.map(mappedStore, Store.class);
         User byUsername = this.userRepository.findByUsername(username);
         mappedStoreEntity.setUser(byUsername);

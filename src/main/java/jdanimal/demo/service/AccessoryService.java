@@ -1,13 +1,13 @@
 package jdanimal.demo.service;
 
-import jdanimal.demo.service.models.UserAccessoryUploadModel;
+import jdanimal.demo.web.binding.UserAccessoryUploadBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 
 import java.util.List;
 
 public interface AccessoryService {
-    void upload(UserAccessoryUploadModel userAccessoryUploadModel, UserProfileViewModel byUsername);
+    void upload(UserAccessoryUploadBinding userAccessoryUploadBinding, UserProfileViewModel byUsername);
     List<AccessoryViewModel> getAllAccessories();
     void saveUrlAccessory(String id, String replaceFileName);
     void removeAccessory(String id);

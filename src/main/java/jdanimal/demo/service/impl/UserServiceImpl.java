@@ -1,9 +1,8 @@
 package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.*;
-import jdanimal.demo.data.DTO.UserRegisterDTO;
-import jdanimal.demo.data.DTO.UserLoginDTO;
-import jdanimal.demo.data.DTO.UserProfileDTO;
+import jdanimal.demo.service.models.UserRegisterUploadModel;
+import jdanimal.demo.web.binding.UserLoginBinding;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.StoreRepository;
@@ -11,8 +10,8 @@ import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.UserValidationSerivce;
-import jdanimal.demo.service.models.UserRegistrationModel;
-import jdanimal.demo.service.models.UserUpdateProfileModel;
+import jdanimal.demo.web.binding.UserRegistrationBinding;
+import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.util.ValidationUtil;
@@ -45,14 +44,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean register(UserRegistrationModel userRegistrationModel) {
-        UserRegisterDTO userRegisterDTO = this.modelMapper.map(userRegistrationModel, UserRegisterDTO.class);
+    public boolean register(UserRegistrationBinding userRegistrationBinding) {
+        UserRegisterUploadModel userRegisterUploadModel = this.modelMapper.map(userRegistrationBinding, UserRegisterUploadModel.class);
 
-        if(!validationUtil.isValid(userRegisterDTO)){
+        if(!validationUtil.isValid(userRegisterUploadModel)){
             return false;
         }
 
-        User user=this.modelMapper.map(userRegisterDTO,User.class);
+        User user=this.modelMapper.map(userRegisterUploadModel,User.class);
 
         if(!userValidationSerivce.checkUser(user)){
             return false;
@@ -78,17 +77,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User validUser(UserLoginDTO userLoginDTO) {
-        userLoginDTO.setPassword(this.bCryptPasswordEncoder.encode(userLoginDTO.getPassword()));
-        User userLogin = this.modelMapper.map(userLoginDTO, User.class);
+    public User validUser(UserLoginBinding userLoginBinding) {
+        userLoginBinding.setPassword(this.bCryptPasswordEncoder.encode(userLoginBinding.getPassword()));
+        User userLogin = this.modelMapper.map(userLoginBinding, User.class);
         return this.userRepository.findByUsernameAndPassword(userLogin.getUsername(), userLogin.getPassword()).orElse(null);
     }
 
     @Override
     public UserProfileViewModel findByUsername(String currentUserName) {
         User byUsername = this.userRepository.findByUsername(currentUserName);
-        UserProfileDTO userProfileDTO = this.modelMapper.map(byUsername, UserProfileDTO.class);
-        return this.modelMapper.map(userProfileDTO, UserProfileViewModel.class);
+        return this.modelMapper.map(byUsername, UserProfileViewModel.class);
     }
 
 
@@ -158,11 +156,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void updateProfile(UserUpdateProfileModel userUpdateProfileModel) {
-        User user = this.userRepository.findByUsername(userUpdateProfileModel.getUsername());
-        user.setEmail(userUpdateProfileModel.getEmail());
-        user.setPhoneNumber(userUpdateProfileModel.getPhoneNumber());
-        user.setFullName(userUpdateProfileModel.getFullName());
+    public void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding) {
+        User user = this.userRepository.findByUsername(userUpdateProfileBinding.getUsername());
+        user.setEmail(userUpdateProfileBinding.getEmail());
+        user.setPhoneNumber(userUpdateProfileBinding.getPhoneNumber());
+        user.setFullName(userUpdateProfileBinding.getFullName());
         this.userRepository.save(user);
     }
 

@@ -1,4 +1,4 @@
-package jdanimal.demo.data.DTO;
+package jdanimal.demo.web.binding;
 
 import jdanimal.demo.data.enums.AnimalType;
 import lombok.AllArgsConstructor;

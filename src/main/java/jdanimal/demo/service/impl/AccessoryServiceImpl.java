@@ -1,14 +1,13 @@
 package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.Accessory;
-import jdanimal.demo.data.Animal;
-import jdanimal.demo.data.DTO.UserAccessoryUploadDTO;
+import jdanimal.demo.service.models.UserAccessoryUploadModel;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAccessoryUploadModel;
+import jdanimal.demo.web.binding.UserAccessoryUploadBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,8 +27,8 @@ public class AccessoryServiceImpl implements AccessoryService {
     private final UserService userService;
 
     @Override
-    public void upload(UserAccessoryUploadModel userAccessoryUploadModel, UserProfileViewModel byUsername) {
-        UserAccessoryUploadDTO mappedAccessory = this.modelMapper.map(userAccessoryUploadModel, UserAccessoryUploadDTO.class);
+    public void upload(UserAccessoryUploadBinding userAccessoryUploadBinding, UserProfileViewModel byUsername) {
+        UserAccessoryUploadModel mappedAccessory = this.modelMapper.map(userAccessoryUploadBinding, UserAccessoryUploadModel.class);
         Accessory accessory = this.modelMapper.map(mappedAccessory, Accessory.class);
         User currentUser = this.userRepository.findByUsername(byUsername.getUsername());
         accessory.setUser(currentUser);

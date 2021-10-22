@@ -2,12 +2,10 @@ package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
-import jdanimal.demo.service.AccessoryService;
-import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.StoreService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
-import jdanimal.demo.service.models.UserUpdateProfileModel;
+import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.StoreViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
@@ -23,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
@@ -53,8 +49,8 @@ public class ProfileController {
             Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();
             Set<Accessory> likedAccessories = userProfileInfo.getLikedAccessories();
 
-            if(!model.containsAttribute("userUpdateProfileModel")){
-                model.addAttribute("userUpdateProfileModel",new UserUpdateProfileModel());
+            if(!model.containsAttribute("userUpdateProfileBinding")){
+                model.addAttribute("userUpdateProfileBinding",new UserUpdateProfileBinding());
             }
 
             model.addAttribute("userProfileInfo",userProfileInfo);
@@ -88,19 +84,19 @@ public class ProfileController {
 
     //update profile details
     @PostMapping("/update-profile")
-    public String updateProfile(@Valid UserUpdateProfileModel userUpdateProfileModel,
+    public String updateProfile(@Valid UserUpdateProfileBinding userUpdateProfileBinding,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("userUpdateProfileModel",userUpdateProfileModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userUpdateProfileModel",bindingResult);
+            redirectAttributes.addFlashAttribute("userUpdateProfileBinding", userUpdateProfileBinding);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userUpdateProfileBinding",bindingResult);
 
             return "redirect:/user/profile";
 
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        userUpdateProfileModel.setUsername(authentication.getName());
-        this.userService.updateProfile(userUpdateProfileModel);
+        userUpdateProfileBinding.setUsername(authentication.getName());
+        this.userService.updateProfile(userUpdateProfileBinding);
         return "redirect:/user/profile";
     }
 

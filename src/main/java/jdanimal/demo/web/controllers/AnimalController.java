@@ -2,7 +2,7 @@ package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
+import jdanimal.demo.web.binding.UserAnimalUploadBinding;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -27,23 +27,23 @@ public class AnimalController {
     //animal form page
     @GetMapping("/animal")
     public String addAnimal(Model model){
-        if(!model.containsAttribute("userAnimalUploadModel")){
-            model.addAttribute("userAnimalUploadModel",new UserAnimalUploadModel());
+        if(!model.containsAttribute("userAnimalUploadBinding")){
+            model.addAttribute("userAnimalUploadBinding",new UserAnimalUploadBinding());
         }
         return "animal";
     }
 
     //animal upload
     @PostMapping("/animal/upload")
-    public String uploadAnimal(@Valid UserAnimalUploadModel userAnimalUploadModel,
+    public String uploadAnimal(@Valid UserAnimalUploadBinding userAnimalUploadBinding,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
-                    "userAnimalUploadModel",userAnimalUploadModel);
+                    "userAnimalUploadBinding", userAnimalUploadBinding);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.userAnimalUploadModel",bindingResult);
+                    "org.springframework.validation.BindingResult.userAnimalUploadBinding",bindingResult);
             return "redirect:/user/animal";
         }
 
@@ -52,7 +52,7 @@ public class AnimalController {
             String currentUserName = authentication.getName();
 
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
-            this.animalService.uploadAnimal(userAnimalUploadModel,userProfileInfo);
+            this.animalService.uploadAnimal(userAnimalUploadBinding,userProfileInfo);
             return "redirect:/user/home";
         }
         return null;

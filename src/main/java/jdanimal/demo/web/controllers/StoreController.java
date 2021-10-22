@@ -1,14 +1,8 @@
 package jdanimal.demo.web.controllers;
 
-import com.sun.xml.bind.v2.TODO;
 import jdanimal.demo.service.StoreService;
-import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
-import jdanimal.demo.service.models.UserStoreUploadModel;
-import jdanimal.demo.service.views.StoreViewModel;
-import jdanimal.demo.service.views.UserProfileViewModel;
+import jdanimal.demo.web.binding.UserStoreUploadBinding;
 import lombok.AllArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,8 +27,8 @@ public class StoreController {
     //store form page
     @GetMapping("/addanimaltore")
     public String addStore(Model model){
-        if(!model.containsAttribute("userStoreUploadModel")){
-            model.addAttribute("userStoreUploadModel",new UserStoreUploadModel());
+        if(!model.containsAttribute("userStoreUploadBinding")){
+            model.addAttribute("userStoreUploadBinding",new UserStoreUploadBinding());
         }
         return "addstore";
     }
@@ -48,22 +42,22 @@ public class StoreController {
 
     //store upload
     @PostMapping("/store/upload")
-    public String uploadStore(@Valid UserStoreUploadModel userStoreUploadModel,
+    public String uploadStore(@Valid UserStoreUploadBinding userStoreUploadBinding,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
-                    "userStoreUploadModel",userStoreUploadModel);
+                    "userStoreUploadBinding", userStoreUploadBinding);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.userStoreUploadModel",bindingResult);
+                    "org.springframework.validation.BindingResult.userStoreUploadBinding",bindingResult);
             return "redirect:/user/addanimaltore";
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-            this.storeService.uploadStore(userStoreUploadModel,currentUserName);
+            this.storeService.uploadStore(userStoreUploadBinding,currentUserName);
             return "redirect:/user/animalstores";
         }
         return null;

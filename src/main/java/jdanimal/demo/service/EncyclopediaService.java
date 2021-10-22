@@ -1,6 +1,6 @@
 package jdanimal.demo.service;
 
-import jdanimal.demo.data.DTO.EncyclopediaAnimalBinding;
+import jdanimal.demo.web.binding.EncyclopediaAnimalBinding;
 import jdanimal.demo.service.views.EncyclopediaAnimalViewModel;
 
 import java.util.List;

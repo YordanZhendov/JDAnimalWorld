@@ -37,34 +37,37 @@
         <br>
         <br>
         <div class="row">
-                <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
-                    <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
-                    <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
-                    <div class="card-body" th:each="accessory : ${accessories}" th:object="${accessory}">
-                        <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
-                        <p class="card-text" th:text="${accessory.getDescription()}"></p>
+            <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
+                <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
+                <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
+                    <p class="card-text" th:text="${accessory.getDescription()}"></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
+                    <li class="list-group-item " th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
+                    <li class="list-group-item bg-light" >---------</li>
+                    <li class="list-group-item" >---------</li>
+                    <li class="list-group-item bg-light">---------</li>
+                </ul>
+                <div class="card-body">
+                    <div class="ms-2 me-1">
+                        <p>
+                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
+                                Owner Details:
+                            </button>
+                        </p>
                     </div>
-                    <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
-                        <li class="list-group-item" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
-                        <li class="list-group-item bg-light" th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
-                    </ul>
-                    <div class="card-body">
-                        <div class="ms-2 me-1">
-                            <p>
-                                <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
-                                    Owner Details:
-                                </button>
-                            </p>
-                        </div>
-                        <div class="homeDetails collapse col-12 mt-5" id="ownerAccDetails" th:each="accessory : ${accessories}" th:object="${accessory}" >
-                            <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
-                            <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                            <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                            <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                        </div>
+                    <div class="homeDetails collapse col-12 mt-5" id="ownerAccDetails" th:each="accessory : ${accessories}" th:object="${accessory}" >
+                        <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                        <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                        <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                        <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                     </div>
                 </div>
             </div>
+        </div>
         <div class="row">
             <div class="col ms-5 mt-5">
                 <p><strong>🐶 Animals Asked People for Help</strong></p>

@@ -1,12 +1,9 @@
 package jdanimal.demo.web.controllers;
 
-import jdanimal.demo.data.DTO.EncyclopediaAnimalBinding;
+import jdanimal.demo.web.binding.EncyclopediaAnimalBinding;
 import jdanimal.demo.service.EncyclopediaService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.views.EncyclopediaAnimalViewModel;
-import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @AllArgsConstructor

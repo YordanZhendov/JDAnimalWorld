@@ -1,4 +1,4 @@
-package jdanimal.demo.service.models;
+package jdanimal.demo.web.binding;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegistrationModel {
+public class UserRegistrationBinding {
 
     @NotBlank(message = "Fields must be filled!")
     @Length(min = 3,message = "Symbols must be more than 2!")

@@ -1,13 +1,13 @@
 package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.Animal;
-import jdanimal.demo.data.DTO.UserAnimalUploadDTO;
+import jdanimal.demo.service.models.UserAnimalUploadModel;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
+import jdanimal.demo.web.binding.UserAnimalUploadBinding;
 import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
@@ -36,8 +36,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public void uploadAnimal(UserAnimalUploadModel userAnimalUploadModel, UserProfileViewModel userProfileInfo){
-        UserAnimalUploadDTO mappedAnimal = this.modelMapper.map(userAnimalUploadModel, UserAnimalUploadDTO.class);
+    public void uploadAnimal(UserAnimalUploadBinding userAnimalUploadBinding, UserProfileViewModel userProfileInfo){
+        UserAnimalUploadModel mappedAnimal = this.modelMapper.map(userAnimalUploadBinding, UserAnimalUploadModel.class);
         Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
         mappedAnimalEntity.setUser(byUsername);

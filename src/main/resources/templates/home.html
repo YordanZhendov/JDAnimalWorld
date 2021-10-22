@@ -70,11 +70,11 @@
             <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
                 <a th:href="@{/user/accessory/like/{id}(id=${accessory.getId()})}" class="btn btn-info position-absolute top-0 end-0">Like<i class="fas fa-user-times ml-2"></i></a>
                 <img width="40%" height="40%" class="rounded-circle mt-5 me-3" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
-                <div class="card-body" th:each="accessory : ${accessories}" th:object="${accessory}">
+                <div class="card-body">
                     <h5 class="card-title" th:text="${accessory.getAccessoryName()}"></h5>
                     <p class="card-text" th:text="${accessory.getDescription()}"></p>
                 </div>
-                <ul class="list-group list-group-flush" th:each="accessory : ${accessories}" th:object="${accessory}">
+                <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-light" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
                     <li class="list-group-item " th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
                     <li class="list-group-item bg-light" >---------</li>

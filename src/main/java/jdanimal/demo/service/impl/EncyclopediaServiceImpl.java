@@ -1,6 +1,6 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.DTO.EncyclopediaAnimalBinding;
+import jdanimal.demo.web.binding.EncyclopediaAnimalBinding;
 import jdanimal.demo.data.EncyclopediaAnimal;
 import jdanimal.demo.data.enums.AnimalType;
 import jdanimal.demo.repository.EncyclopediaRepository;

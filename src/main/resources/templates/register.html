@@ -11,7 +11,7 @@
     <main>
         <div class="row">
             <div class="register col-9">
-                <form class="row g-3 border-top border-primary border-1" th:object="${userRegistrationModel}" th:action="@{/users/register}" method="post">
+                <form class="row g-3 border-top border-primary border-1" th:object="${userRegistrationBinding}" th:action="@{/users/register}" method="post">
                     <h3 th:if="${isFound == false}" class="mt-5 text-center">
                     <strong class="bg-blur rounded text-danger">
                         User with such username or email already exists.

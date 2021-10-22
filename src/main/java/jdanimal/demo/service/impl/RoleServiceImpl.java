@@ -1,6 +1,6 @@
 package jdanimal.demo.service.impl;
 
-import jdanimal.demo.data.DTO.RoleServiceDTO;
+import jdanimal.demo.service.views.RoleServiceViewModel;
 import jdanimal.demo.data.Role;
 import jdanimal.demo.repository.RoleRepository;
 import jdanimal.demo.service.RoleService;
@@ -34,16 +34,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Set<RoleServiceDTO> findAllRoles() {
+    public Set<RoleServiceViewModel> findAllRoles() {
         return  this.roleRepository.findAll()
                 .stream()
-                .map(r->this.modelMapper.map(r,RoleServiceDTO.class))
+                .map(r->this.modelMapper.map(r, RoleServiceViewModel.class))
                 .collect(Collectors.toSet());
 
     }
 
     @Override
-    public RoleServiceDTO findByAuthority(String role) {
-        return this.modelMapper.map(this.roleRepository.findByAuthority(role),RoleServiceDTO.class);
+    public RoleServiceViewModel findByAuthority(String role) {
+        return this.modelMapper.map(this.roleRepository.findByAuthority(role), RoleServiceViewModel.class);
     }
 }

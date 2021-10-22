@@ -2,12 +2,9 @@ package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.models.UserAccessoryUploadModel;
-import jdanimal.demo.service.models.UserAnimalUploadModel;
+import jdanimal.demo.web.binding.UserAccessoryUploadBinding;
 import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,8 +27,8 @@ public class AccessoryController {
     @GetMapping("/user/accessory")
     public String accessoryPage(Model model) {
 
-        if(!model.containsAttribute("userAccessoryUploadModel")){
-            model.addAttribute("userAccessoryUploadModel",new UserAccessoryUploadModel());
+        if(!model.containsAttribute("userAccessoryUploadBinding")){
+            model.addAttribute("userAccessoryUploadBinding",new UserAccessoryUploadBinding());
         }
         return "accessory";
 
@@ -39,14 +36,14 @@ public class AccessoryController {
 
     //accessory upload
     @PostMapping("/user/accessory/upload")
-    public String accessoryUpload(@Valid UserAccessoryUploadModel userAccessoryUploadModel,
+    public String accessoryUpload(@Valid UserAccessoryUploadBinding userAccessoryUploadBinding,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
-                    "userAccessoryUploadModel",userAccessoryUploadModel);
+                    "userAccessoryUploadBinding", userAccessoryUploadBinding);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.userAccessoryUploadModel",bindingResult);
+                    "org.springframework.validation.BindingResult.userAccessoryUploadBinding",bindingResult);
             return "redirect:/user/accessory";
         }
 
@@ -54,7 +51,7 @@ public class AccessoryController {
         String currentUserName = authentication.getName();
 
         UserProfileViewModel byUsername = this.userService.findByUsername(currentUserName);
-        this.accessoryService.upload(userAccessoryUploadModel,byUsername);
+        this.accessoryService.upload(userAccessoryUploadBinding,byUsername);
 
         return "redirect:/user/home";
 
