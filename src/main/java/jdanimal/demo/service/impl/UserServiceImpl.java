@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
             user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
         }
         this.userRepository.save(user);
+        this.userRepository.findAll();
         return true;
 
     }
@@ -151,7 +152,7 @@ public class UserServiceImpl implements UserService {
 
 
         this.userRepository.deleteById(id);
-
+        this.userRepository.findAll();
     }
 
 

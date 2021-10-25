@@ -33,6 +33,7 @@ public class AccessoryServiceImpl implements AccessoryService {
         User currentUser = this.userRepository.findByUsername(byUsername.getUsername());
         accessory.setUser(currentUser);
         this.accessoryRepository.saveAndFlush(accessory);
+        this.accessoryRepository.findAll();
     }
 
     @Override
@@ -55,6 +56,8 @@ public class AccessoryServiceImpl implements AccessoryService {
         Accessory accessoryById = accessoryRepository.findAccessoryById(id);
         this.userService.removeAccessoryFromUsers(accessoryById);
         this.accessoryRepository.deleteById(id);
+        this.accessoryRepository.findAll();
+
     }
 
     @Override

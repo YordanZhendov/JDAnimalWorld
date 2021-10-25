@@ -42,6 +42,7 @@ public class AnimalServiceImpl implements AnimalService {
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
         mappedAnimalEntity.setUser(byUsername);
         this.animalRepository.saveAndFlush(mappedAnimalEntity);
+        this.animalRepository.findAll();
     }
 
     @Override
@@ -49,6 +50,8 @@ public class AnimalServiceImpl implements AnimalService {
         Animal animalById = animalRepository.findAnimalById(id);
         this.userService.removeAnimalFromUsers(animalById);
         this.animalRepository.deleteById(id);
+        this.animalRepository.findAll();
+
 
     }
 

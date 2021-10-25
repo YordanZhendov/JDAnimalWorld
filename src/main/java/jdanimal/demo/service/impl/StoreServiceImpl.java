@@ -35,14 +35,13 @@ public class StoreServiceImpl implements StoreService {
         mappedStoreEntity.setLocationPath(split1[1]);
 
         this.storeRepository.saveAndFlush(mappedStoreEntity);
-
-
+        this.storeRepository.findAll();
 
     }
 
     @Override
     public List<StoreViewModel> getAllStores() {
-        return this.storeRepository.findAll()
+        return this.storeRepository.getAllStores()
                 .stream()
                 .map(store -> this.modelMapper.map(store, StoreViewModel.class))
                 .collect(Collectors.toList());
@@ -57,6 +56,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void removeStore(String id) {
         this.storeRepository.deleteById(id);
+        this.storeRepository.findAll();
     }
 
 }

@@ -26,11 +26,12 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
         EncyclopediaAnimalUploadModel mapped = this.modelMapper.map(encyclopediaAnimalBinding, EncyclopediaAnimalUploadModel.class);
         EncyclopediaAnimal mappedToEntity = this.modelMapper.map(mapped, EncyclopediaAnimal.class);
         this.encyclopediaRepository.saveAndFlush(mappedToEntity);
+        this.encyclopediaRepository.findAll();
     }
 
     @Override
     public List<EncyclopediaAnimalViewModel> findAllAnimalsInEncyclopedia() {
-        return this.encyclopediaRepository.findAll().stream().map(encyclopediaAnimal ->
+        return this.encyclopediaRepository.getAllAnimals().stream().map(encyclopediaAnimal ->
                 this.modelMapper.map(encyclopediaAnimal,EncyclopediaAnimalViewModel.class))
                 .collect(Collectors.toList());
     }
@@ -38,6 +39,7 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
     @Override
     public void removeAnimalFromEncyclopedia(String id) {
         this.encyclopediaRepository.deleteById(id);
+        this.encyclopediaRepository.findAll();
     }
 
     @Override
