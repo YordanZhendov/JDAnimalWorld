@@ -21,7 +21,7 @@ public class DemoApplication {
 
     }
 
-    @Scheduled(cron = "@daily")
+    @Scheduled(cron = "1 * * * * ?")
     public void printUsersCount(){
         this.userService.sendEmail();
     };
