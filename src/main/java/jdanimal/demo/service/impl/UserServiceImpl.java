@@ -1,6 +1,7 @@
 package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.*;
+import jdanimal.demo.data.Store;
 import jdanimal.demo.service.models.UserRegisterUploadModel;
 import jdanimal.demo.web.binding.UserLoginBinding;
 import jdanimal.demo.repository.AccessoryRepository;
@@ -23,8 +24,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 
@@ -185,5 +191,90 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(s);
+    }
+
+    @Override
+    public void sendEmail(){
+
+        // Sender's email ID needs to be mentioned
+        String sender = "jzanimalteam@gmail.com";
+
+        // Assuming you are sending email from through gmails smtp
+        String host = "smtp.gmail.com";
+
+        // Get system properties
+        Properties properties = System.getProperties();
+
+        // Setup mail server
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        // Get the Session object.// and pass username and password
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+
+            protected PasswordAuthentication getPasswordAuthentication() {
+
+                return new PasswordAuthentication("jzanimalteam@gmail.com","JZanimalTeam94");
+
+            }
+
+        });
+
+        List<User> all = this.userRepository.findAll();
+
+        List<String> emails=new ArrayList<>();
+        emails.add("jordan.zhendov@abv.bg");
+        for (User user : all) {
+            emails.add(user.getEmail());
+        }
+
+        if(emails.size() == 0){
+            return;
+        }
+
+
+//        // Recipient's email ID needs to be mentioned.
+//        String receiver = "jordan.zhendov@abv.bg";
+
+
+
+        // Used to debug SMTP issues
+        session.setDebug(false);
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(sender));
+
+            // Set To: header field of the header.
+            for (String email : emails) {
+
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            }
+
+
+            // Set Subject: header field
+            message.setSubject("JZ Team Information!");
+
+            // Now set the actual message
+            message.setText("Dear User, \nwe are so happy to have you in the family!" +
+                    " \nPlease check the newest product and friends in our updated web application https://jd-animals-world.herokuapp.com ." +
+                    "\n Do not hesitate to contact us." +
+                    "\n Best regards," +
+                    "\n JZ Animal Team");
+
+//            System.out.println("sending...");
+            // Send message
+            Transport.send(message);
+//            System.out.println("Sent message successfully....");
+
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+
     }
 }

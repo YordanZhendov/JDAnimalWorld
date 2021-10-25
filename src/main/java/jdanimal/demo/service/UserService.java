@@ -27,5 +27,6 @@ public interface UserService extends UserDetailsService {
     void removeAccessoryFromUsers(Accessory accessoryById);
     void removeUser(String id);
     List<User> getAllUsersForUserControl();
+    void sendEmail();
 
 }
