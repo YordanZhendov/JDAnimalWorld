@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Getter
@@ -16,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserProfileViewModel {
 
+    private String id;
     private String username;
     private String fullName;
     private String email;
@@ -26,4 +28,6 @@ public class UserProfileViewModel {
     private Set<Animal> likedAnimals;
     private Set<Accessory> likedAccessories;
     private Set<Role> authorities;
+    private Set<Animal> animals;
+    private Set<Accessory> accessories;
 }

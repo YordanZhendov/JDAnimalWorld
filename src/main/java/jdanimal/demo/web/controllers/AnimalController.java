@@ -27,6 +27,16 @@ public class AnimalController {
     //animal form page
     @GetMapping("/animal")
     public String addAnimal(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        String status = this.userService.checkUserStatus(currentUserName);
+        if(status.equals("suspended")){
+            return "user-suspended";
+        }
+
+
         if(!model.containsAttribute("userAnimalUploadBinding")){
             model.addAttribute("userAnimalUploadBinding",new UserAnimalUploadBinding());
         }

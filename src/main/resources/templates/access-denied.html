@@ -1,42 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</head>
+<head th:replace="fragments/commons::head"></head>
 
 <body class="mainb">
 <div class="wrapper">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3 col-12 position-fixed">
-            <div class="container-fluid ">
-                <img title="Animals-World" th:href="@{/users/login}" src="https://toppng.com/public/uploads/thumbnail/capricorn-capricorn-black-and-white-11563492688rygjitea4x.png" width="50px" height="50px" alt="" srcset="">
-                <a class="navbar-brand ms-1" th:href="@{/}">Animals World</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/}">&hearts;&hearts;&hearts;</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">All Rights
-                                Reserved &copy;JD</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="fragments/commonsLogReg::header"></header>
     <main>
         <img src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/fox-deer-animal-seamless-pattern-watercolor-image-hand-drawn-wild-forest-animals-herbs-fern-mushrooms-fabric-paper-tixtile-226004569.jpg" class="backImage"/>
         <br>
@@ -49,6 +18,7 @@
         </div>
 
     </main>
+    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
 
@@ -260,10 +230,11 @@
 
 </script>
 <style>
-    body{
+    .mainb {
         max-width: 1800px;
         margin: auto;
     }
+
 
     .backImage{
         max-width: 1800px;
@@ -275,115 +246,82 @@
     }
 
 
-    .toast:not(.showing):not(.show){
-        opacity: 1;
-    }
-    .sign{
-        margin-top: 130px;
-        margin-left: 30px;
-
-    }
-
-    .animalsGroup h1{
+    .animalsGroup h1 {
         margin-top: 3%;
         padding-top: 4%;
 
     }
-    .staticnav li{
-        border-left: 5px solid rgba(255, 199, 199,0);
+
+    .navbar {
+        z-index: 2;
+        background-color: rgba(31,90,120,0.9);
     }
-    .staticnav a{
+
+    .staticnav li {
+        border-left: 5px solid rgba(255, 199, 199, 0);
+    }
+
+    .staticnav a {
         padding-left: 5px;
     }
-    .navigator{
-        margin-top: 10%;
-    }
 
-    .navbar{
+
+    .navbar {
         max-width: 1800px;
         margin: auto;
-        z-index: 4;
-        background-color: rgba(31,90,120,0.9);
-
     }
-    @media only screen and (max-width: 1300px) {
-        .navigator{
-            display: none;
+
+    @media only screen and (min-width: 300px) {
+        .searchInput {
+            display: flex;
+        }
+
+        .animalallList {
+            display: flex;
         }
     }
 
-    .text-muted{
-        color: white;
-    }
-    footer{
-        margin-top: 50px;
-        background-color: rgba(31,90,120,0.9);
-
-    }
-    .animalsGroup{
-        margin-left: 5%;
-        margin-right: 30%;
-        margin-top: 5%;
-    }
-
-    /* //weather */
-
-    #weatherWindow{
-        display: none;
-        z-index: -1;
-    }
-    .card {
-        width: 100%;
-        height: 75%;
-        border-radius: 20px;
-        box-shadow: 0px 8px 16px 4px #ffe9e9;
-        margin-top: 50px;
-        margin-bottom: 50px
-    }
-
-    .time-font {
-        font-size: 50px;
-    }
-
-    .sm-font {
-        font-size: 18px
-    }
-
-    .med-font {
-        font-size: 28px
-    }
-
-    .large-font {
-        font-size: 60px
-    }
-    .register{
-        margin-top: 130px;
-        margin-left: 30px;
-        display: none;
-    }
-
-
-    /* Homepage */
-    @media only screen and (max-width: 700px) {
-        .row >.inlineForms{
-            display: inline !important;
+    @media only screen and (max-width: 400px) {
+        .searchInput {
+            display: inline;
         }
-    }
 
+        .animalallList {
+            display: inline;
+        }
+
+    }
     @media only screen and (max-width: 370px) {
         footer{
             width: 500px;
         }
     }
+
+    .text-muted {
+        color: white;
+    }
+
+    footer {
+        margin-top: 50px;
+        background-color: rgba(31,90,120,0.9);
+
+    }
     .profilInput {
         display: none;
     }
 
-    .welcomePicture{
-        width: 1800px;
-        margin:auto;
+    .animalsList {
+        position: relative;
+        margin-top: 10%;
     }
 
+    .carousel-indicators {
+        z-index: 1;
+    }
+
+    .btn-danger {
+        background-color: #d43f3a;
+    }
 </style>
 
 </html>

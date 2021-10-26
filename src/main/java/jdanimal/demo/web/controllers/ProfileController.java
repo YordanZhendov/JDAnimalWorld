@@ -38,9 +38,16 @@ public class ProfileController {
     @GetMapping("/profile")
     public String getUserProfile(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        String status = this.userService.checkUserStatus(currentUserName);
+        if(status.equals("suspended")){
+            return "user-suspended";
+        }
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            String currentUserName = authentication.getName();
+
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
+
             String username = userProfileInfo.getUsername();
 
             List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(username);

@@ -16,6 +16,10 @@ public class UserValidationServiceImpl implements UserValidationSerivce {
         return !userRepository.existsByEmail(email);
     }
 
+    private boolean phoneCheck(String phonenumber) {
+        return !userRepository.existsAllByPhoneNumber(phonenumber);
+    }
+
     private boolean usernameFree(String username) {
         return !userRepository.existsByUsername(username);
     }
@@ -28,6 +32,6 @@ public class UserValidationServiceImpl implements UserValidationSerivce {
     public boolean checkUser(User user) {
         return this.isPasswordValid(user.getPassword(),user.getConfirmPassword()) &&
                 this.usernameFree(user.getUsername()) &&
-                this.emailValid(user.getEmail());
+                this.emailValid(user.getEmail()) && this.phoneCheck(user.getPhoneNumber());
     }
 }

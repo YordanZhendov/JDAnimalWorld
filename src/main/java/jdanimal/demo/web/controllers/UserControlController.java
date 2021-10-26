@@ -6,6 +6,7 @@ import jdanimal.demo.service.AnimalService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
+import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class UserControlController {
     @GetMapping("/users-control")
     public String userControlPage(Model model){
 
-        List<User> users=this.userService.getAllUsersForUserControl();
+        List<UserProfileViewModel> users=this.userService.getAllUsersForUserControl();
 
         model.addAttribute("users",users);
 
@@ -45,5 +46,17 @@ public class UserControlController {
         this.userService.removeUser(id);
         return "redirect:/user/users-control";
     };
+
+    @GetMapping("/deactive/temporary/{id}")
+    public String suspendAccount(@PathVariable(name = "id") String id){
+        this.userService.suspendUser(id);
+        return "redirect:/user/users-control";
+    }
+
+    @GetMapping("/activate/{id}")
+    public String activateUser(@PathVariable(name = "id") String id){
+        this.userService.activateUser(id);
+        return "redirect:/user/users-control";
+    }
 
 }

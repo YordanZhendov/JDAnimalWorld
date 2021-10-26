@@ -3,6 +3,7 @@ package jdanimal.demo.service.impl;
 import jdanimal.demo.data.*;
 import jdanimal.demo.data.Store;
 import jdanimal.demo.service.models.UserRegisterUploadModel;
+import jdanimal.demo.service.views.RoleServiceViewModel;
 import jdanimal.demo.web.binding.UserLoginBinding;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
@@ -27,10 +28,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -69,7 +67,7 @@ public class UserServiceImpl implements UserService {
         if(userRepository.count() == 0){
             roleService.seedRoles();
             user.setAuthorities(this.roleService.findAllRoles()
-                    .stream().map(r->this.modelMapper
+                    .stream().filter(roleServiceViewModel -> !roleServiceViewModel.getAuthority().equals("SUSPENDED")).map(r->this.modelMapper
                             .map(r,Role.class))
                     .collect(Collectors.toSet()));
         }else {
@@ -177,8 +175,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsersForUserControl(){
-        return this.userRepository.getAllUsersByAccessoryType();
+    public List<UserProfileViewModel> getAllUsersForUserControl(){
+        return this.userRepository.getAllUsersByRoleType().stream()
+                .map(user -> this.modelMapper.map(user,UserProfileViewModel.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -277,4 +276,51 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public void suspendUser(String id) {
+        User allById = userRepository.findAllById(id);
+
+        RoleServiceViewModel suspended = this.roleService.findByAuthority("SUSPENDED");
+
+        Set<Role> authorities = allById.getAuthorities();
+        authorities.removeAll(authorities);
+        authorities.add(this.modelMapper.map(suspended, Role.class));
+
+        allById.setAuthorities(authorities);
+        this.userRepository.flush();
+    }
+
+    @Override
+    public void activateUser(String id) {
+        User allById = userRepository.findAllById(id);
+
+        RoleServiceViewModel guest = this.roleService.findByAuthority("GUEST");
+
+        Set<Role> authorities = allById.getAuthorities();
+        authorities.removeAll(authorities);
+        authorities.add(this.modelMapper.map(guest, Role.class));
+
+        allById.setAuthorities(authorities);
+        this.userRepository.flush();
+    }
+
+    @Override
+    public String checkUserStatus(String currentUserName) {
+        UserProfileViewModel byUsername = findByUsername(currentUserName);
+        RoleServiceViewModel suspended = roleService.findByAuthority("SUSPENDED");
+
+        Set<Role> authorities = byUsername.getAuthorities();
+
+        for (Role authority : authorities) {
+            if(authority.getId().equals(suspended.getId())){
+                return "suspended";
+            }
+        }
+
+        return "active";
+
+    }
+
+
 }

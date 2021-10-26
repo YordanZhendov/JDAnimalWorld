@@ -27,6 +27,14 @@ public class AccessoryController {
     @GetMapping("/user/accessory")
     public String accessoryPage(Model model) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        String status = this.userService.checkUserStatus(currentUserName);
+        if(status.equals("suspended")){
+            return "user-suspended";
+        }
+
         if(!model.containsAttribute("userAccessoryUploadBinding")){
             model.addAttribute("userAccessoryUploadBinding",new UserAccessoryUploadBinding());
         }
