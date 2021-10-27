@@ -13,5 +13,5 @@ public interface AccessoryService {
     void removeAccessory(String id);
     void addLikedAccessoryTotheCurrentUser(String id, String currentUserName);
     void disLikedAccessoryTotheCurrentUser(String id, String currentUserName);
-
+    void updateAccessoryCash();
 }

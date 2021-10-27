@@ -35,7 +35,7 @@ public class StoreServiceImpl implements StoreService {
         mappedStoreEntity.setLocationPath(split1[1]);
 
         this.storeRepository.saveAndFlush(mappedStoreEntity);
-        this.storeRepository.findAll();
+        updateStoreCash();
 
     }
 
@@ -56,6 +56,11 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void removeStore(String id) {
         this.storeRepository.deleteById(id);
+        updateStoreCash();
+    }
+
+    @Override
+    public void updateStoreCash() {
         this.storeRepository.findAll();
     }
 

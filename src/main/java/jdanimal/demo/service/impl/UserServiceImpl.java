@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
             user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
         }
         this.userRepository.save(user);
-        this.userRepository.findAll();
+        updateCash();
         return true;
 
     }
@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
 
 
         this.userRepository.deleteById(id);
-        this.userRepository.findAll();
+        updateCash();
     }
 
 
@@ -303,6 +303,7 @@ public class UserServiceImpl implements UserService {
 
         allById.setAuthorities(authorities);
         this.userRepository.flush();
+        updateCash();
     }
 
     @Override
@@ -320,6 +321,11 @@ public class UserServiceImpl implements UserService {
 
         return "active";
 
+    }
+
+    @Override
+    public void updateCash() {
+        this.userRepository.findAll();
     }
 
 

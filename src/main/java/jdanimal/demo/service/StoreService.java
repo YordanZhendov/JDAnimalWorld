@@ -10,4 +10,5 @@ public interface StoreService {
     List<StoreViewModel> getAllStores();
     List<StoreViewModel> getAllStoresByUser(String username);
     void removeStore(String id);
+    void updateStoreCash();
 }

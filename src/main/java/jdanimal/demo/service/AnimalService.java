@@ -13,4 +13,5 @@ public interface AnimalService {
     void saveUrlAnimal(String id, String replaceFileName);
     void addLikedAnimalTotheCurrentUser(String id, String currentUserName);
     void disLikedAnimalTotheCurrentUser(String id, String currentUserName);
+    void updateAnimalCash();
 }

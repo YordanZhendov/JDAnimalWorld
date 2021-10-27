@@ -45,7 +45,9 @@ public class StorageServiceImpl {
         String replaceFileName = fileName.replace(" ", "+");
         userService.saveUrl(userProfileViewModel.getUsername(),replaceFileName);
          fileRecieved.delete();
-         return "File"+fileName+"successfully uploaded";
+
+        this.userService.updateCash();
+        return "File"+fileName+"successfully uploaded";
     };
 
 
@@ -57,6 +59,8 @@ public class StorageServiceImpl {
 
         animalService.saveUrlAnimal(id,replaceFileName);
         fileRecieved.delete();
+
+        this.animalService.updateAnimalCash();
          return "File"+fileName+"successfully uploaded";
 
     }
@@ -68,6 +72,7 @@ public class StorageServiceImpl {
         String replaceFileName = fileName.replace(" ", "+");
         accessoryService.saveUrlAccessory(id,replaceFileName);
         fileRecieved.delete();
+        this.accessoryService.updateAccessoryCash();
         return "File"+fileName+"successfully uploaded";
     }
 

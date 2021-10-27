@@ -33,7 +33,7 @@ public class AccessoryServiceImpl implements AccessoryService {
         User currentUser = this.userRepository.findByUsername(byUsername.getUsername());
         accessory.setUser(currentUser);
         this.accessoryRepository.saveAndFlush(accessory);
-        this.accessoryRepository.findAll();
+        updateAccessoryCash();
     }
 
     @Override
@@ -56,8 +56,7 @@ public class AccessoryServiceImpl implements AccessoryService {
         Accessory accessoryById = accessoryRepository.findAccessoryById(id);
         this.userService.removeAccessoryFromUsers(accessoryById);
         this.accessoryRepository.deleteById(id);
-        this.accessoryRepository.findAll();
-
+        updateAccessoryCash();
     }
 
     @Override
@@ -78,6 +77,11 @@ public class AccessoryServiceImpl implements AccessoryService {
         accessoryById.getUsers().remove(byUsername);
         userRepository.saveAndFlush(byUsername);
         accessoryRepository.saveAndFlush(accessoryById);
+    }
+
+    @Override
+    public void updateAccessoryCash() {
+        this.accessoryRepository.findAll();
     }
 
 }

@@ -31,4 +31,6 @@ public interface UserService extends UserDetailsService {
     void suspendUser(String id);
     void activateUser(String id);
     String checkUserStatus(String currentUserName);
+    void updateCash();
+
 }
