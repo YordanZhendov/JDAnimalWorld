@@ -27,12 +27,10 @@ public class RoleServiceImpl implements RoleService {
         Role role=new Role("ADMIN");
         Role roleUser=new Role("USER");
         Role roleGuest=new Role("GUEST");
-        Role roleSuspended=new Role("SUSPENDED");
 
         this.roleRepository.saveAndFlush(role);
         this.roleRepository.saveAndFlush(roleUser);
         this.roleRepository.saveAndFlush(roleGuest);
-        this.roleRepository.saveAndFlush(roleSuspended);
     }
 
     @Override

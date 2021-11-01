@@ -40,6 +40,8 @@ public class User extends BaseEntity implements UserDetails {
     private boolean policyAgree;
     @Column(name = "profile_picture")
     private String urlProfilePicture;
+    @Column(name = "user_status")
+    private boolean userStatus;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id")
@@ -55,10 +57,10 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Store> stores;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "users")
     private Set<Animal> likedAnimals;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "users")
     private Set<Accessory> likedAccessories;
 
     @Override
@@ -80,9 +82,8 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Transient
     public boolean isEnabled() {
-        return true;
+        return this.userStatus;
     }
 
 }

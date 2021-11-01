@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class IndexController {
 
-    private final UserService userService;
-
     //login page
     @GetMapping("/users/login")
     public String logIn(){
@@ -30,14 +28,6 @@ public class IndexController {
     //access denied page
     @GetMapping("/access-denied")
     public String accessDeniedPage(){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
         return "access-denied";
     }
 }

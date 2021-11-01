@@ -40,10 +40,6 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
 
-        String status = this.userService.checkUserStatus(currentUserName);
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
 
             UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);

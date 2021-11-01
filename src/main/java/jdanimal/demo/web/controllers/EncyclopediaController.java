@@ -24,13 +24,6 @@ public class EncyclopediaController {
     //encyclopedia form page
     @GetMapping("/encyclopedia/add")
     public String add(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String status = this.userService.checkUserStatus(authentication.getName());
-
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
         return "addencyclopedia";
     }
 
@@ -39,11 +32,6 @@ public class EncyclopediaController {
     public String animalEncyclopedia(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
 
         int size = this.userService.findByUsername(currentUserName).getAuthorities().size();
 
@@ -60,13 +48,6 @@ public class EncyclopediaController {
     public String addAnimaltoEncyclopedia(@Valid EncyclopediaAnimalBinding encyclopediaAnimalBinding,
                                           BindingResult bindingResult,
                                           RedirectAttributes redirectAttributes){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute(
@@ -91,13 +72,6 @@ public class EncyclopediaController {
     @GetMapping("/animal/filter/{name}")
     public String filterbyAnimal(@PathVariable(name = "name") String type,
                                  Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
 
         model.addAttribute("animals",this.encyclopediaService.animalsFilterbyName(type));
         return "animalencyclopedia";

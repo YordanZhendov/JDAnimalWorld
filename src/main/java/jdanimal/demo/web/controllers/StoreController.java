@@ -24,19 +24,10 @@ import javax.validation.Valid;
 public class StoreController {
 
     private final StoreService storeService;
-    private final UserService userService;
 
     //store form page
     @GetMapping("/addanimaltore")
     public String addStore(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
 
         if(!model.containsAttribute("userStoreUploadBinding")){
             model.addAttribute("userStoreUploadBinding",new UserStoreUploadBinding());
@@ -47,13 +38,6 @@ public class StoreController {
     //stores page
     @GetMapping("/animalstores")
     public String store(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
 
         model.addAttribute("storeViewModel",this.storeService.getAllStores());
         return "store";

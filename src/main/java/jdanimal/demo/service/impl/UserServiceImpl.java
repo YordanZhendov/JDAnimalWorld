@@ -51,30 +51,31 @@ public class UserServiceImpl implements UserService {
     public boolean register(UserRegistrationBinding userRegistrationBinding) {
         UserRegisterUploadModel userRegisterUploadModel = this.modelMapper.map(userRegistrationBinding, UserRegisterUploadModel.class);
 
-        if(!validationUtil.isValid(userRegisterUploadModel)){
+        if (!validationUtil.isValid(userRegisterUploadModel)) {
             return false;
         }
 
-        User user=this.modelMapper.map(userRegisterUploadModel,User.class);
+        User user = this.modelMapper.map(userRegisterUploadModel, User.class);
 
-        if(!userValidationSerivce.checkUser(user)){
+        if (!userValidationSerivce.checkUser(user)) {
             return false;
         }
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(this.bCryptPasswordEncoder.encode(user.getConfirmPassword()));
 
-        if(userRepository.count() == 0){
+        if (userRepository.count() == 0) {
             roleService.seedRoles();
             user.setAuthorities(this.roleService.findAllRoles()
-                    .stream().filter(roleServiceViewModel -> !roleServiceViewModel.getAuthority().equals("SUSPENDED")).map(r->this.modelMapper
-                            .map(r,Role.class))
+                    .stream().filter(roleServiceViewModel -> !roleServiceViewModel.getAuthority().equals("SUSPENDED")).map(r -> this.modelMapper
+                            .map(r, Role.class))
                     .collect(Collectors.toSet()));
-        }else {
+        } else {
 
             user.setAuthorities(new LinkedHashSet<>());
-            user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"),Role.class));
+            user.getAuthorities().add(this.modelMapper.map(this.roleService.findByAuthority("GUEST"), Role.class));
         }
+        user.setUserStatus(true);
         this.userRepository.save(user);
         updateCash();
         return true;
@@ -95,12 +96,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public List<AnimalViewModel> getAllAnimalsByUser(String username) {
         return this.animalRepository.getAnimalByUser(username)
                 .stream()
-                .map(animal -> this.modelMapper.map(animal,AnimalViewModel.class))
+                .map(animal -> this.modelMapper.map(animal, AnimalViewModel.class))
                 .collect(Collectors.toList());
     }
 
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
     public List<AccessoryViewModel> getAllAccessoriesByUser(String username) {
         return this.accessoryRepository.getAccessoriesByUser(username)
                 .stream()
-                .map(accessory -> this.modelMapper.map(accessory,AccessoryViewModel.class))
+                .map(accessory -> this.modelMapper.map(accessory, AccessoryViewModel.class))
                 .collect(Collectors.toList());
     }
 
@@ -130,35 +130,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUser(String id) {
-        List<User> allUsersInDB = getAllUsersInDB();
         List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
+        List<Accessory> accessories = accessoryRepository.getAccessoryByUserId(id);
+        List<Store> stores=storeRepository.getStoreByUserId(id);
+
         for (Animal animal : animalByUser) {
-            for (User user : allUsersInDB) {
-                user.getLikedAnimals().remove(animal);
-                userRepository.saveAndFlush(user);
-            }
-            animalRepository.deleteById(animal.getId());
+           animal.getUsers().clear();
         }
-        List<Accessory> accessoriesByUser = accessoryRepository.getAccessoryByUserId(id);
-        for (Accessory accessory : accessoriesByUser) {
 
-            for (User user : allUsersInDB) {
-                user.getLikedAccessories().remove(accessory);
-                userRepository.saveAndFlush(user);
-            }
-            accessoryRepository.deleteById(accessory.getId());
+        for (Animal animal : animalByUser) {
+            animalRepository.delete(animal);
         }
-        List<Store> storeByUser = storeRepository.getStoreByUserId(id);
-        for (Store store : storeByUser) {
-            storeRepository.deleteById(store.getId());
+        this.animalRepository.findAll();
 
+        for (Accessory accessory : accessories) {
+            accessory.getUsers().clear();
         }
+
+        for (Accessory accessory : accessories) {
+            accessoryRepository.delete(accessory);
+        }
+        this.accessoryRepository.findAll();
+
+        for (Store store : stores) {
+         this.storeRepository.delete(store);
+        }
+
+        this.storeRepository.findAll();
 
 
         this.userRepository.deleteById(id);
-        updateCash();
     }
-
 
     @Override
     public void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding) {
@@ -171,7 +173,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsersInDB() {
-        return this.userRepository.getAllUsers();
+        return this.userRepository.getAllUsersInDB();
     }
 
     @Override
@@ -279,48 +281,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void suspendUser(String id) {
-        User allById = userRepository.findAllById(id);
-
-        RoleServiceViewModel suspended = this.roleService.findByAuthority("SUSPENDED");
-
-        Set<Role> authorities = allById.getAuthorities();
-        authorities.removeAll(authorities);
-        authorities.add(this.modelMapper.map(suspended, Role.class));
-
-        allById.setAuthorities(authorities);
-        this.userRepository.flush();
-    }
-
-    @Override
-    public void activateUser(String id) {
-        User allById = userRepository.findAllById(id);
-
-        RoleServiceViewModel guest = this.roleService.findByAuthority("GUEST");
-
-        Set<Role> authorities = allById.getAuthorities();
-        authorities.removeAll(authorities);
-        authorities.add(this.modelMapper.map(guest, Role.class));
-
-        allById.setAuthorities(authorities);
-        this.userRepository.flush();
+        User deactivateUser = userRepository.findAllById(id);
+        deactivateUser.setUserStatus(false);
+        this.userRepository.saveAndFlush(deactivateUser);
         updateCash();
     }
 
     @Override
-    public String checkUserStatus(String currentUserName) {
-        UserProfileViewModel byUsername = findByUsername(currentUserName);
-        RoleServiceViewModel suspended = roleService.findByAuthority("SUSPENDED");
-
-        Set<Role> authorities = byUsername.getAuthorities();
-
-        for (Role authority : authorities) {
-            if(authority.getId().equals(suspended.getId())){
-                return "suspended";
-            }
-        }
-
-        return "active";
-
+    public void activateUser(String id) {
+        User activateUser = userRepository.findAllById(id);
+        activateUser.setUserStatus(true);
+        this.userRepository.saveAndFlush(activateUser);
+        updateCash();
     }
 
     @Override

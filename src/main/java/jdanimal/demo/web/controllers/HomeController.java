@@ -23,19 +23,10 @@ public class HomeController {
 
     private final AnimalService animalService;
     private final AccessoryService accessoryService;
-    private final UserService userService;
-    private final RoleRepository roleRepository;
 
     //Home, that shows All Animals and Accessories
     @GetMapping("/user/home")
     public String getHome(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
 
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
@@ -50,14 +41,6 @@ public class HomeController {
     @GetMapping("/user/filterby/animals")
     public String filterbyAnimal(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String status = this.userService.checkUserStatus(authentication.getName());
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
-
-
         List<AnimalViewModel> allAnimals = this.animalService.getAllAnimals();
 
         model.addAttribute("animals",allAnimals);
@@ -68,13 +51,6 @@ public class HomeController {
     //filter all Accessories
     @GetMapping("/user/filterby/accessories")
     public String filterbyAccessory(Model model){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String status = this.userService.checkUserStatus(authentication.getName());
-
-        if(status.equals("suspended")){
-            return "user-suspended";
-        }
 
         List<AccessoryViewModel> allAccessories = this.accessoryService.getAllAccessories();
 

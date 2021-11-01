@@ -30,7 +30,6 @@ public interface UserService extends UserDetailsService {
     void sendEmail();
     void suspendUser(String id);
     void activateUser(String id);
-    String checkUserStatus(String currentUserName);
     void updateCash();
 
 }
