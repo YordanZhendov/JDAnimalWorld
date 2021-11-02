@@ -26,7 +26,7 @@
                                     Filter by Animal's type
                                 </a>
 
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu" id="allTypeAnimals" aria-labelledby="dropdownMenuLink">
                                     <li>
                                         <a class="dropdown-item" th:href="@{/user/animalencyclopedia}">Show All</a>
                                     </li>
@@ -182,7 +182,7 @@
         position: fixed;
     }
 
-    .dropdown-menu {
+    #allTypeAnimals {
         max-height:200px;
         overflow:scroll;
     }
