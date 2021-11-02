@@ -141,7 +141,6 @@ public class UserServiceImpl implements UserService {
         for (Animal animal : animalByUser) {
             animalRepository.delete(animal);
         }
-        this.animalRepository.findAll();
 
         for (Accessory accessory : accessories) {
             accessory.getUsers().clear();
@@ -150,14 +149,10 @@ public class UserServiceImpl implements UserService {
         for (Accessory accessory : accessories) {
             accessoryRepository.delete(accessory);
         }
-        this.accessoryRepository.findAll();
 
         for (Store store : stores) {
          this.storeRepository.delete(store);
         }
-
-        this.storeRepository.findAll();
-
 
         this.userRepository.deleteById(id);
     }

@@ -10,4 +10,5 @@ public interface EncyclopediaService {
     List<EncyclopediaAnimalViewModel> findAllAnimalsInEncyclopedia();
     void removeAnimalFromEncyclopedia(String id);
     List<EncyclopediaAnimalViewModel> animalsFilterbyName(String type);
+    void updateEncyclopedia();
 }
