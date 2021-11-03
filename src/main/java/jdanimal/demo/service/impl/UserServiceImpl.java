@@ -3,7 +3,6 @@ package jdanimal.demo.service.impl;
 import jdanimal.demo.data.*;
 import jdanimal.demo.data.Store;
 import jdanimal.demo.service.models.UserRegisterUploadModel;
-import jdanimal.demo.service.views.RoleServiceViewModel;
 import jdanimal.demo.web.binding.UserLoginBinding;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
@@ -173,7 +172,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserProfileViewModel> getAllUsersForUserControl(){
-        return this.userRepository.getAllUsersByRoleType().stream()
+        return this.userRepository.getAllUsersWithoutAdmin().stream()
                 .map(user -> this.modelMapper.map(user,UserProfileViewModel.class)).collect(Collectors.toList());
     }
 
@@ -276,18 +275,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void suspendUser(String id) {
-        User deactivateUser = userRepository.findAllById(id);
-        deactivateUser.setUserStatus(false);
-        this.userRepository.saveAndFlush(deactivateUser);
-        updateCash();
+        User deactivateUser = userRepository.findById(id).orElse(null);
+        if(deactivateUser != null){
+            deactivateUser.setUserStatus(false);
+            this.userRepository.saveAndFlush(deactivateUser);
+            updateCash();
+        }
     }
 
     @Override
     public void activateUser(String id) {
-        User activateUser = userRepository.findAllById(id);
-        activateUser.setUserStatus(true);
-        this.userRepository.saveAndFlush(activateUser);
-        updateCash();
+        User activateUser = userRepository.findById(id).orElse(null);
+        if(activateUser != null){
+            activateUser.setUserStatus(true);
+            this.userRepository.saveAndFlush(activateUser);
+            updateCash();
+        }
     }
 
     @Override

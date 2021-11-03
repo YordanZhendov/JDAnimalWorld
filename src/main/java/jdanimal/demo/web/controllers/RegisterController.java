@@ -3,6 +3,7 @@ package jdanimal.demo.web.controllers;
 import jdanimal.demo.web.binding.UserRegistrationBinding;
 import jdanimal.demo.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 public class RegisterController {
 
     private final UserService userService;
+
 
     //Registration page
     @GetMapping("/users/register")

@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User,String> {
     boolean existsAllByPhoneNumber(String phoneNumber);
     Optional<User> findByUsernameAndPassword(String username, String password);
     User findByUsername(String username);
-    User findAllById(String id);
+    Optional<User> findById(String id);
 
     @Cacheable("users")
     @Query("select s from User as s")
@@ -30,7 +30,7 @@ public interface UserRepository extends JpaRepository<User,String> {
     List<User> findAll();
 
     @Query("select s from User as s where s.authorities.size < 3 ")
-    List<User>  getAllUsersByRoleType();
+    List<User> getAllUsersWithoutAdmin();
 
 
 
