@@ -27,13 +27,29 @@ public class AccessoryServiceImpl implements AccessoryService {
     private final UserService userService;
 
     @Override
-    public void upload(UserAccessoryUploadBinding userAccessoryUploadBinding, UserProfileViewModel byUsername) {
+    public Accessory upload(UserAccessoryUploadBinding userAccessoryUploadBinding, UserProfileViewModel byUsername) {
+
         UserAccessoryUploadModel mappedAccessory = this.modelMapper.map(userAccessoryUploadBinding, UserAccessoryUploadModel.class);
         Accessory accessory = this.modelMapper.map(mappedAccessory, Accessory.class);
         User currentUser = this.userRepository.findByUsername(byUsername.getUsername());
         accessory.setUser(currentUser);
-        this.accessoryRepository.saveAndFlush(accessory);
+        Accessory accessoryUploaded = this.accessoryRepository.saveAndFlush(accessory);
         updateAccessoryCash();
+        return accessoryUploaded;
+    }
+
+    @Override
+    public boolean removeAccessoryById(String id) {
+        try {
+            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            this.userService.removeAccessoryFromUsers(accessoryById);
+            this.accessoryRepository.deleteById(id);
+            updateAccessoryCash();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     @Override
@@ -45,43 +61,57 @@ public class AccessoryServiceImpl implements AccessoryService {
     }
 
     @Override
-    public void saveUrlAccessory(String id, String replaceFileName) {
-        Accessory accessoryById = accessoryRepository.findAccessoryById(id);
-        accessoryById.setUrlAccessoryPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
-        accessoryRepository.saveAndFlush(accessoryById);
+    public boolean saveUrlAccessory(String id, String replaceFileName) {
+        try {
+            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            accessoryById.setUrlAccessoryPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
+            accessoryRepository.saveAndFlush(accessoryById);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
+    @Override
+    public boolean addLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
+        try {
+            User byUsername = userRepository.findByUsername(currentUserName);
+            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+
+            byUsername.getLikedAccessories().add(accessoryById);
+            accessoryById.getUsers().add(byUsername);
+
+            userRepository.saveAndFlush(byUsername);
+            accessoryRepository.saveAndFlush(accessoryById);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public void removeAccessory(String id) {
-        Accessory accessoryById = accessoryRepository.findAccessoryById(id);
-        this.userService.removeAccessoryFromUsers(accessoryById);
-        this.accessoryRepository.deleteById(id);
-        updateAccessoryCash();
+    public boolean disLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
+        try {
+            User byUsername = userRepository.findByUsername(currentUserName);
+            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            byUsername.getLikedAccessories().remove(accessoryById);
+            accessoryById.getUsers().remove(byUsername);
+            userRepository.saveAndFlush(byUsername);
+            accessoryRepository.saveAndFlush(accessoryById);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public void addLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
-        User byUsername = userRepository.findByUsername(currentUserName);
-        Accessory accessoryById = accessoryRepository.findAccessoryById(id);
-        byUsername.getLikedAccessories().add(accessoryById);
-        accessoryById.getUsers().add(byUsername);
-        userRepository.saveAndFlush(byUsername);
-        accessoryRepository.saveAndFlush(accessoryById);
+    public boolean updateAccessoryCash() {
+        try {
+           this.accessoryRepository.findAll();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
-
-    @Override
-    public void disLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
-        User byUsername = userRepository.findByUsername(currentUserName);
-        Accessory accessoryById = accessoryRepository.findAccessoryById(id);
-        byUsername.getLikedAccessories().remove(accessoryById);
-        accessoryById.getUsers().remove(byUsername);
-        userRepository.saveAndFlush(byUsername);
-        accessoryRepository.saveAndFlush(accessoryById);
-    }
-
-    @Override
-    public void updateAccessoryCash() {
-        this.accessoryRepository.findAll();
-    }
-
 }

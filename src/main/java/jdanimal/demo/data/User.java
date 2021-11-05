@@ -57,10 +57,10 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Store> stores;
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "users")
+    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
     private Set<Animal> likedAnimals;
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "users")
+    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
     private Set<Accessory> likedAccessories;
 
     @Override

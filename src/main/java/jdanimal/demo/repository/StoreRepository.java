@@ -22,7 +22,7 @@ public interface StoreRepository extends JpaRepository<Store,String> {
     List<Store> findAll();
 
     @Query("select a from Store as a WHERE a.user.username=?1")
-    List<Store> getStoreByUser(String username);
+    List<Store> getStoreByUserUsername(String username);
 
     @Query("select a from Store as a WHERE a.user.id=?1")
     List<Store> getStoreByUserId(String id);

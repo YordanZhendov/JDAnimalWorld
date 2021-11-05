@@ -33,7 +33,7 @@ public class Accessory extends BaseEntity{
     private String description;
     @ManyToOne
     private User user;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users;
 
 }

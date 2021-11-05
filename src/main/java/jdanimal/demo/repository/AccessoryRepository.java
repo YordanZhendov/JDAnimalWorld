@@ -20,7 +20,7 @@ public interface AccessoryRepository extends JpaRepository<Accessory,String> {
     List<Accessory> findAll();
 
     @Query("select a from Accessory as a WHERE a.user.username=?1")
-    List<Accessory> getAccessoriesByUser(String username);
+    List<Accessory> getAccessoriesByUserUsername(String username);
 
     Accessory findAccessoryById(String id);
 

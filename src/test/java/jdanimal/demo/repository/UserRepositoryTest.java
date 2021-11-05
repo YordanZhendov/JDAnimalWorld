@@ -46,13 +46,8 @@ class UserRepositoryTest {
         userRepository.save(user);
         userRepository.save(user2);
     }
+
     //Testing User Entity  ->>>>>>>> NOT BINDING MODELS!!!
-
-    @Test
-    public void registerUser() {
-        assertEquals(2,userRepository.count());
-    }
-
     @Test
     public void enterTwoUsersMustThrowException(){
         User user = new User();
@@ -74,42 +69,7 @@ class UserRepositoryTest {
 
     }
 
-    @Test
-    public void enterTwoDifferentUsers(){
-        User user = new User();
-        user.setUsername("Dimo");
-        user.setFullName("Dimo Ivanov");
-        user.setPassword("12345");
-        user.setConfirmPassword("12345");
-        user.setEmail("dimoI@abv.bg");
-        user.setPostcode("4445");
-        user.setPhoneNumber("0856577851");
-        user.setCity("Varna");
-        user.setCountry("Bulgaria");
-        user.setPolicyAgree(true);
-        user.setUserStatus(true);
-
-        User user2 = new User();
-        user2.setUsername("Pesho");
-        user2.setFullName("Pesho Ivanov");
-        user2.setPassword("12345");
-        user2.setConfirmPassword("12345");
-        user2.setEmail("peshoi@abv.bg");
-        user2.setPostcode("5555");
-        user2.setPhoneNumber("0226254851");
-        user2.setCity("Varna");
-        user2.setCountry("Bulgaria");
-        user2.setPolicyAgree(true);
-        user2.setUserStatus(true);
-
-        userRepository.save(user);
-        userRepository.save(user2);
-
-
-    }
-
     //Testing User Repository
-
     @Test
     public void checkIfUserExistsByUsername(){
 

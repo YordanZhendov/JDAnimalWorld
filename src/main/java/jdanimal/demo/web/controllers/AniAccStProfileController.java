@@ -2,7 +2,6 @@ package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
-import jdanimal.demo.service.StoreService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
 import jdanimal.demo.service.views.UserProfileViewModel;
@@ -91,7 +90,7 @@ public class AniAccStProfileController {
     //accessory delete
     @GetMapping("/accessory/delete/{id}")
     public String deleteAccessory(@PathVariable(value = "id") String id){
-        accessoryService.removeAccessory(id);
+        accessoryService.removeAccessoryById(id);
         return "redirect:/user/profile";
     }
 

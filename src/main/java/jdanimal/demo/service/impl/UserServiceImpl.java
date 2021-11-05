@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<AnimalViewModel> getAllAnimalsByUser(String username) {
-        return this.animalRepository.getAnimalByUser(username)
+        return this.animalRepository.getAnimalByUserUserName(username)
                 .stream()
                 .map(animal -> this.modelMapper.map(animal, AnimalViewModel.class))
                 .collect(Collectors.toList());
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<AccessoryViewModel> getAllAccessoriesByUser(String username) {
-        return this.accessoryRepository.getAccessoriesByUser(username)
+        return this.accessoryRepository.getAccessoriesByUserUsername(username)
                 .stream()
                 .map(accessory -> this.modelMapper.map(accessory, AccessoryViewModel.class))
                 .collect(Collectors.toList());
