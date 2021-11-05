@@ -23,14 +23,19 @@ public class RoleServiceImpl implements RoleService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void seedRoles() {
-        Role role=new Role("ADMIN");
-        Role roleUser=new Role("USER");
-        Role roleGuest=new Role("GUEST");
+    public boolean seedRoles() {
+        try {
+            Role role=new Role("ADMIN");
+            Role roleUser=new Role("USER");
+            Role roleGuest=new Role("GUEST");
 
-        this.roleRepository.saveAndFlush(role);
-        this.roleRepository.saveAndFlush(roleUser);
-        this.roleRepository.saveAndFlush(roleGuest);
+            this.roleRepository.saveAndFlush(role);
+            this.roleRepository.saveAndFlush(roleUser);
+            this.roleRepository.saveAndFlush(roleGuest);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override

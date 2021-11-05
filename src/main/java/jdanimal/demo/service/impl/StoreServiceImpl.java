@@ -41,7 +41,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<StoreViewModel> getAllStores() {
-        return this.storeRepository.getAllStores()
+        return this.storeRepository.findAllStores()
                 .stream()
                 .map(store -> this.modelMapper.map(store, StoreViewModel.class))
                 .collect(Collectors.toList());
@@ -54,14 +54,24 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void removeStore(String id) {
-        this.storeRepository.deleteById(id);
-        updateStoreCash();
+    public boolean removeStore(String id) {
+        try {
+            this.storeRepository.deleteById(id);
+            updateStoreCash();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public void updateStoreCash() {
-        this.storeRepository.findAll();
+    public boolean updateStoreCash() {
+        try {
+           this.storeRepository.findAll();
+           return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 }

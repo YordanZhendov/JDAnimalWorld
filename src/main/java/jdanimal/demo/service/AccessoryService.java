@@ -8,13 +8,14 @@ import jdanimal.demo.service.views.UserProfileViewModel;
 import java.util.List;
 
 public interface AccessoryService {
+    List<AccessoryViewModel> getAllAccessories();
+    boolean updateAccessoryCash();
+
     Accessory upload(UserAccessoryUploadBinding userAccessoryUploadBinding, UserProfileViewModel byUsername);
     boolean removeAccessoryById(String id);
-    List<AccessoryViewModel> getAllAccessories();
     boolean saveUrlAccessory(String id, String replaceFileName);
 
-    boolean addLikedAccessoryTotheCurrentUser(String id, String currentUserName);
-    boolean disLikedAccessoryTotheCurrentUser(String id, String currentUserName);
+    boolean addLikedAccessoryToTheCurrentUser(String id, String currentUserName);
+    boolean disLikedAccessoryToTheCurrentUser(String id, String currentUserName);
 
-    boolean updateAccessoryCash();
 }

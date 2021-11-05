@@ -74,7 +74,7 @@ public class AccessoryServiceImpl implements AccessoryService {
 
 
     @Override
-    public boolean addLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
+    public boolean addLikedAccessoryToTheCurrentUser(String id, String currentUserName) {
         try {
             User byUsername = userRepository.findByUsername(currentUserName);
             Accessory accessoryById = accessoryRepository.findAccessoryById(id);
@@ -91,7 +91,7 @@ public class AccessoryServiceImpl implements AccessoryService {
     }
 
     @Override
-    public boolean disLikedAccessoryTotheCurrentUser(String id, String currentUserName) {
+    public boolean disLikedAccessoryToTheCurrentUser(String id, String currentUserName) {
         try {
             User byUsername = userRepository.findByUsername(currentUserName);
             Accessory accessoryById = accessoryRepository.findAccessoryById(id);

@@ -36,54 +36,80 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public void uploadAnimal(UserAnimalUploadBinding userAnimalUploadBinding, UserProfileViewModel userProfileInfo){
+    public Animal uploadAnimal(UserAnimalUploadBinding userAnimalUploadBinding, UserProfileViewModel userProfileInfo){
         UserAnimalUploadModel mappedAnimal = this.modelMapper.map(userAnimalUploadBinding, UserAnimalUploadModel.class);
         Animal mappedAnimalEntity = this.modelMapper.map(mappedAnimal, Animal.class);
         User byUsername = this.userRepository.findByUsername(userProfileInfo.getUsername());
         mappedAnimalEntity.setUser(byUsername);
-        this.animalRepository.saveAndFlush(mappedAnimalEntity);
+        Animal animal = this.animalRepository.saveAndFlush(mappedAnimalEntity);
         updateAnimalCash();
-    }
-
-    @Override
-    public void removeAnimal(String id) {
-        Animal animalById = animalRepository.findAnimalById(id);
-        this.userService.removeAnimalFromUsers(animalById);
-        this.animalRepository.deleteById(id);
-        updateAnimalCash();
+        return animal;
 
     }
 
     @Override
-    public void saveUrlAnimal(String id, String replaceFileName) {
-        Animal animalById = animalRepository.findAnimalById(id);
-        animalById.setUrlAnimalPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
-        animalRepository.saveAndFlush(animalById);
+    public boolean removeAnimal(String id) {
+        try {
+            Animal animalById = animalRepository.findAnimalById(id);
+            this.userService.removeAnimalFromUsers(animalById);
+            this.animalRepository.deleteById(id);
+            updateAnimalCash();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     @Override
-    public void addLikedAnimalTotheCurrentUser(String id, String currentUserName) {
-        User byUsername = userRepository.findByUsername(currentUserName);
-        Animal animalById = animalRepository.findAnimalById(id);
-        byUsername.getLikedAnimals().add(animalById);
-        animalById.getUsers().add(byUsername);
-        userRepository.saveAndFlush(byUsername);
-        animalRepository.saveAndFlush(animalById);
+    public boolean saveUrlAnimal(String id, String replaceFileName) {
+        try {
+            Animal animalById = animalRepository.findAnimalById(id);
+            animalById.setUrlAnimalPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
+            animalRepository.saveAndFlush(animalById);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public void disLikedAnimalTotheCurrentUser(String id, String currentUserName) {
-        User byUsername = userRepository.findByUsername(currentUserName);
-        Animal animalById = animalRepository.findAnimalById(id);
-        byUsername.getLikedAnimals().remove(animalById);
-        animalById.getUsers().remove(byUsername);
-        userRepository.saveAndFlush(byUsername);
-        animalRepository.saveAndFlush(animalById);
+    public boolean addLikedAnimalToTheCurrentUser(String id, String currentUserName) {
+        try {
+            User byUsername = userRepository.findByUsername(currentUserName);
+            Animal animalById = animalRepository.findAnimalById(id);
+            byUsername.getLikedAnimals().add(animalById);
+            animalById.getUsers().add(byUsername);
+            userRepository.saveAndFlush(byUsername);
+            animalRepository.saveAndFlush(animalById);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public void updateAnimalCash() {
-        this.animalRepository.findAll();
+    public boolean disLikedAnimalToTheCurrentUser(String id, String currentUserName) {
+        try {
+            User byUsername = userRepository.findByUsername(currentUserName);
+            Animal animalById = animalRepository.findAnimalById(id);
+            byUsername.getLikedAnimals().remove(animalById);
+            animalById.getUsers().remove(byUsername);
+            userRepository.saveAndFlush(byUsername);
+            animalRepository.saveAndFlush(animalById);
+            return true;
+        }catch (Exception e){
+            return  false;
+        }
     }
 
+    @Override
+    public boolean updateAnimalCash() {
+        try {
+            this.animalRepository.findAll();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

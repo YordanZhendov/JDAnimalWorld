@@ -22,11 +22,16 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void saveInDB(EncyclopediaAnimalBinding encyclopediaAnimalBinding) {
-        EncyclopediaAnimalUploadModel mapped = this.modelMapper.map(encyclopediaAnimalBinding, EncyclopediaAnimalUploadModel.class);
-        EncyclopediaAnimal mappedToEntity = this.modelMapper.map(mapped, EncyclopediaAnimal.class);
-        this.encyclopediaRepository.saveAndFlush(mappedToEntity);
-        updateEncyclopedia();
+    public boolean saveInDB(EncyclopediaAnimalBinding encyclopediaAnimalBinding) {
+        try {
+            EncyclopediaAnimalUploadModel mapped = this.modelMapper.map(encyclopediaAnimalBinding, EncyclopediaAnimalUploadModel.class);
+            EncyclopediaAnimal mappedToEntity = this.modelMapper.map(mapped, EncyclopediaAnimal.class);
+            this.encyclopediaRepository.saveAndFlush(mappedToEntity);
+            updateEncyclopedia();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -37,21 +42,30 @@ public class EncyclopediaServiceImpl implements EncyclopediaService {
     }
 
     @Override
-    public void removeAnimalFromEncyclopedia(String id) {
-        this.encyclopediaRepository.deleteById(id);
-        updateEncyclopedia();
+    public boolean removeAnimalFromEncyclopedia(String id) {
+        try {
+            this.encyclopediaRepository.deleteById(id);
+            updateEncyclopedia();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public List<EncyclopediaAnimalViewModel> animalsFilterbyName(String type) {
-        AnimalType animalType = AnimalType.valueOf(type);
-        return this.encyclopediaRepository.getAllByTypeOfAnimal(animalType).stream().map(encyclopediaAnimal ->
-                this.modelMapper.map(encyclopediaAnimal,EncyclopediaAnimalViewModel.class)).collect(Collectors.toList());
+    public List<EncyclopediaAnimalViewModel> animalsFilterByType(String type) {
+        return this.encyclopediaRepository.getAllByTypeOfAnimal(AnimalType.valueOf(type)).stream().map(encyclopediaAnimal ->
+                this.modelMapper.map(encyclopediaAnimal, EncyclopediaAnimalViewModel.class)).collect(Collectors.toList());
     }
 
     @Override
-    public void updateEncyclopedia() {
-        this.encyclopediaRepository.findAll();
+    public boolean updateEncyclopedia() {
+        try {
+            this.encyclopediaRepository.findAll();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 }

@@ -1,13 +1,13 @@
 package jdanimal.demo.service;
 
 import jdanimal.demo.DemoApplication;
-import jdanimal.demo.data.Accessory;
+import jdanimal.demo.data.Animal;
 import jdanimal.demo.data.User;
-import jdanimal.demo.repository.AccessoryRepository;
+import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.UserRepository;
-import jdanimal.demo.service.views.AccessoryViewModel;
+import jdanimal.demo.service.views.AnimalViewModel;
 import jdanimal.demo.service.views.UserProfileViewModel;
-import jdanimal.demo.web.binding.UserAccessoryUploadBinding;
+import jdanimal.demo.web.binding.UserAnimalUploadBinding;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,31 +17,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
-class AccessoryServiceTest {
+class AnimalServiceTest {
 
     @Autowired
-    private AccessoryService accessoryService;
+    private AnimalService animalService;
+
     @Autowired
-    private UserRepository userRepository;
+    private AnimalRepository animalRepository;
+
     @Autowired
     private ModelMapper modelMapper;
+
     @Autowired
-    private AccessoryRepository accessoryRepository;
+    private UserRepository userRepository;
 
     User savedU;
-    Accessory upload;
-    UserAccessoryUploadBinding savedAc;
+    Animal upload;
+    UserAnimalUploadBinding savedAn;
     UserProfileViewModel mappedUser;
 
     @BeforeEach
     void setUp() {
+
         User user1 = new User();
         user1.setUsername("Ivan");
         user1.setPassword("12345");
@@ -65,59 +68,56 @@ class AccessoryServiceTest {
         savedU = userRepository.save(user);
         mappedUser = this.modelMapper.map(savedU, UserProfileViewModel.class);
 
-        savedAc =new UserAccessoryUploadBinding();
-        savedAc.setAccessoryPrice(new BigDecimal(5));
-        savedAc.setDescription("Never used");
-        savedAc.setDaysUsed(0);
-        savedAc.setAvailableTill("22-2-2021");
-        savedAc.setAccessoryName("Ball");
-
-        upload = accessoryService.upload(savedAc, mappedUser);
+        savedAn=new UserAnimalUploadBinding();
+        savedAn.setFoodOfAnimal("Meat");
+        savedAn.setGamesOfAnimal("Ball");
+        savedAn.setTypeOfAnimal("Golden Retriver");
+        savedAn.setAgeOfAnimal("3");
+        savedAn.setKilogramsOfAnimal("40");
+        upload = animalService.uploadAnimal(savedAn, mappedUser);
     }
 
     @Test
-    void upload() {
+    void uploadAnimal() {
         assertNotNull(upload);
     }
 
     @Test
-    void removeAccessory() {
-        assertTrue(accessoryService.removeAccessoryById(upload.getId()));
+    void getAllAnimals() {
+        List<AnimalViewModel> allAnimals = animalService.getAllAnimals();
+        assertEquals(1,allAnimals.size());
     }
 
     @Test
-    void getAllAccessories() {
-        List<AccessoryViewModel> allAccessories = accessoryService.getAllAccessories();
-        assertEquals(1,allAccessories.size());
+    void removeAnimal() {
+        assertTrue(animalService.removeAnimal(upload.getId()));
     }
 
     @Test
-    void saveUrlAccessory() {
-        assertTrue(accessoryService.saveUrlAccessory(upload.getId(),"df63d0e07528eb159a7209a3cd354ef7"));
+    void saveUrlAnimal() {
+        assertTrue(animalService.saveUrlAnimal(upload.getId(),"Kurzhaardackel"));
     }
 
     @Test
-    void addLikedAccessoryToTheCurrentUser() {
-        assertTrue(accessoryService.addLikedAccessoryToTheCurrentUser(upload.getId(),"Ivan"));
-        assertTrue(accessoryService.addLikedAccessoryToTheCurrentUser(upload.getId(),"Joro"));
-
+    void addLikedAnimalToTheCurrentUser() {
+        assertTrue(animalService.addLikedAnimalToTheCurrentUser(upload.getId(),"Ivan"));
+        assertTrue(animalService.addLikedAnimalToTheCurrentUser(upload.getId(),"Joro"));
     }
 
     @Test
-    void disLikedAccessoryToTheCurrentUser() {
-        assertTrue(accessoryService.disLikedAccessoryToTheCurrentUser(upload.getId(),"Ivan"));
-        assertTrue(accessoryService.disLikedAccessoryToTheCurrentUser(upload.getId(),"Joro"));
+    void disLikedAnimalToTheCurrentUser() {
+        assertTrue(animalService.disLikedAnimalToTheCurrentUser(upload.getId(),"Ivan"));
+        assertTrue(animalService.disLikedAnimalToTheCurrentUser(upload.getId(),"Joro"));
     }
 
     @Test
-    void updateAccessoryCash() {
-        assertTrue(accessoryService.updateAccessoryCash());
+    void updateAnimalCash() {
+        assertTrue(animalService.updateAnimalCash());
     }
-
 
     @AfterEach
     void tearDown() {
-        accessoryRepository.deleteAll();
+        animalRepository.deleteAll();
         userRepository.deleteAll();
     }
 }

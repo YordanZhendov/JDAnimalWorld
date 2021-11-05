@@ -73,7 +73,7 @@ public class EncyclopediaController {
     public String filterbyAnimal(@PathVariable(name = "name") String type,
                                  Model model){
 
-        model.addAttribute("animals",this.encyclopediaService.animalsFilterbyName(type));
+        model.addAttribute("animals",this.encyclopediaService.animalsFilterByType(type));
         return "animalencyclopedia";
     }
 

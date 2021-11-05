@@ -21,6 +21,9 @@ public interface StoreRepository extends JpaRepository<Store,String> {
     @CachePut("stores")
     List<Store> findAll();
 
+    @Query("select s from Store as s")
+    List<Store> findAllStores();
+
     @Query("select a from Store as a WHERE a.user.username=?1")
     List<Store> getStoreByUserUsername(String username);
 

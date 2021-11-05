@@ -52,7 +52,7 @@ public class AniAccStProfileController {
     public String likeAnimal(@PathVariable(value = "id") String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        animalService.addLikedAnimalTotheCurrentUser(id,currentUserName);
+        animalService.addLikedAnimalToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/home";
     };
@@ -62,7 +62,7 @@ public class AniAccStProfileController {
     public String dislikeAnimal(@PathVariable(value = "id") String  id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        animalService.disLikedAnimalTotheCurrentUser(id,currentUserName);
+        animalService.disLikedAnimalToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/profile";
     }
@@ -99,7 +99,7 @@ public class AniAccStProfileController {
     public String likeAccessory(@PathVariable(value = "id") String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        accessoryService.addLikedAccessoryTotheCurrentUser(id,currentUserName);
+        accessoryService.addLikedAccessoryToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/home";
     };
@@ -109,7 +109,7 @@ public class AniAccStProfileController {
     public String dislikeAccessory(@PathVariable(value = "id") String  id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        accessoryService.disLikedAccessoryTotheCurrentUser(id,currentUserName);
+        accessoryService.disLikedAccessoryToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/profile";
     }

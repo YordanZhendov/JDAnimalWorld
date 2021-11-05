@@ -5,7 +5,7 @@ import java.util.Set;
 
 
 public interface RoleService {
-    void seedRoles();
+    boolean seedRoles();
     Set<RoleServiceViewModel> findAllRoles();
     RoleServiceViewModel findByAuthority(String role);
 
