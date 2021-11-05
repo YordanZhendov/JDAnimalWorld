@@ -48,10 +48,10 @@ public class User extends BaseEntity implements UserDetails {
             ,inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> authorities;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private Set<Animal> animals;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private Set<Accessory> accessories;
 
     @OneToMany(mappedBy = "user")

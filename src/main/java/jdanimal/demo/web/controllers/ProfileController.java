@@ -46,7 +46,7 @@ public class ProfileController {
 
             String username = userProfileInfo.getUsername();
 
-            List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUser(username);
+            List<AnimalViewModel> allAnimalsByUser = this.userService.getAllAnimalsByUserName(username);
             List<AccessoryViewModel> allAccessoriesByUser = this.userService.getAllAccessoriesByUser(username);
             List<StoreViewModel> allStoresByUser = this.storeService.getAllStoresByUser(username);
             Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();

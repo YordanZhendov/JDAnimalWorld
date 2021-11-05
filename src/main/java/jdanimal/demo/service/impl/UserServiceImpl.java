@@ -10,7 +10,7 @@ import jdanimal.demo.repository.StoreRepository;
 import jdanimal.demo.repository.UserRepository;
 import jdanimal.demo.service.RoleService;
 import jdanimal.demo.service.UserService;
-import jdanimal.demo.service.UserValidationSerivce;
+import jdanimal.demo.service.UserValidationService;
 import jdanimal.demo.web.binding.UserRegistrationBinding;
 import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     private final AnimalRepository animalRepository;
     private final AccessoryRepository accessoryRepository;
     private final StoreRepository storeRepository;
-    private final UserValidationSerivce userValidationSerivce;
+    private final UserValidationService userValidationService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
     private final RoleService roleService;
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
         User user = this.modelMapper.map(userRegisterUploadModel, User.class);
 
-        if (!userValidationSerivce.checkUser(user)) {
+        if (!userValidationService.checkUser(user)) {
             return false;
         }
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.count() == 0) {
             roleService.seedRoles();
             user.setAuthorities(this.roleService.findAllRoles()
-                    .stream().filter(roleServiceViewModel -> !roleServiceViewModel.getAuthority().equals("SUSPENDED")).map(r -> this.modelMapper
+                    .stream().map(r -> this.modelMapper
                             .map(r, Role.class))
                     .collect(Collectors.toSet()));
         } else {
@@ -82,13 +82,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User validUser(UserLoginBinding userLoginBinding) {
-        userLoginBinding.setPassword(this.bCryptPasswordEncoder.encode(userLoginBinding.getPassword()));
-        User userLogin = this.modelMapper.map(userLoginBinding, User.class);
-        return this.userRepository.findByUsernameAndPassword(userLogin.getUsername(), userLogin.getPassword()).orElse(null);
-    }
-
-    @Override
     public UserProfileViewModel findByUsername(String currentUserName) {
         User byUsername = this.userRepository.findByUsername(currentUserName);
         return this.modelMapper.map(byUsername, UserProfileViewModel.class);
@@ -96,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<AnimalViewModel> getAllAnimalsByUser(String username) {
+    public List<AnimalViewModel> getAllAnimalsByUserName(String username) {
         return this.animalRepository.getAnimalByUserUserName(username)
                 .stream()
                 .map(animal -> this.modelMapper.map(animal, AnimalViewModel.class))
@@ -166,14 +159,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsersInDB() {
-        return this.userRepository.getAllUsersInDB();
-    }
-
-    @Override
     public List<UserProfileViewModel> getAllUsersForUserControl(){
         return this.userRepository.getAllUsersWithoutAdmin().stream()
-                .map(user -> this.modelMapper.map(user,UserProfileViewModel.class)).collect(Collectors.toList());
+                .map(user -> this.modelMapper.map(user, UserProfileViewModel.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -189,7 +177,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendEmail(){
+    public boolean sendEmail(){
 
         // Sender's email ID needs to be mentioned
         String sender = "jzanimalteam@gmail.com";
@@ -217,7 +205,7 @@ public class UserServiceImpl implements UserService {
 
         });
 
-        List<User> all = this.userRepository.findAll();
+        List<User> all = this.userRepository.getAllUsersInDB();
 
         List<String> emails=new ArrayList<>();
         emails.add("jordan.zhendov@abv.bg");
@@ -226,7 +214,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if(emails.size() == 0){
-            return;
+            return false;
         }
 
 
@@ -266,36 +254,48 @@ public class UserServiceImpl implements UserService {
             // Send message
             Transport.send(message);
 //            System.out.println("Sent message successfully....");
+            return true;
 
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            return false;
         }
 
     }
 
     @Override
-    public void suspendUser(String id) {
+    public boolean suspendUser(String id) {
         User deactivateUser = userRepository.findById(id).orElse(null);
         if(deactivateUser != null){
             deactivateUser.setUserStatus(false);
             this.userRepository.saveAndFlush(deactivateUser);
             updateCash();
+            return true;
         }
+
+        return false;
     }
 
     @Override
-    public void activateUser(String id) {
+    public boolean activateUser(String id) {
         User activateUser = userRepository.findById(id).orElse(null);
         if(activateUser != null){
             activateUser.setUserStatus(true);
             this.userRepository.saveAndFlush(activateUser);
             updateCash();
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void updateCash() {
-        this.userRepository.findAll();
+    public boolean updateCash() {
+        try {
+            this.userRepository.findAll();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 

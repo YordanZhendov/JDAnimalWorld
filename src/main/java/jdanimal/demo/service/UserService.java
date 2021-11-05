@@ -16,20 +16,21 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
     boolean register(UserRegistrationBinding userRegistrationBinding);
-    User validUser(UserLoginBinding userLoginBinding);
+
+    boolean suspendUser(String id);
+    boolean activateUser(String id);
+    boolean updateCash();
+
     UserProfileViewModel findByUsername(String currentUserName);
-    List<AnimalViewModel> getAllAnimalsByUser(String username);
+    List<AnimalViewModel> getAllAnimalsByUserName(String username);
     void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding);
-    List<User> getAllUsersInDB();
+
     void saveUrl(String username,String fileName);
     void removeAnimalFromUsers(Animal animalById);
     List<AccessoryViewModel> getAllAccessoriesByUser(String username);
     void removeAccessoryFromUsers(Accessory accessoryById);
     void removeUser(String id);
     List<UserProfileViewModel> getAllUsersForUserControl();
-    void sendEmail();
-    void suspendUser(String id);
-    void activateUser(String id);
-    void updateCash();
 
+    boolean sendEmail();
 }

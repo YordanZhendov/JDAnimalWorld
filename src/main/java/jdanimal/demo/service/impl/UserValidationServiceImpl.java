@@ -2,13 +2,13 @@ package jdanimal.demo.service.impl;
 
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.UserRepository;
-import jdanimal.demo.service.UserValidationSerivce;
+import jdanimal.demo.service.UserValidationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserValidationServiceImpl implements UserValidationSerivce {
+public class UserValidationServiceImpl implements UserValidationService {
 
     private final UserRepository userRepository;
 
