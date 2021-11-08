@@ -25,12 +25,13 @@ public interface UserService extends UserDetailsService {
     List<AnimalViewModel> getAllAnimalsByUserName(String username);
     void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding);
 
-    void saveUrl(String username,String fileName);
-    void removeAnimalFromUsers(Animal animalById);
-    List<AccessoryViewModel> getAllAccessoriesByUser(String username);
-    void removeAccessoryFromUsers(Accessory accessoryById);
-    void removeUser(String id);
+    boolean saveUrl(String username,String fileName);
+    boolean removeLikedAnimalFromUsers(Animal animalById);
+    List<AccessoryViewModel> getAllAccessoriesByUserName(String username);
+    boolean removeLikedAccessoryFromUsers(Accessory accessoryById);
+    boolean removeUser(String id);
+    boolean sendEmail();
+
     List<UserProfileViewModel> getAllUsersForUserControl();
 
-    boolean sendEmail();
 }

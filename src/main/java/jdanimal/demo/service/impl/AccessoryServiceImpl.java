@@ -42,7 +42,7 @@ public class AccessoryServiceImpl implements AccessoryService {
     public boolean removeAccessoryById(String id) {
         try {
             Accessory accessoryById = accessoryRepository.findAccessoryById(id);
-            this.userService.removeAccessoryFromUsers(accessoryById);
+            this.userService.removeLikedAccessoryFromUsers(accessoryById);
             this.accessoryRepository.deleteById(id);
             updateAccessoryCash();
             return true;

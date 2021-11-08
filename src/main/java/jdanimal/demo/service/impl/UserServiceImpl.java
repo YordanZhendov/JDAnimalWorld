@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<AccessoryViewModel> getAllAccessoriesByUser(String username) {
+    public List<AccessoryViewModel> getAllAccessoriesByUserName(String username) {
         return this.accessoryRepository.getAccessoriesByUserUsername(username)
                 .stream()
                 .map(accessory -> this.modelMapper.map(accessory, AccessoryViewModel.class))
@@ -105,48 +105,64 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeAnimalFromUsers(Animal animalById) {
-        List<User> allUsers = userRepository.getAllUsers();
-        for (User allUser : allUsers) {
-            allUser.getLikedAnimals().remove(animalById);
+    public boolean removeLikedAnimalFromUsers(Animal animalById) {
+        try {
+            List<User> allUsers = userRepository.getAllUsers();
+            for (User allUser : allUsers) {
+                allUser.getLikedAnimals().remove(animalById);
+            }
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 
     @Override
-    public void removeAccessoryFromUsers(Accessory accessoryById) {
-        List<User> allUsers = userRepository.getAllUsers();
-        for (User allUser : allUsers) {
-            allUser.getLikedAccessories().remove(accessoryById);
+    public boolean removeLikedAccessoryFromUsers(Accessory accessoryById) {
+        try {
+            List<User> allUsers = userRepository.getAllUsers();
+            for (User allUser : allUsers) {
+                allUser.getLikedAccessories().remove(accessoryById);
+            }
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 
     @Override
-    public void removeUser(String id) {
-        List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
-        List<Accessory> accessories = accessoryRepository.getAccessoryByUserId(id);
-        List<Store> stores=storeRepository.getStoreByUserId(id);
+    public boolean removeUser(String id) {
+        try {
+            List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
+            List<Accessory> accessories = accessoryRepository.getAccessoryByUserId(id);
+            List<Store> stores=storeRepository.getStoreByUserId(id);
 
-        for (Animal animal : animalByUser) {
-           animal.getUsers().clear();
+            for (Animal animal : animalByUser) {
+               animal.getUsers().clear();
+            }
+
+            for (Animal animal : animalByUser) {
+                animalRepository.delete(animal);
+            }
+
+            for (Accessory accessory : accessories) {
+                accessory.getUsers().clear();
+            }
+
+            for (Accessory accessory : accessories) {
+                accessoryRepository.delete(accessory);
+            }
+
+            for (Store store : stores) {
+             this.storeRepository.delete(store);
+            }
+
+            this.userRepository.deleteById(id);
+
+            return true;
+        }catch (Exception e){
+            return  false;
         }
-
-        for (Animal animal : animalByUser) {
-            animalRepository.delete(animal);
-        }
-
-        for (Accessory accessory : accessories) {
-            accessory.getUsers().clear();
-        }
-
-        for (Accessory accessory : accessories) {
-            accessoryRepository.delete(accessory);
-        }
-
-        for (Store store : stores) {
-         this.storeRepository.delete(store);
-        }
-
-        this.userRepository.deleteById(id);
     }
 
     @Override
@@ -165,10 +181,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUrl(String username,String fileName) {
-        User byUsername = this.userRepository.findByUsername(username);
-        byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);
-        this.userRepository.saveAndFlush(byUsername);
+    public boolean saveUrl(String username,String fileName) {
+        try {
+            User byUsername = this.userRepository.findByUsername(username);
+            byUsername.setUrlProfilePicture("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + fileName);
+            this.userRepository.saveAndFlush(byUsername);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override

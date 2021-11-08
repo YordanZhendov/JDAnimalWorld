@@ -51,7 +51,7 @@ public class AnimalServiceImpl implements AnimalService {
     public boolean removeAnimal(String id) {
         try {
             Animal animalById = animalRepository.findAnimalById(id);
-            this.userService.removeAnimalFromUsers(animalById);
+            this.userService.removeLikedAnimalFromUsers(animalById);
             this.animalRepository.deleteById(id);
             updateAnimalCash();
             return true;
