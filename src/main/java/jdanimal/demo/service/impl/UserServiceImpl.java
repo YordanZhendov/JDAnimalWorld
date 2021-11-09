@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
             }
 
             this.userRepository.deleteById(id);
-
+            updateCash();
             return true;
         }catch (Exception e){
             return  false;
