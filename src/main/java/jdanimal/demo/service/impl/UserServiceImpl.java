@@ -136,9 +136,18 @@ public class UserServiceImpl implements UserService {
             List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
             List<Accessory> accessories = accessoryRepository.getAccessoryByUserId(id);
             List<Store> stores=storeRepository.getStoreByUserId(id);
+            List<Accessory> allAccessories = accessoryRepository.findAll();
+            List<Animal> alAnimals1 = animalRepository.findAll();
 
+            User byId = userRepository.findById(id).orElse(null);
+            for (Accessory accessory : allAccessories) {
+                accessory.getUsers().remove(byId);
+            }
+            for (Animal animal : alAnimals1) {
+                animal.getUsers().remove(byId);
+            }
             for (Animal animal : animalByUser) {
-               animal.getUsers().clear();
+                animal.getUsers().clear();
             }
 
             for (Animal animal : animalByUser) {
@@ -157,8 +166,10 @@ public class UserServiceImpl implements UserService {
              this.storeRepository.delete(store);
             }
 
-            this.userRepository.deleteById(id);
-            updateCash();
+            if(byId != null){
+                this.userRepository.delete(byId);
+
+            }
             return true;
         }catch (Exception e){
             return  false;
