@@ -16,10 +16,10 @@ public class AnimalViewModel {
     private String animalPicture;
     private String nameOfAnimal;
     private String typeOfAnimal;
-    private String ageOfAnimal;
+    private Integer ageOfAnimal;
     private String gamesOfAnimal;
     private String foodOfAnimal;
-    private String kilogramsOfAnimal;
+    private Integer kilogramsOfAnimal;
     private String availableTill;
     private String urlAnimalPhoto;
     private String description;

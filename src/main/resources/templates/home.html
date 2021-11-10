@@ -46,25 +46,20 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-light" th:text="|Animal Type: *{typeOfAnimal}|"></li>
-                    <li class="list-group-item" th:text="|Age: *{ageOfAnimal}|"></li>
+                    <li class="list-group-item" th:text="|Age: *{ageOfAnimal} years|"></li>
                     <li class="list-group-item bg-light" th:text="|Favourite Food: *{foodOfAnimal}|"></li>
-                    <li class="list-group-item" th:text="|The Lovely Games: *{gamesOfAnimal}|"></li>
-                    <li class="list-group-item bg-light" th:text="|The Weight: *{ageOfAnimal}|"></li>
+                    <li class="list-group-item" th:text="|Lovely Games: *{gamesOfAnimal}|"></li>
+                    <li class="list-group-item bg-light" th:text="|Weight: *{ageOfAnimal} kg|"></li>
                 </ul>
-                <div class="card-body">
-                    <div class="ms-2 me-1">
-                        <p>
-                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
-                                Owner Details:
-                            </button>
-                        </p>
-                    </div>
-                    <div class="homeDetails collapse col-12 mt-5" id="ownerDetails">
-                        <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
-                        <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                        <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                        <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                    </div>
+                    <div class="list-group-item bg-warning mt-4 ms-2 me-2 text-center" th:text="|Available till: *{availableTill}|"></div>
+                <div class="btn btn-primary ms-5 me-5 mt-3 mb-3" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerDetails">
+                    Owner Details:
+                </div>
+                <div class="homeDetails collapse col-12 mt-2 mb-4" id="ownerDetails">
+                    <img width="25%" height="25%" class="rounded-circle m-1" th:src="${(animal.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(animal.getUser().getUrlProfilePicture())) ? animal.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
+                    <div class="card card-body bg-light" th:text="|Owner: ${animal.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                    <div class="card card-body" th:text="|PhoneNumber: ${animal.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                    <div class="card card-body bg-light" th:text="|Email: ${animal.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                 </div>
             </div>
             <div class="col-4 card m-5" style="width: 18rem;" th:each="accessory : ${accessories}" th:object="${accessory}">
@@ -75,26 +70,18 @@
                     <p class="card-text" th:text="${accessory.getDescription()}"></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light" th:text="|Days used: ${accessory.getDaysUsed()}|"></li>
-                    <li class="list-group-item " th:text="|Price: ${accessory.getAccessoryPrice()}|"></li>
-                    <li class="list-group-item bg-light" >---------</li>
-                    <li class="list-group-item" >---------</li>
-                    <li class="list-group-item bg-light">---------</li>
+                    <li class="list-group-item bg-light" th:text="|Used: ${accessory.getDaysUsed()} days|"></li>
+                    <li class="list-group-item " th:text="|Price: ${accessory.getAccessoryPrice()} &euro;|"></li>
                 </ul>
-                <div class="card-body">
-                    <div class="ms-2 me-1">
-                        <p>
-                            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
-                                Owner Details:
-                            </button>
-                        </p>
-                    </div>
-                    <div class="homeDetails collapse col-12 mt-5" id="ownerAccDetails" th:each="accessory : ${accessories}" th:object="${accessory}" >
-                        <img width="25%" height="25%" class="rounded-circle mb-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
-                        <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
-                        <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
-                        <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
-                    </div>
+                <div class="list-group-item bg-warning mt-4 ms-2 me-2 text-center" th:text="|Available till: *{availableTill}|"></div>
+                <div class="btn btn-primary ms-5 me-5 mt-3 mb-3" type="button" data-bs-toggle="collapse" data-bs-target=".homeDetails" aria-expanded="false" aria-controls="ownerAccDetails">
+                    Owner Details:
+                </div>
+                <div class="homeDetails collapse col-12 mt-2 mb-4" id="ownerAccDetails">
+                    <img width="25%" height="25%" class="rounded-circle m-1" th:src="${(accessory.getUser().getUrlProfilePicture() != null && !#strings.isEmpty(accessory.getUser().getUrlProfilePicture())) ? accessory.getUser().getUrlProfilePicture() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
+                    <div class="card card-body bg-light" th:text="|Owner: ${accessory.getUser().getFullName()}|">Owner: Yordan Nikolov Zhendov</div>
+                    <div class="card card-body" th:text="|PhoneNumber: ${accessory.getUser().getPhoneNumber()}|">PhoneNumber: 089585594</div>
+                    <div class="card card-body bg-light" th:text="|Email: ${accessory.getUser().getEmail()}|">Email: jordna.zhendov@abv.bg</div>
                 </div>
             </div>
         </div>
@@ -329,8 +316,8 @@
         height: 75%;
         border-radius: 20px;
         box-shadow: 0px 8px 16px 4px #1f5a78e6;
-        margin-top: 50px;
-        margin-bottom: 50px
+        margin-top: 20px;
+        margin-bottom: 10px
     }
 
     iframe{

@@ -86,7 +86,7 @@
                             <img width="100" height="100" class="rounded-circle mb-2" th:src="${(animal.getUrlAnimalPhoto() != null && !#strings.isEmpty(animal.getUrlAnimalPhoto())) ? animal.getUrlAnimalPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${animal.getUser().getUsername()}"/>
                             <form th:action="@{/user/animal/uploadPhoto/{id}(id=${animal.getId()})}" method="POST" enctype="multipart/form-data">
                                 <input type="file" accept=".jpg, .png, .jpeg" name="fileAnimal" class="fileAnimal ms-2"/>
-                                <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload</button>
+                                <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload Picture</button>
                                 <a th:href="@{/user/animal/delete/{id}(id=${animal.getId()})}" class="btn ms-2 btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a>
                             </form>
                             <br>
@@ -119,7 +119,7 @@
                             <img width="100" height="100" class="rounded-circle mb-2" th:src="${(accessory.getUrlAccessoryPhoto() != null && !#strings.isEmpty(accessory.getUrlAccessoryPhoto())) ? accessory.getUrlAccessoryPhoto() : 'https://jdanimalsworld.s3.eu-central-1.amazonaws.com/imageNotAvailable.png'}" th:alt="${accessory.getUser().getUsername()}"/>
                             <form th:action="@{/user/accessory/uploadPhoto/{id}(id=${accessory.getId()})}" method="POST" enctype="multipart/form-data">
                                 <input type="file" accept=".jpg, .png, .jpeg" name="fileAccessory" class="fileAccessory ms-2"/>
-                                <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload</button>
+                                <button type="submit" class="btn ms-2 mb-2 mt-2 btn-primary">Upload Picture</button>
                                 <a th:href="@{/user/accessory/delete/{id}(id=${accessory.getId()})}" class="btn ms-2 btn-danger">Delete<i class="fas fa-user-times ml-2"></i></a>
                             </form>
                             <br>

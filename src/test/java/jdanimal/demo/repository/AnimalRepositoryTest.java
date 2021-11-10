@@ -47,8 +47,8 @@ class AnimalRepositoryTest {
         animal.setFoodOfAnimal("Meat");
         animal.setGamesOfAnimal("Ball");
         animal.setTypeOfAnimal("Golden Retriver");
-        animal.setAgeOfAnimal("3");
-        animal.setKilogramsOfAnimal("40");
+        animal.setAgeOfAnimal(3);
+        animal.setKilogramsOfAnimal(40);
         animal.setUser(user);
         savedA = animalRepository.save(animal);
 
@@ -60,8 +60,8 @@ class AnimalRepositoryTest {
         animal.setFoodOfAnimal("Meat");
         animal.setGamesOfAnimal("Ball");
         animal.setTypeOfAnimal("Golden Retriver");
-        animal.setAgeOfAnimal("3");
-        animal.setKilogramsOfAnimal("40");
+        animal.setAgeOfAnimal(3);
+        animal.setKilogramsOfAnimal(40);
         animal.setUser(savedU);
 
         boolean thrown = false;

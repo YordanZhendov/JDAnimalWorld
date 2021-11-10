@@ -72,8 +72,8 @@ class AnimalServiceTest {
         savedAn.setFoodOfAnimal("Meat");
         savedAn.setGamesOfAnimal("Ball");
         savedAn.setTypeOfAnimal("Golden Retriver");
-        savedAn.setAgeOfAnimal("3");
-        savedAn.setKilogramsOfAnimal("40");
+        savedAn.setAgeOfAnimal(3);
+        savedAn.setKilogramsOfAnimal(40);
         upload = animalService.uploadAnimal(savedAn, mappedUser);
     }
 

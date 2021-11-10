@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -16,18 +17,19 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class UserAnimalUploadBinding {
 
-    @NotBlank(message = "Field must be filled!")
     @Length(min = 3,message = "Name's length must be greater than 2")
+    @NotBlank(message = "Field must be filled!")
     private String nameOfAnimal;
     @NotBlank(message = "Field must be filled!")
     private String typeOfAnimal;
-    @NotBlank(message = "Field must be filled!")
-    private String ageOfAnimal;
+    @NotNull(message = "Field must be filled!")
+    private Integer ageOfAnimal;
     private String gamesOfAnimal;
     @NotBlank(message = "Field must be filled!")
     private String foodOfAnimal;
+    @NotNull(message = "Field must be filled!")
+    private Integer kilogramsOfAnimal;
     @NotBlank(message = "Field must be filled!")
-    private String kilogramsOfAnimal;
     private String availableTill;
     private String urlAnimalPhoto;
     private String description;

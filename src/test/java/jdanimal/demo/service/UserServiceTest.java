@@ -83,8 +83,8 @@ class UserServiceTest {
         animal.setFoodOfAnimal("Meat");
         animal.setGamesOfAnimal("Ball");
         animal.setTypeOfAnimal("Golden Retriver");
-        animal.setAgeOfAnimal("3");
-        animal.setKilogramsOfAnimal("40");
+        animal.setAgeOfAnimal(3);
+        animal.setKilogramsOfAnimal(40);
         animal1 = animalRepository.save(animal);
 
         Accessory accessory=new Accessory();
@@ -155,8 +155,8 @@ class UserServiceTest {
         animal.setFoodOfAnimal("Meat");
         animal.setGamesOfAnimal("Ball");
         animal.setTypeOfAnimal("Golden Retriver");
-        animal.setAgeOfAnimal("3");
-        animal.setKilogramsOfAnimal("40");
+        animal.setAgeOfAnimal(3);
+        animal.setKilogramsOfAnimal(40);
         animal.setUser(user2);
         animalRepository.save(animal);
         assertEquals(1,userService.getAllAnimalsByUserName("Desi").size());
@@ -204,7 +204,7 @@ class UserServiceTest {
 
     @Test
     void removeUser() {
-        assertTrue(userService.removeUser(user1.getId()));
+        assertTrue(userService.removeUser(user2.getId()));
     }
 
     @Test
