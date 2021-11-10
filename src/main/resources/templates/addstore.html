@@ -9,8 +9,8 @@
     <main class="row">
         <div class="d-flex">
             <img src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/fox-deer-animal-seamless-pattern-watercolor-image-hand-drawn-wild-forest-animals-herbs-fern-mushrooms-fabric-paper-tixtile-226004569.jpg" class="backImage"/>
-            <div class="col-2"></div>
-            <form class="col-7" action="/user/store/upload" method="POST" enctype="multipart/form-data" th:object="${userStoreUploadBinding}">
+            <div class="col-1"></div>
+            <form class="col-11" action="/user/store/upload" method="POST" enctype="multipart/form-data" th:object="${userStoreUploadBinding}">
                 <br>
                 <br>
                 <br>
@@ -48,19 +48,18 @@
                                 <input th:field="*{locationPath}" th:errorclass="bg-warning"  class="form-control animalInputClear" placeholder="Location Url..." type="text" name="typeOfAnimal" id="locationPath">
                                 <small th:if="${#fields.hasErrors('locationPath')}" th:errors="*{locationPath}" class="text-danger">error</small>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Store</button>
+                            <div class="row">
+                                <div>
+                                    <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Store</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ul>
             </form>
-            <div class="col-3"></div>
         </div>
 
     </main>

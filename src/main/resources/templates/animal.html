@@ -10,8 +10,8 @@
     <main class="row">
         <div class="d-flex">
             <img src="https://jdanimalsworld.s3.eu-central-1.amazonaws.com/fox-deer-animal-seamless-pattern-watercolor-image-hand-drawn-wild-forest-animals-herbs-fern-mushrooms-fabric-paper-tixtile-226004569.jpg" class="backImage"/>
-            <div class="col-2"></div>
-            <form class="col-7" action="/user/animal/upload" method="POST" enctype="multipart/form-data" th:object="${userAnimalUploadBinding}">
+            <div class="col-1"></div>
+            <form class="col-11" action="/user/animal/upload" method="POST" enctype="multipart/form-data" th:object="${userAnimalUploadBinding}">
                 <br>
                 <br>
                 <br>
@@ -22,7 +22,6 @@
                 <div class="text-center h2 border-bottom border-danger"><strong>Animal Form</strong></div>
                 <ul>
                     <div id="addAnimalForm" class="row">
-                    
                         <div id="inputInfoAnimal" class="col-8">
                             <br>
                             <br>
@@ -64,19 +63,18 @@
                                 <input th:field="*{availableTill}" th:errorclass="bg-warning" class="form-control" type="date" id="available" name="availableTill">
                                 <small th:if="${#fields.hasErrors('availableTill')}" th:errors="*{availableTill}" class="text-danger">error</small>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Animal</button>
+                            <div class="row">
+                                <div>
+                                    <button type="button" class="btn btn-secondary mt-3" onclick="clearTheForm()" style="float:right">Clear Form</button>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-secondary mt-3" style="float:right" >Upload Animal</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ul>
             </form>
-            <div class="col-3"></div>
         </div>
 
     </main>
