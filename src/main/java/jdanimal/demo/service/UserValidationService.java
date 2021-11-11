@@ -3,5 +3,5 @@ import jdanimal.demo.data.User;
 
 public interface UserValidationService {
     boolean checkUser(User user);
-
+    boolean checkDetails(User user);
 }

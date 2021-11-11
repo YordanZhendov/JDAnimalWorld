@@ -21,7 +21,7 @@ public interface UserService extends UserDetailsService {
 
     UserProfileViewModel findByUsername(String currentUserName);
     List<AnimalViewModel> getAllAnimalsByUserName(String username);
-    void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding);
+    boolean updateProfile(UserUpdateProfileBinding userUpdateProfileBinding);
 
     boolean saveUrl(String username,String fileName);
     boolean removeLikedAnimalFromUsers(Animal animalById);
@@ -31,5 +31,4 @@ public interface UserService extends UserDetailsService {
     boolean sendEmail();
 
     List<UserProfileViewModel> getAllUsersForUserControl();
-
 }

@@ -176,12 +176,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateProfile(UserUpdateProfileBinding userUpdateProfileBinding) {
-        User user = this.userRepository.findByUsername(userUpdateProfileBinding.getUsername());
-        user.setEmail(userUpdateProfileBinding.getEmail());
-        user.setPhoneNumber(userUpdateProfileBinding.getPhoneNumber());
-        user.setFullName(userUpdateProfileBinding.getFullName());
-        this.userRepository.save(user);
+    public boolean updateProfile(UserUpdateProfileBinding userUpdateProfileBinding) {
+        User user = this.modelMapper.map(userUpdateProfileBinding, User.class);
+
+        if(userValidationService.checkDetails(user)){
+            return false;
+        }
+
+        User userUpdate = this.userRepository.findByUsername(user.getUsername());
+        userUpdate.setEmail(user.getEmail());
+        userUpdate.setPhoneNumber(user.getPhoneNumber());
+        userUpdate.setFullName(user.getFullName());
+        this.userRepository.saveAndFlush(userUpdate);
+        return true;
     }
 
     @Override

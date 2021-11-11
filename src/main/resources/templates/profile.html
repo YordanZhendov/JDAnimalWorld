@@ -21,6 +21,11 @@
                 <button id="uploadProfilePicture" type="submit" class="btn btn-secondary mt-2">Upload</button>
             </form>
             <form class="col-10 ms-5 mt-5 me-5" action="/user/update-profile" method="POST">
+                <h3 th:if="${isFound == false}" class="mt-5 text-center">
+                    <strong class="bg-blur rounded text-danger">
+                         Such phone number or email exists.
+                    </strong>
+                </h3>
                 <div class="shadow p-3 mb-5 bg-body rounded">
                         <div class="col-7">
                             <label class="form-label"><strong>Username :</strong></label>

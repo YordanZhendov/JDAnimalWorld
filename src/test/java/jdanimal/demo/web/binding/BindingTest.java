@@ -75,4 +75,16 @@ public class BindingTest {
         Set<ConstraintViolation<UserRegistrationBinding>> registerBinding = validator.validate(userRegisterDTO);
         assertEquals(2,registerBinding.size());
     }
+
+    @Test
+    void updateProfile(){
+        UserUpdateProfileBinding updateProfileDTO= UserUpdateProfileBinding.builder()
+        .username("test")
+        .fullName("test testov")
+        .phoneNumber("3424324")
+        .build();
+        Set<ConstraintViolation<UserUpdateProfileBinding>> updateProfileBinding = validator.validate(updateProfileDTO);
+        System.out.println(updateProfileBinding);
+        assertEquals(2,updateProfileBinding.size());
+    }
 }

@@ -162,20 +162,12 @@ class UserServiceTest {
 
     @Test
     void updateProfile() {
-        UserUpdateProfileBinding userUpdateProfileBinding= new UserUpdateProfileBinding();
-        userUpdateProfileBinding.setUsername("Desi");
-        userUpdateProfileBinding.setEmail("updatedInfo@abv.bg");
-        userUpdateProfileBinding.setPhoneNumber("0856254851");
-        userService.updateProfile(userUpdateProfileBinding);
-
-        UserProfileViewModel byUsername = userService.findByUsername(userUpdateProfileBinding.getUsername());
-
-        boolean changed=false;
-        if(byUsername.getEmail().equals("updatedInfo@abv.bg")){
-            changed=true;
-        }
-
-        assertTrue(changed);
+        UserUpdateProfileBinding userUpdateProfileBinding= UserUpdateProfileBinding.builder()
+        .username("Desi")
+        .email("desi@abv.bg")
+        .phoneNumber("0856254851")
+        .build();
+        assertTrue(userService.updateProfile(userUpdateProfileBinding));
     }
 
     @Test

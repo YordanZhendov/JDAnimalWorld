@@ -86,7 +86,7 @@ class UserRepositoryTest {
 
     @Test
     public void checkIfUserExistsByPhoneNumber() {
-        boolean exists = userRepository.existsAllByPhoneNumber("0856258851");
+        boolean exists = userRepository.existsByPhoneNumber("0856258851");
         assertTrue(exists);
     }
 

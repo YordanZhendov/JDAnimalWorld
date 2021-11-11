@@ -5,6 +5,7 @@ import jdanimal.demo.data.Animal;
 import jdanimal.demo.service.StoreService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
+import jdanimal.demo.web.binding.UserRegistrationBinding;
 import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.StoreViewModel;
@@ -52,16 +53,16 @@ public class ProfileController {
             Set<Animal> likedAnimals = userProfileInfo.getLikedAnimals();
             Set<Accessory> likedAccessories = userProfileInfo.getLikedAccessories();
 
-            if(!model.containsAttribute("userUpdateProfileBinding")){
-                model.addAttribute("userUpdateProfileBinding",new UserUpdateProfileBinding());
-            }
-
             model.addAttribute("userProfileInfo",userProfileInfo);
             model.addAttribute("userAnimal",allAnimalsByUser);
             model.addAttribute("allStoresByUser",allStoresByUser);
             model.addAttribute("allAccessoriesByUser",allAccessoriesByUser);
             model.addAttribute("likedAnimals",likedAnimals);
             model.addAttribute("likedAccessories",likedAccessories);
+
+            if(!model.containsAttribute("isFound")){
+                model.addAttribute("isFound",true);
+            }
 
             return "profile";
         }
@@ -97,10 +98,21 @@ public class ProfileController {
             return "redirect:/user/profile";
 
         }
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        userUpdateProfileBinding.setUsername(authentication.getName());
-        this.userService.updateProfile(userUpdateProfileBinding);
+        String currentUserName = authentication.getName();
+        userUpdateProfileBinding.setUsername(currentUserName);
+        boolean detailsFound = this.userService.updateProfile(userUpdateProfileBinding);
+        if(!detailsFound){
+            redirectAttributes.addFlashAttribute("isFound",false);
+            return "redirect:/user/profile";
+        }
         return "redirect:/user/profile";
+    }
+
+    @ModelAttribute
+    public UserUpdateProfileBinding userUpdateProfileBinding(){
+        return new UserUpdateProfileBinding();
     }
 
 }
