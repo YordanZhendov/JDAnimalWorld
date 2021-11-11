@@ -1,10 +1,6 @@
 package jdanimal.demo.web.binding;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.NumberFormat;
+import lombok.*;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -13,6 +9,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserAccessoryUploadBinding {
 
     @NotBlank(message = "Field must be filled!")

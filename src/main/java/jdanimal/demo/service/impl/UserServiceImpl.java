@@ -3,7 +3,6 @@ package jdanimal.demo.service.impl;
 import jdanimal.demo.data.*;
 import jdanimal.demo.data.Store;
 import jdanimal.demo.service.models.UserRegisterUploadModel;
-import jdanimal.demo.web.binding.UserLoginBinding;
 import jdanimal.demo.repository.AccessoryRepository;
 import jdanimal.demo.repository.AnimalRepository;
 import jdanimal.demo.repository.StoreRepository;

@@ -1,9 +1,6 @@
 package jdanimal.demo.web.binding;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
@@ -13,6 +10,7 @@ import javax.validation.constraints.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserRegistrationBinding {
 
     @NotBlank(message = "Fields must be filled!")

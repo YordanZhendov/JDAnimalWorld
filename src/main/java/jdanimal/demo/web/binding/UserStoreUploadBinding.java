@@ -1,20 +1,15 @@
 package jdanimal.demo.web.binding;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.joda.time.DateTime;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.sql.Time;
-import java.sql.Timestamp;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserStoreUploadBinding {
 
     @NotBlank(message = "Field must be filled!")

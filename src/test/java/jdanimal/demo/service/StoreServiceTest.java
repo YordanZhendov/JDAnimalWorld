@@ -5,19 +5,14 @@ import jdanimal.demo.data.Store;
 import jdanimal.demo.data.User;
 import jdanimal.demo.repository.StoreRepository;
 import jdanimal.demo.repository.UserRepository;
-import jdanimal.demo.service.views.StoreViewModel;
 import jdanimal.demo.web.binding.UserStoreUploadBinding;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

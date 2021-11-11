@@ -3,8 +3,6 @@ package jdanimal.demo.service;
 
 import jdanimal.demo.data.Accessory;
 import jdanimal.demo.data.Animal;
-import jdanimal.demo.web.binding.UserLoginBinding;
-import jdanimal.demo.data.User;
 import jdanimal.demo.web.binding.UserRegistrationBinding;
 import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
