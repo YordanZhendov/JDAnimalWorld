@@ -1,7 +1,6 @@
 package jdanimal.demo.web.controllers;
 
 import jdanimal.demo.service.StoreService;
-import jdanimal.demo.service.UserService;
 import jdanimal.demo.web.binding.UserStoreUploadBinding;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

@@ -1,16 +1,10 @@
 package jdanimal.demo.web.controllers;
 
-import jdanimal.demo.data.Role;
-import jdanimal.demo.repository.RoleRepository;
 import jdanimal.demo.service.AccessoryService;
 import jdanimal.demo.service.AnimalService;
-import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.AnimalViewModel;
-import jdanimal.demo.service.views.UserProfileViewModel;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
