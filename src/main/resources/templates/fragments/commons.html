@@ -43,6 +43,9 @@
                             <li class="nav-item" sec:authorize-url="/encyclopedia/add">
                                 <a class="dropdown-item" th:href="@{/encyclopedia/add}">+/- Encyclopedia</a>
                             </li>
+                            <li class="nav-item" sec:authorize-url="/swagger-ui/">
+                                <a class="dropdown-item text-primary" th:href="@{/swagger-ui/}">API Documentation</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

@@ -2,6 +2,7 @@ package jdanimal.demo.web.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -10,7 +11,11 @@ public class IndexController {
 
     //login page
     @GetMapping("/users/login")
-    public String logIn(){
+    public String logIn(Model model){
+        if(!model.containsAttribute("registeredSuccessfully")){
+            model.addAttribute("registeredSuccessfully",true);
+        }
+
         return "index";
     }
 

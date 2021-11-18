@@ -12,6 +12,11 @@
     <main>
         <div class="row">
             <div class="sign in col-9">
+                <h3 th:if="${registeredSuccessfully == false}" class="mt-5 mb-5 text-center">
+                    <strong class="bg-blur rounded text-success">
+                        You have been registered successfully.
+                    </strong>
+                </h3>
                 <form th:action="@{/users/login}" method="post" class="row g-3 border-top border-primary border-1">
                     <div th:if="${param.error}">
                         <p class="col-12 p-2 bg-danger text-white text-center mt-2 rounded-circle">Invalid username or password</p>

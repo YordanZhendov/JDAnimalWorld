@@ -26,6 +26,9 @@ public class RegisterController {
             if(!model.containsAttribute("isFound")){
                 model.addAttribute("isFound",true);
             }
+            if(!model.containsAttribute("correctInfoDetails")){
+                model.addAttribute("correctInfoDetails",true);
+            }
             return "register";
 
     }
@@ -40,6 +43,7 @@ public class RegisterController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegistrationBinding", userRegistrationBinding);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationBinding",bindingResult);
+            redirectAttributes.addFlashAttribute("correctInfoDetails",false);
 
             return "redirect:/users/register";
         }
@@ -51,6 +55,7 @@ public class RegisterController {
             return "redirect:/users/register";
         }
 
+        redirectAttributes.addFlashAttribute("registeredSuccessfully",false);
         return "redirect:/users/login";
     }
 
