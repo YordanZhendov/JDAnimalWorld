@@ -19,7 +19,7 @@ public class APIController {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "https://yordanzhendov.github.io")
     @GetMapping("/api/{username}")
     public ResponseEntity<User> userByUserName(@PathVariable(name = "username") String username){
         return new ResponseEntity<>(userRepository.findByUsername(username), HttpStatus.OK);
