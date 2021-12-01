@@ -1,11 +1,9 @@
 package jdanimal.demo.config;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 public class ApplicationBeanConfiguration {

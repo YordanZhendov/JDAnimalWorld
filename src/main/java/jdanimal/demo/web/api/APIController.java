@@ -11,7 +11,6 @@ import jdanimal.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,27 +31,27 @@ public class APIController {
 
     @GetMapping("/api/{username}")
     public ResponseEntity<User> userByUserName(@PathVariable(name = "username") String username){
-        return new ResponseEntity<>(userRepository.findByUsername(username), HttpStatus.OK);
+        return new ResponseEntity<>(this.userRepository.findByUsername(username), HttpStatus.OK);
     }
 
     @GetMapping("/api/allusers")
     public ResponseEntity<List<User>> allUsers(){
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/api/allanimals")
     public ResponseEntity<List<Animal>> allAnimals(){
-        return new ResponseEntity<>(animalRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.animalRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/api/allaccessories")
     public ResponseEntity<List<Accessory>> allAccessories(){
-        return new ResponseEntity<>(accessoryRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.accessoryRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/api/stores")
     public ResponseEntity<List<Store>> allStores(){
-        return new ResponseEntity<>(storeRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.storeRepository.findAll(), HttpStatus.OK);
     }
 
 }

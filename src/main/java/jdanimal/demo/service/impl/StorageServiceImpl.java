@@ -40,10 +40,10 @@ public class StorageServiceImpl {
         File fileRecieved=convertMultiPartFileToFile(file);
 
         String fileName=userProfileViewModel.getUsername()+"_"+file.getOriginalFilename();
-         s3Client.putObject(new PutObjectRequest(bucketName,fileName,fileRecieved));
+        this.s3Client.putObject(new PutObjectRequest(this.bucketName,fileName,fileRecieved));
 
         String replaceFileName = fileName.replace(" ", "+");
-        userService.saveUrl(userProfileViewModel.getUsername(),replaceFileName);
+        this.userService.saveUrl(userProfileViewModel.getUsername(),replaceFileName);
          fileRecieved.delete();
 
         this.userService.updateCash();
@@ -54,10 +54,10 @@ public class StorageServiceImpl {
     public String uploadAnimalPicture(MultipartFile fileAnimal, UserProfileViewModel userProfileInfo, String id) {
         File fileRecieved=convertMultiPartFileToFile(fileAnimal);
         String fileName=userProfileInfo.getUsername()+"_"+fileAnimal.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName,fileName,fileRecieved));
+        this.s3Client.putObject(new PutObjectRequest(this.bucketName,fileName,fileRecieved));
         String replaceFileName = fileName.replace(" ", "+");
 
-        animalService.saveUrlAnimal(id,replaceFileName);
+        this.animalService.saveUrlAnimal(id,replaceFileName);
         fileRecieved.delete();
 
         this.animalService.updateAnimalCash();
@@ -68,32 +68,13 @@ public class StorageServiceImpl {
     public String uploadAccessoryPicture(MultipartFile fileAccessory, UserProfileViewModel userProfileInfo, String id) {
         File fileRecieved=convertMultiPartFileToFile(fileAccessory);
         String fileName=userProfileInfo.getUsername()+"_"+fileAccessory.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName,fileName,fileRecieved));
+        this.s3Client.putObject(new PutObjectRequest(this.bucketName,fileName,fileRecieved));
         String replaceFileName = fileName.replace(" ", "+");
-        accessoryService.saveUrlAccessory(id,replaceFileName);
+        this.accessoryService.saveUrlAccessory(id,replaceFileName);
         fileRecieved.delete();
         this.accessoryService.updateAccessoryCash();
         return "File"+fileName+"successfully uploaded";
     }
-
-
-//    public byte[] downloadFile(String fileName) {
-//        S3Object s3Object = s3Client.getObject(bucketName, fileName);
-//        S3ObjectInputStream inputStream = s3Object.getObjectContent();
-//        try {
-//            byte[] content = IOUtils.toByteArray(inputStream);
-//            return content;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-
-//    public String deleteFile(String fileName) {
-//        s3Client.deleteObject(bucketName, fileName);
-//        return fileName + " successfully removed";
-//    }
 
     private File convertMultiPartFileToFile(MultipartFile file) {
         File convertedFile = new File(file.getOriginalFilename());
@@ -119,17 +100,3 @@ public class StorageServiceImpl {
 
 
 }
-
-// Bucket Policy
-//{
-//    "Version": "2012-10-17",
-//    "Statement": [
-//        {
-//            "Sid": "PublicReadGetObject",
-//            "Effect": "Allow",
-//            "Principal": "*",
-//            "Action": "s3:GetObject",
-//            "Resource": "arn:aws:s3:::jdanimalsworld/*"
-//        }
-//    ]
-//}

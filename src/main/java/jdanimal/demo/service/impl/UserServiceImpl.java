@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(UserRegistrationBinding userRegistrationBinding) {
         UserRegisterUploadModel userRegisterUploadModel = this.modelMapper.map(userRegistrationBinding, UserRegisterUploadModel.class);
 
-        if (!validationUtil.isValid(userRegisterUploadModel)) {
+        if (!this.validationUtil.isValid(userRegisterUploadModel)) {
             return false;
         }
 
@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(this.bCryptPasswordEncoder.encode(user.getConfirmPassword()));
 
-        if (userRepository.count() == 0) {
-            roleService.seedRoles();
+        if (this.userRepository.count() == 0) {
+            this.roleService.seedRoles();
             user.setAuthorities(this.roleService.findAllRoles()
                     .stream().map(r -> this.modelMapper
                             .map(r, Role.class))
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removeLikedAnimalFromUsers(Animal animalById) {
         try {
-            List<User> allUsers = userRepository.getAllUsers();
+            List<User> allUsers = this.userRepository.getAllUsers();
             for (User allUser : allUsers) {
                 allUser.getLikedAnimals().remove(animalById);
             }
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removeLikedAccessoryFromUsers(Accessory accessoryById) {
         try {
-            List<User> allUsers = userRepository.getAllUsers();
+            List<User> allUsers = this.userRepository.getAllUsers();
             for (User allUser : allUsers) {
                 allUser.getLikedAccessories().remove(accessoryById);
             }
@@ -132,13 +132,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removeUser(String id) {
         try {
-            List<Animal> animalByUser = animalRepository.getAnimalByUserId(id);
-            List<Accessory> accessories = accessoryRepository.getAccessoryByUserId(id);
-            List<Store> stores=storeRepository.getStoreByUserId(id);
-            List<Accessory> allAccessories = accessoryRepository.findAll();
-            List<Animal> alAnimals1 = animalRepository.findAll();
+            List<Animal> animalByUser = this.animalRepository.getAnimalByUserId(id);
+            List<Accessory> accessories = this.accessoryRepository.getAccessoryByUserId(id);
+            List<Store> stores= this.storeRepository.getStoreByUserId(id);
+            List<Accessory> allAccessories = this.accessoryRepository.findAll();
+            List<Animal> alAnimals1 = this.animalRepository.findAll();
 
-            User byId = userRepository.findById(id).orElse(null);
+            User byId = this.userRepository.findById(id).orElse(null);
             for (Accessory accessory : allAccessories) {
                 accessory.getUsers().remove(byId);
             }
@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
             }
 
             for (Animal animal : animalByUser) {
-                animalRepository.delete(animal);
+                this.animalRepository.delete(animal);
             }
 
             for (Accessory accessory : accessories) {
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
             }
 
             for (Accessory accessory : accessories) {
-                accessoryRepository.delete(accessory);
+                this.accessoryRepository.delete(accessory);
             }
 
             for (Store store : stores) {
@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService {
     public boolean updateProfile(UserUpdateProfileBinding userUpdateProfileBinding) {
         User user = this.modelMapper.map(userUpdateProfileBinding, User.class);
 
-        if(userValidationService.checkDetails(user)){
+        if(this.userValidationService.checkDetails(user)){
             return false;
         }
 
@@ -255,12 +255,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-
-//        // Recipient's email ID needs to be mentioned.
-//        String receiver = "jordan.zhendov@abv.bg";
-
-
-
         // Used to debug SMTP issues
         session.setDebug(false);
 
@@ -303,7 +297,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean suspendUser(String id) {
-        User deactivateUser = userRepository.findById(id).orElse(null);
+        User deactivateUser = this.userRepository.findById(id).orElse(null);
         if(deactivateUser != null){
             deactivateUser.setUserStatus(false);
             this.userRepository.saveAndFlush(deactivateUser);

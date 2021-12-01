@@ -9,6 +9,7 @@ public interface StoreService {
     void uploadStore(UserStoreUploadBinding userStoreUploadBinding, String username);
     List<StoreViewModel> getAllStores();
     List<StoreViewModel> getAllStoresByUser(String username);
+
     boolean removeStore(String id);
     boolean updateStoreCash();
 }

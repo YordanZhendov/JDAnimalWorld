@@ -26,15 +26,14 @@ public class AniAccStProfileController {
     //upload animal picture
     @PostMapping("/animal/uploadPhoto/{id}")
     public String uploadAnimalPicture(@PathVariable(value = "id") String id, @RequestParam(value = "fileAnimal") MultipartFile fileAnimal){
-        boolean correctPicture = storageService.checkFile(fileAnimal.getOriginalFilename(),fileAnimal.getSize());
-        if(!correctPicture){
+        if(!this.storageService.checkFile(fileAnimal.getOriginalFilename(),fileAnimal.getSize())){
             return "redirect:/user/profile";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
 
-        storageService.uploadAnimalPicture(fileAnimal,userProfileInfo,id);
+        this.storageService.uploadAnimalPicture(fileAnimal,userProfileInfo,id);
 
 
         return "redirect:/user/profile";
@@ -43,7 +42,7 @@ public class AniAccStProfileController {
     //animal delete
     @GetMapping("/animal/delete/{id}")
     public String deleteAnimal(@PathVariable(value = "id") String id){
-        animalService.removeAnimal(id);
+        this.animalService.removeAnimal(id);
         return "redirect:/user/profile";
     }
 
@@ -52,7 +51,7 @@ public class AniAccStProfileController {
     public String likeAnimal(@PathVariable(value = "id") String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        animalService.addLikedAnimalToTheCurrentUser(id,currentUserName);
+        this.animalService.addLikedAnimalToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/home";
     };
@@ -62,7 +61,7 @@ public class AniAccStProfileController {
     public String dislikeAnimal(@PathVariable(value = "id") String  id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        animalService.disLikedAnimalToTheCurrentUser(id,currentUserName);
+        this.animalService.disLikedAnimalToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/profile";
     }
@@ -73,15 +72,14 @@ public class AniAccStProfileController {
     //accessory upload picture
     @PostMapping("/accessory/uploadPhoto/{id}")
     public String uploadAccessoryPicture(@PathVariable(value = "id") String id,@RequestParam(value = "fileAccessory") MultipartFile fileAccessory){
-        boolean correctPicture = storageService.checkFile(fileAccessory.getOriginalFilename(),fileAccessory.getSize());
-        if(!correctPicture){
+        if(!this.storageService.checkFile(fileAccessory.getOriginalFilename(),fileAccessory.getSize())){
             return "redirect:/user/profile";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
 
-        storageService.uploadAccessoryPicture(fileAccessory,userProfileInfo,id);
+        this.storageService.uploadAccessoryPicture(fileAccessory,userProfileInfo,id);
 
 
         return "redirect:/user/profile";
@@ -90,7 +88,7 @@ public class AniAccStProfileController {
     //accessory delete
     @GetMapping("/accessory/delete/{id}")
     public String deleteAccessory(@PathVariable(value = "id") String id){
-        accessoryService.removeAccessoryById(id);
+        this.accessoryService.removeAccessoryById(id);
         return "redirect:/user/profile";
     }
 
@@ -99,7 +97,7 @@ public class AniAccStProfileController {
     public String likeAccessory(@PathVariable(value = "id") String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        accessoryService.addLikedAccessoryToTheCurrentUser(id,currentUserName);
+        this.accessoryService.addLikedAccessoryToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/home";
     };
@@ -109,7 +107,7 @@ public class AniAccStProfileController {
     public String dislikeAccessory(@PathVariable(value = "id") String  id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        accessoryService.disLikedAccessoryToTheCurrentUser(id,currentUserName);
+        this.accessoryService.disLikedAccessoryToTheCurrentUser(id,currentUserName);
 
         return "redirect:/user/profile";
     }

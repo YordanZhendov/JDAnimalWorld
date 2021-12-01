@@ -41,7 +41,7 @@ public class AccessoryServiceImpl implements AccessoryService {
     @Override
     public boolean removeAccessoryById(String id) {
         try {
-            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            Accessory accessoryById = this.accessoryRepository.findAccessoryById(id);
             this.userService.removeLikedAccessoryFromUsers(accessoryById);
             this.accessoryRepository.deleteById(id);
             updateAccessoryCash();
@@ -63,9 +63,9 @@ public class AccessoryServiceImpl implements AccessoryService {
     @Override
     public boolean saveUrlAccessory(String id, String replaceFileName) {
         try {
-            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            Accessory accessoryById = this.accessoryRepository.findAccessoryById(id);
             accessoryById.setUrlAccessoryPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
-            accessoryRepository.saveAndFlush(accessoryById);
+            this.accessoryRepository.saveAndFlush(accessoryById);
             return true;
         }catch (Exception e){
             return false;
@@ -76,14 +76,14 @@ public class AccessoryServiceImpl implements AccessoryService {
     @Override
     public boolean addLikedAccessoryToTheCurrentUser(String id, String currentUserName) {
         try {
-            User byUsername = userRepository.findByUsername(currentUserName);
-            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            User byUsername = this.userRepository.findByUsername(currentUserName);
+            Accessory accessoryById = this.accessoryRepository.findAccessoryById(id);
 
             byUsername.getLikedAccessories().add(accessoryById);
             accessoryById.getUsers().add(byUsername);
 
-            userRepository.saveAndFlush(byUsername);
-            accessoryRepository.saveAndFlush(accessoryById);
+            this.userRepository.saveAndFlush(byUsername);
+            this.accessoryRepository.saveAndFlush(accessoryById);
             return true;
         }catch (Exception e){
             return false;
@@ -93,12 +93,12 @@ public class AccessoryServiceImpl implements AccessoryService {
     @Override
     public boolean disLikedAccessoryToTheCurrentUser(String id, String currentUserName) {
         try {
-            User byUsername = userRepository.findByUsername(currentUserName);
-            Accessory accessoryById = accessoryRepository.findAccessoryById(id);
+            User byUsername = this.userRepository.findByUsername(currentUserName);
+            Accessory accessoryById = this.accessoryRepository.findAccessoryById(id);
             byUsername.getLikedAccessories().remove(accessoryById);
             accessoryById.getUsers().remove(byUsername);
-            userRepository.saveAndFlush(byUsername);
-            accessoryRepository.saveAndFlush(accessoryById);
+            this.userRepository.saveAndFlush(byUsername);
+            this.accessoryRepository.saveAndFlush(accessoryById);
             return true;
         }catch (Exception e){
             return false;

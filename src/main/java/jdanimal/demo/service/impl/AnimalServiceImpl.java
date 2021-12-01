@@ -50,7 +50,7 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public boolean removeAnimal(String id) {
         try {
-            Animal animalById = animalRepository.findAnimalById(id);
+            Animal animalById = this.animalRepository.findAnimalById(id);
             this.userService.removeLikedAnimalFromUsers(animalById);
             this.animalRepository.deleteById(id);
             updateAnimalCash();
@@ -64,9 +64,9 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public boolean saveUrlAnimal(String id, String replaceFileName) {
         try {
-            Animal animalById = animalRepository.findAnimalById(id);
+            Animal animalById = this.animalRepository.findAnimalById(id);
             animalById.setUrlAnimalPhoto("https://jdanimalsworld.s3.eu-central-1.amazonaws.com/" + replaceFileName);
-            animalRepository.saveAndFlush(animalById);
+            this.animalRepository.saveAndFlush(animalById);
             return true;
         }catch (Exception e){
             return false;
@@ -76,12 +76,12 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public boolean addLikedAnimalToTheCurrentUser(String id, String currentUserName) {
         try {
-            User byUsername = userRepository.findByUsername(currentUserName);
-            Animal animalById = animalRepository.findAnimalById(id);
+            User byUsername = this.userRepository.findByUsername(currentUserName);
+            Animal animalById = this.animalRepository.findAnimalById(id);
             byUsername.getLikedAnimals().add(animalById);
             animalById.getUsers().add(byUsername);
-            userRepository.saveAndFlush(byUsername);
-            animalRepository.saveAndFlush(animalById);
+            this.userRepository.saveAndFlush(byUsername);
+            this.animalRepository.saveAndFlush(animalById);
             return true;
         }catch (Exception e){
             return false;
@@ -91,12 +91,12 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public boolean disLikedAnimalToTheCurrentUser(String id, String currentUserName) {
         try {
-            User byUsername = userRepository.findByUsername(currentUserName);
-            Animal animalById = animalRepository.findAnimalById(id);
+            User byUsername = this.userRepository.findByUsername(currentUserName);
+            Animal animalById = this.animalRepository.findAnimalById(id);
             byUsername.getLikedAnimals().remove(animalById);
             animalById.getUsers().remove(byUsername);
-            userRepository.saveAndFlush(byUsername);
-            animalRepository.saveAndFlush(animalById);
+            this.userRepository.saveAndFlush(byUsername);
+            this.animalRepository.saveAndFlush(animalById);
             return true;
         }catch (Exception e){
             return  false;

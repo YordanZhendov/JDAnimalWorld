@@ -13,15 +13,15 @@ public class UserValidationServiceImpl implements UserValidationService {
     private final UserRepository userRepository;
 
     private boolean emailValid(String email) {
-        return !userRepository.existsByEmail(email);
+        return !this.userRepository.existsByEmail(email);
     }
 
     private boolean phoneCheck(String phonenumber) {
-        return !userRepository.existsByPhoneNumber(phonenumber);
+        return !this.userRepository.existsByPhoneNumber(phonenumber);
     }
 
     private boolean usernameFree(String username) {
-        return !userRepository.existsByUsername(username);
+        return !this.userRepository.existsByUsername(username);
     }
 
     private boolean isPasswordValid(String password, String confirmPassword) {
@@ -29,9 +29,9 @@ public class UserValidationServiceImpl implements UserValidationService {
     }
 
     private boolean emailOrPhoneNumberTaken(String email, String phoneNumber,String userName){
-        User byUsername = userRepository.findByUsername(userName);
-        boolean existsByPhoneNumber = userRepository.existsByPhoneNumber(phoneNumber);
-        boolean existsByEmail = userRepository.existsByEmail(email);
+        User byUsername = this.userRepository.findByUsername(userName);
+        boolean existsByPhoneNumber = this.userRepository.existsByPhoneNumber(phoneNumber);
+        boolean existsByEmail = this.userRepository.existsByEmail(email);
         System.out.println("werwr");
 
         if(byUsername.getPhoneNumber().equals(phoneNumber) && byUsername.getEmail().equals(email)){

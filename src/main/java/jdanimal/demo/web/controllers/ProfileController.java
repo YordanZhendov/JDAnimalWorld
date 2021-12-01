@@ -5,7 +5,6 @@ import jdanimal.demo.data.Animal;
 import jdanimal.demo.service.StoreService;
 import jdanimal.demo.service.UserService;
 import jdanimal.demo.service.impl.StorageServiceImpl;
-import jdanimal.demo.web.binding.UserRegistrationBinding;
 import jdanimal.demo.web.binding.UserUpdateProfileBinding;
 import jdanimal.demo.service.views.AccessoryViewModel;
 import jdanimal.demo.service.views.StoreViewModel;
@@ -74,7 +73,7 @@ public class ProfileController {
     //upload profile picture
     @PostMapping("/foto/upload")
     public String uploadPicture(@RequestParam(value = "file") MultipartFile file){
-        boolean correctPicture = storageService.checkFile(file.getOriginalFilename(),file.getSize());
+        boolean correctPicture = this.storageService.checkFile(file.getOriginalFilename(),file.getSize());
         if(!correctPicture){
             return "redirect:/user/profile";
         }
@@ -82,7 +81,7 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         UserProfileViewModel userProfileInfo = this.userService.findByUsername(currentUserName);
-        storageService.upload(file,userProfileInfo);
+        this.storageService.upload(file,userProfileInfo);
         return "redirect:/user/profile";
     };
 
